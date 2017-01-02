@@ -59,7 +59,7 @@ public class Labyrinthe {
 		switch(choix){
 		
 		case 1:
-			if(pos_y > 5)
+			if(pos_y > 4)
 			{	
 				return true;
 			}
@@ -68,7 +68,7 @@ public class Labyrinthe {
 				return false;
 			}
 		case 2:
-			if(pos_y < max_y-5)
+			if(pos_y < max_y-4)
 			{	
 				return true;
 			}
@@ -77,7 +77,7 @@ public class Labyrinthe {
 				return false;
 			}
 		case 3:
-			if(pos_x > 5)
+			if(pos_x > 4)
 			{	
 				return true;
 			}
@@ -86,7 +86,7 @@ public class Labyrinthe {
 				return false;
 			}
 		case 4:
-			if(pos_x < max_x-5)
+			if(pos_x < max_x-4)
 			{	
 				return true;
 			}

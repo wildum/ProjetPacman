@@ -31,21 +31,21 @@ public class GestionDuJeu {
 		{
 			System.out.println("Les touches sont: ");
 			System.out.println("");
-			System.out.println("P1:                       P2:");
-			System.out.println("Z pour monter             UP pour monter");
-			System.out.println("S pour descendre          DOWN pour descendre");
-			System.out.println("Q pour aller a gauche     LEFT pour aller a gauche");
-			System.out.println("D pour aller a droite     RIGHT pour aller a droite");
-			System.out.println("E pour quitter");
+			System.out.println("P1:                          P2:");
+			System.out.println("UP pour monter               Z pour monter");
+			System.out.println("DOWN pour descendre          S pour descendre");
+			System.out.println("LEFT pour aller a gauche     Q pour aller a gauche");
+			System.out.println("RIGHT pour aller a droite    D pour aller a droite");
+			System.out.println("               E pour quitter");
 		}
 		else //affichage sans 2nd joueur
 		{
 			System.out.println("Les touches sont: ");
 			System.out.println("");
-			System.out.println("Z pour monter");
-			System.out.println("S pour descendre");
-			System.out.println("Q pour aller a gauche");
-			System.out.println("D pour aller a droite");
+			System.out.println("UP pour monter");
+			System.out.println("DOWN pour descendre");
+			System.out.println("LEFT pour aller a gauche");
+			System.out.println("RIGHT pour aller a droite");
 			System.out.println("E pour quitter");
 		}
 		

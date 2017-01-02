@@ -67,5 +67,45 @@ public class Pacman extends Personnage{
         }
 	}
 	
+	public void interraction(Graine [][] tab_graines, Fantome...fantomes)
+	{
+		for(int i = 0; i < tab_graines.length;i++)
+		{
+			for(int j = 0; j < tab_graines[i].length; j++)
+			{
+				if(		
+						this.hitbox_x1 < tab_graines[i][j].gethx2() &&
+						this.hitbox_x2 > tab_graines[i][j].gethx1() &&
+						this.hitbox_y1 < tab_graines[i][j].gethy2() &&
+						this.hitbox_y2 > tab_graines[i][j].gethy1()   )
+				{
+					if(tab_graines[i][j].type == "standard")
+					{
+						tab_graines[i][j].setType("null");
+					}
+				}
+			}
+		}
+		
+		for(int a = 0; a < fantomes.length;a++)
+		{
+			if(this.hitbox_x1 < fantomes[a].gethx2() &&
+					this.hitbox_x2 > fantomes[a].gethx1() &&
+					this.hitbox_y1 < fantomes[a].gethy2() &&
+					this.hitbox_y2 > fantomes[a].gethy1())
+			{
+				this.position_x = this.position_i_x;
+				this.position_y = this.position_i_y;
+				this.hitbox_x1 = this.position_x-this.width;
+				this.hitbox_x2 = this.position_x+this.width;
+				this.hitbox_y1= this.position_y-this.width;
+				this.hitbox_y2 = this.position_y+this.width;
+
+			}
+		}
+	}
+	
+	
+	
 	
 }

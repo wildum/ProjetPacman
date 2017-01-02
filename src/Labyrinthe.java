@@ -4,6 +4,8 @@ public class Labyrinthe {
 	
 	protected int max_x;
 	protected int max_y;
+	protected int f_graines = 4;
+	protected int ligne = 4, colonne = 4;
 	
 	public Labyrinthe(int max_x, int max_y)
 	{
@@ -12,14 +14,14 @@ public class Labyrinthe {
 	}
 	
 	//cette méthode gère l'affichage du lab et des personnages
-	public void affichage(Labyrinthe Lab, Personnage... persos) //on peut ajouter autant de perso que l'on veut
+	public void affichage(Labyrinthe Lab,Graine [][] tab_graines ,Personnage... persos) //on peut ajouter autant de perso que l'on veut
 	{
 		
 		//affichage du terrain
 		StdDraw.setXscale(0,Lab.getMax_x());
 		StdDraw.setYscale(0,Lab.getMax_y());
 		StdDraw.clear(StdDraw.GRAY); 
-		
+		Lab.affiche_graines(tab_graines);
 		//affichage des persos
 		for(int i = 0; i<persos.length;i++)
 		{	
@@ -31,6 +33,10 @@ public class Labyrinthe {
 			if(persos[i].color == "g" )
 			{
 				StdDraw.setPenColor(StdDraw.GREEN);
+			}
+			if(persos[i].color == "o" )
+			{
+				StdDraw.setPenColor(StdDraw.ORANGE);
 			}
 			if(persos[i].color == "p" )
 			{
@@ -58,8 +64,18 @@ public class Labyrinthe {
 	{	
 		switch(choix){
 		
+		case 0:
+			if( ligne <= pos_x && pos_x <= max_x-ligne && colonne <= pos_y && pos_y<= max_y-colonne) // check si la case est libre
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		
 		case 1:
-			if(pos_y > 4)
+			if(pos_y > colonne)
 			{	
 				return true;
 			}
@@ -68,7 +84,7 @@ public class Labyrinthe {
 				return false;
 			}
 		case 2:
-			if(pos_y < max_y-4)
+			if(pos_y < max_y-colonne)
 			{	
 				return true;
 			}
@@ -77,7 +93,7 @@ public class Labyrinthe {
 				return false;
 			}
 		case 3:
-			if(pos_x > 4)
+			if(pos_x > ligne)
 			{	
 				return true;
 			}
@@ -86,7 +102,7 @@ public class Labyrinthe {
 				return false;
 			}
 		case 4:
-			if(pos_x < max_x-4)
+			if(pos_x < max_x-ligne)
 			{	
 				return true;
 			}
@@ -96,6 +112,58 @@ public class Labyrinthe {
 			}
 		}
 		return false;
+	}
+	
+	//on initialise la position des graines
+	//cette méthode prends en argument les personnages et utilise leur position
+	public Graine [][] i_graines(Personnage... persos) 
+	{
+		Graine [][] tab_graines = new Graine[25][25];
+		boolean dispo;
+		for(int i = 0; i < tab_graines.length;i++)
+		{
+			for(int j = 0; j < tab_graines[i].length; j++)
+			{	
+				dispo = false;
+				if(this.checkMur(0,i*f_graines,j*f_graines)) // s'il n'y a pas de mur
+				{
+					for(int a = 0; a < persos.length;a++) //on parcourt l'ensemble des personnages
+					{
+						if(persos[a].getPosx() != i*f_graines || persos[a].getPosy() != j*f_graines)//on vérifie si la position est occupée
+						{
+							dispo = true; 
+						}
+					}
+					
+				}
+				if(dispo) // pas de mur, pas de perso 
+				{
+					tab_graines[i][j] = new Graine(i*f_graines,j*f_graines,"standard"); // on ajoute une graine
+				}
+				else
+				{
+					tab_graines[i][j] = new Graine(i*f_graines,j*f_graines,"null"); // pas de graine sur cette position
+				}
+			}
+		}
+		
+		return tab_graines;
+	}
+	
+	public void affiche_graines(Graine [][] tab_graines)
+	{
+		for(int i = 0; i < tab_graines.length;i++)
+		{
+			for(int j = 0; j < tab_graines[i].length; j++)
+			{
+				if(tab_graines[i][j].type == "standard")
+				{	
+					StdDraw.setPenColor(StdDraw.YELLOW);
+					StdDraw.filledCircle(i*f_graines,j*f_graines,Graine.width);
+
+				}
+			}
+		}
 	}
 	
 	
@@ -108,5 +176,6 @@ public class Labyrinthe {
 	{
 		return max_y;
 	}
+	
 	
 }

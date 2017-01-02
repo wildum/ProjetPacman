@@ -2,8 +2,11 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class Personnage {
 	
-	protected double width, speed, speed_init, position_x, position_y;
+	protected double width, speed, speed_init, position_x, position_y, position_i_x, position_i_y;
 	protected String color;
+	
+	protected double hitbox_x1, hitbox_x2, hitbox_y1, hitbox_y2;
+	
 	
 	public Personnage(double position_x,double position_y, double width, double speed, String color)
 	{
@@ -13,6 +16,13 @@ public class Personnage {
 		this.color = color;
 		this.position_x = position_x;
 		this.position_y = position_y;
+		this.position_i_x = position_x;
+		this.position_i_y = position_y;
+		
+		this.hitbox_x1 = position_x-width;
+		this.hitbox_x2 = position_x+width;
+		this.hitbox_y1= position_y-width;
+		this.hitbox_y2 = position_y+width;
 	}
 	
 	//cette méthode déplace les personnages dans le labyrinthe
@@ -69,6 +79,10 @@ public class Personnage {
 			default:
 				break;
 		}
+		this.hitbox_x1 = this.position_x-this.width;
+		this.hitbox_x2 = this. position_x+this.width;
+		this.hitbox_y1= this.position_y-this.width;
+		this.hitbox_y2 = this.position_y+this.width;
 		return true;
 				
 	}
@@ -107,6 +121,23 @@ public class Personnage {
 	public void setPosy(double newPosy)
 	{
 		this.position_y = newPosy;
+	}
+	
+	public double gethx1()
+	{
+		return this.hitbox_x1;
+	}
+	public double gethx2()
+	{
+		return this.hitbox_x2;
+	}
+	public double gethy1()
+	{
+		return this.hitbox_y1;
+	}
+	public double gethy2()
+	{
+		return this.hitbox_y2;
 	}
 	
 	

@@ -2,15 +2,14 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class Labyrinthe {
 	
-	protected int max_x;
-	protected int max_y;
+	protected final int max_x = 100;
+	protected final int max_y = 100;
 	protected int f_graines = 4;
 	protected int ligne = 4, colonne = 4;
 	
-	public Labyrinthe(int max_x, int max_y)
+	public Labyrinthe()
 	{
-		this.max_x = max_x;
-		this.max_y = max_y;
+		StdDraw.setCanvasSize(500, 600); // pour gérer la taille de la fenêtre
 	}
 	
 	//cette méthode gère l'affichage du lab et des personnages
@@ -18,9 +17,10 @@ public class Labyrinthe {
 	{
 		
 		//affichage du terrain
-		StdDraw.setXscale(0,Lab.getMax_x());
-		StdDraw.setYscale(0,Lab.getMax_y());
-		StdDraw.clear(StdDraw.GRAY); 
+		StdDraw.setXscale(0,100);
+		StdDraw.setYscale(-50,150); // pour placer les points ou on veut
+		StdDraw.clear(StdDraw.BLACK);
+		StdDraw.picture(50,60,"Terrain.jpg",100,110); // pour placer l'image
 		Lab.affiche_graines(tab_graines);
 		//affichage des persos
 		for(int i = 0; i<persos.length;i++)

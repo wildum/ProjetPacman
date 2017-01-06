@@ -6,10 +6,19 @@ public class Labyrinthe {
 	private final int max_y = 100; // A ne pas changer
 	private int f_graines = 4;
 	private int ligne = 4, colonne = 4;
+	private Mur [][] tab_murs= new Mur[28][31];
 	
 	public Labyrinthe()
 	{
 		StdDraw.setCanvasSize(500,760); // pour gérer la taille de la fenêtre
+		for(int i = 0; i < tab_murs.length;i++)
+		{
+			for(int j = 0; j<tab_murs[i].length;j++)
+			{
+				tab_murs[i][j] = new Mur(i*ligne, j*colonne,matrice[30-j][27-i]);
+			}
+		}
+		
 	}
 	
 	//cette méthode gère l'affichage du lab et des personnages
@@ -17,12 +26,12 @@ public class Labyrinthe {
 	{
 		
 		//affichage du terrain
-		StdDraw.setXscale(0,100);
-		StdDraw.setYscale(-25,125); // pour placer les points ou on veut
+		StdDraw.setXscale(-2,110);
+		StdDraw.setYscale(-27,149); // pour placer les points ou on veut
 		StdDraw.clear(StdDraw.BLACK);
-		StdDraw.picture(50,50,"Terrain.jpg",100,100); // pour placer l'image (Paint)
+		StdDraw.picture(55,60,"Terrain.jpg",112,124); // pour placer l'image (Paint)
 		Lab.affiche_graines(tab_graines);
-		
+		//Lab.affiche_mur();
 		//affichage des persos
 		for(int i = 0; i<persos.length;i++)
 		{	
@@ -76,7 +85,7 @@ public class Labyrinthe {
 			}
 		
 		case 1:
-			if(pos_y > colonne)
+			if(pos_y> this.nextMur(pos_x,pos_y,1).hitbox_y2)
 			{	
 				return true;
 			}
@@ -85,7 +94,7 @@ public class Labyrinthe {
 				return false;
 			}
 		case 2:
-			if(pos_y < max_y-colonne)
+			if(pos_y < this.nextMur(pos_x,pos_y,2).hitbox_y1)
 			{	
 				return true;
 			}
@@ -94,7 +103,7 @@ public class Labyrinthe {
 				return false;
 			}
 		case 3:
-			if(pos_x > ligne)
+			if(pos_x > this.nextMur(pos_x,pos_y,3).hitbox_x2)
 			{	
 				return true;
 			}
@@ -103,7 +112,7 @@ public class Labyrinthe {
 				return false;
 			}
 		case 4:
-			if(pos_x < max_x-ligne)
+			if(pos_x < this.nextMur(pos_x,pos_y,4).hitbox_x1)
 			{	
 				return true;
 			}
@@ -115,35 +124,72 @@ public class Labyrinthe {
 		return false;
 	}
 	
+public void affiche_mur()
+{
+	StdDraw.setPenColor(StdDraw.BLUE);
+	for(int i = 0; i < tab_murs.length;i++)
+	{
+		for(int j = 0; j<tab_murs[i].length;j++)
+		{
+			if(tab_murs[i][j].getType() == 0)
+			{
+				StdDraw.filledRectangle(i*ligne, j*colonne, 2, 2);
+			}
+		}
+	}
+}
+	
+	
+public Mur nextMur(double pos_x, double pos_y, int choix)
+	{
+		
+switch(choix){
+		
+		case 1:
+			while(tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 1)
+			{
+				pos_y--;
+			}
+			break;
+		case 2:
+			while(tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 1)
+			{
+				pos_y++;
+			}
+			break;
+		case 3:
+			while(tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 1)
+			{
+				pos_x--;
+			}
+			break;
+		case 4:
+			while(tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 1)
+			{
+				pos_x++;
+			}
+			break;
+		}
+		return tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)];
+	}
+	
 	//on initialise la position des graines
 	//cette méthode prends en argument les personnages et utilise leur position
-	public Graine [][] i_graines(Personnage... persos) 
+	public Graine [][] i_graines() 
 	{
-		Graine [][] tab_graines = new Graine[29][31];
+		Graine [][] tab_graines = new Graine[28][31];
 		boolean dispo;
 		for(int i = 0; i < tab_graines.length;i++)
 		{
 			for(int j = 0; j < tab_graines[i].length; j++)
 			{	
-				dispo = false;
-				if(this.checkMur(0,i*f_graines,j*f_graines)) // s'il n'y a pas de mur
+				if(tab_murs[i][j].getType() == 1)
 				{
-					for(int a = 0; a < persos.length;a++) //on parcourt l'ensemble des personnages
-					{
-						if(persos[a].getPosx() != i*f_graines || persos[a].getPosy() != j*f_graines)//on vérifie si la position est occupée
-						{
-							dispo = true; 
-						}
-					}
-					
-				}
-				if(dispo) // pas de mur, pas de perso 
-				{
-					tab_graines[i][j] = new Graine(i*f_graines,j*f_graines,"standard"); // on ajoute une graine
+					tab_graines[i][j] = new Graine(i*ligne,j*colonne, "standard");
 				}
 				else
 				{
-					tab_graines[i][j] = new Graine(i*f_graines,j*f_graines,"null"); // pas de graine sur cette position
+					tab_graines[i][j] = new Graine(i*ligne,j*colonne, "null");
 				}
 			}
 		}
@@ -168,6 +214,7 @@ public class Labyrinthe {
 	}
 	
 	
+
 	public int getMax_x()
 	{
 		return max_x;
@@ -177,6 +224,40 @@ public class Labyrinthe {
 	{
 		return max_y;
 	}
+	public int [][] matrice =
+			
+			{{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+			{0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0},
+			{0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0},
+			{0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0},
+			{0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0},
+			{0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
+			{0,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0},
+			{0,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0},
+			{0,1,1,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,1,1,0},
+			{0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0},
+			{0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0},
+			{0,0,0,0,0,0,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0},
+			{0,0,0,0,0,0,1,0,0,1,0,0,0,2,2,0,0,0,1,0,0,1,0,0,0,0,0,0},
+			{0,0,0,0,0,0,1,0,0,1,0,1,1,1,1,1,1,0,1,0,0,1,0,0,0,0,0,0},
+			{3,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,3},
+			{0,0,0,0,0,0,1,0,0,1,0,1,1,1,1,1,1,0,1,0,0,1,0,0,0,0,0,0},
+			{0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+			{0,0,0,0,0,0,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,0,0,0,0},
+			{0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+			{0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0},
+			{0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0},
+			{0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0},
+			{0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0},
+			{0,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,0},
+			{0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0},
+			{0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0},
+			{0,1,1,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,1,1,0},
+			{0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0},
+			{0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0},
+			{0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
+			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
 	
+
 	
 }

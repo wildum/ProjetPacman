@@ -9,7 +9,7 @@ public class Jeu {
 		int choixP1 = 0, choixP2 = 0, choixF1 = 1, choixF2 = 2, choixF3 = 3, choixF4 = 3;
 		player2 = GestionDuJeu.affichage(); //propose l'ajout d'un 2nd joueur et affiche le menu
 		Labyrinthe Lab = new Labyrinthe(); //Labyrinthe de taille 500x760
-		Pacman Pac = new Pacman(80, 80, 2, 0.5 , "y"); //(pos_x, pos_y, largeur, vitesse, couleur)
+		Pacman Pac = new Pacman(84, 80, 2, 0.5 , "y"); //(pos_x, pos_y, largeur, vitesse, couleur)
 		Pacman Pac2 = new Pacman(60,60, 2, 0.5, "g");
 		Fantome FantomeRose = new Fantome(56, 56, 2, 0.5 , "p");
 		Fantome FantomeBleu = new Fantome(52, 52, 2, 0.5, "b");
@@ -18,14 +18,9 @@ public class Jeu {
 		
 		Graine [][] graines = new Graine[25][25]; 
 		
-		if(player2)
-		{
-			graines = Lab.i_graines(Pac, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
-		}
-		else
-		{
-			graines = Lab.i_graines(Pac, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
-		}
+	
+		graines = Lab.i_graines();
+		
 		
 		do
 		{

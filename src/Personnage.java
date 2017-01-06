@@ -87,6 +87,7 @@ public class Personnage {
 				
 	}
 	
+
 	
 	public double getWidth()
 	{

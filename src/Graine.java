@@ -3,7 +3,7 @@ public class Graine {
 	
 	protected int pos_x, pos_y;
 	protected String type;
-	protected static double width = 0.8;
+	protected static double width = 0.5;
 	protected double hitbox_x1, hitbox_x2, hitbox_y1, hitbox_y2;
 	
 	public Graine(int pos_x, int pos_y, String type)

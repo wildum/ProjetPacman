@@ -2,14 +2,14 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class Labyrinthe {
 	
-	protected final int max_x = 100; // A ne pas changer
-	protected final int max_y = 100; // A ne pas changer
-	protected int f_graines = 4;
-	protected int ligne = 4, colonne = 4;
+	private final int max_x = 100; // A ne pas changer
+	private final int max_y = 100; // A ne pas changer
+	private int f_graines = 4;
+	private int ligne = 4, colonne = 4;
 	
 	public Labyrinthe()
 	{
-		StdDraw.setCanvasSize(350,700); // pour gérer la taille de la fenêtre
+		StdDraw.setCanvasSize(500,760); // pour gérer la taille de la fenêtre
 	}
 	
 	//cette méthode gère l'affichage du lab et des personnages
@@ -18,9 +18,9 @@ public class Labyrinthe {
 		
 		//affichage du terrain
 		StdDraw.setXscale(0,100);
-		StdDraw.setYscale(-50,150); // pour placer les points ou on veut
-		StdDraw.clear(StdDraw.DARK_GRAY);
-		StdDraw.picture(50,50,"Terrain.jpg",100,145); // pour placer l'image (Paint)
+		StdDraw.setYscale(-25,125); // pour placer les points ou on veut
+		StdDraw.clear(StdDraw.BLACK);
+		StdDraw.picture(50,50,"Terrain.jpg",100,100); // pour placer l'image (Paint)
 		Lab.affiche_graines(tab_graines);
 		
 		//affichage des persos
@@ -119,7 +119,7 @@ public class Labyrinthe {
 	//cette méthode prends en argument les personnages et utilise leur position
 	public Graine [][] i_graines(Personnage... persos) 
 	{
-		Graine [][] tab_graines = new Graine[25][25];
+		Graine [][] tab_graines = new Graine[29][31];
 		boolean dispo;
 		for(int i = 0; i < tab_graines.length;i++)
 		{
@@ -159,7 +159,7 @@ public class Labyrinthe {
 			{
 				if(tab_graines[i][j].type == "standard")
 				{	
-					StdDraw.setPenColor(StdDraw.YELLOW);
+					StdDraw.setPenColor(StdDraw.GRAY);
 					StdDraw.filledCircle(i*f_graines,j*f_graines,Graine.width);
 
 				}

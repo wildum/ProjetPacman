@@ -37,6 +37,7 @@ public class Pacman extends Personnage{
         {
         	return choix; // si rien n'est pressé on garde la même direction
         }
+        
 	}
 	
 	//cette méthode permet au joueur 2 de choisir sa direction en appuyant sur une touche
@@ -103,6 +104,9 @@ public class Pacman extends Personnage{
 
 			}
 		}
+		
+		
+		
 	}
 	
 	

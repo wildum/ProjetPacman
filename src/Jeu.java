@@ -13,10 +13,10 @@ public class Jeu {
 		Pacman Pac2 = new Pacman(60,60, 2, 0.5, "g");
 		Joueur J1 = new Joueur(Pac1); 
 		Joueur J2 = new Joueur(Pac2);
-		Fantome FantomeRose = new Fantome(56, 56, 2, 0.5 , "p");
-		Fantome FantomeBleu = new Fantome(48, 46, 2, 0.5, "b");
-		Fantome FantomeRouge = new Fantome(48, 48, 2, 0.5, "r");
-		Fantome FantomeOrange = new Fantome(44, 44, 2, 0.5, "o");
+		Fantome FantomeRose = new Fantome(54, 76, 2, 0.5 , "p");
+		Fantome FantomeBleu = new Fantome(52, 60, 2, 0.5, "b");
+		Fantome FantomeRouge = new Fantome(56, 60, 2, 0.5, "r");
+		Fantome FantomeOrange = new Fantome(54, 60, 2, 0.5, "o");
 		
 		Graine [][] graines = new Graine[25][25]; 
 		

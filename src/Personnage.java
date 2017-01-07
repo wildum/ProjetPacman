@@ -49,9 +49,10 @@ public class Personnage {
 					this.position_y -= speed; //pas d'obstacle -> on avance
 					this.choix_precedent = choix;
 				}
-				else
+				else if (choix != this.choix_precedent)
 				{
 					choix = this.choix_precedent;
+					this.deplacer(Lab, choix);
 				}
 				break;
 				
@@ -61,9 +62,10 @@ public class Personnage {
 					this.position_y += speed;
 					this.choix_precedent = choix;
 				}
-				else
+				else if (choix != this.choix_precedent)
 				{
 					choix = this.choix_precedent;
+					this.deplacer(Lab, choix);
 				}
 				break;
 			case 3:
@@ -72,9 +74,10 @@ public class Personnage {
 					this.position_x -= speed;
 					this.choix_precedent = choix;
 				}
-				else
+				else if (choix != this.choix_precedent)
 				{
 					choix = this.choix_precedent;
+					this.deplacer(Lab, choix);
 				}
 				break;
 			case 4:
@@ -83,9 +86,10 @@ public class Personnage {
 					this.position_x += speed;
 					this.choix_precedent = choix;
 				}
-				else
+				else if (choix != this.choix_precedent)
 				{
 					choix = this.choix_precedent;
+					this.deplacer(Lab, choix);
 				}
 				break;
 			case 5:

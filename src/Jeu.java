@@ -37,7 +37,6 @@ public class Jeu {
 		
 		Graine [][] graines; 
 		
-	
 		graines = Lab.i_graines();
 		
 		

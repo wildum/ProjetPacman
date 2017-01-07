@@ -70,31 +70,36 @@ public class Labyrinthe {
 			if(persos[i].color == "y" )
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
+				StdDraw.filledCircle(persos[i].getPosx(),persos[i].getPosy(),persos[i].getWidth());
 			}
 			if(persos[i].color == "g" )
 			{
 				StdDraw.setPenColor(StdDraw.GREEN);
+				StdDraw.filledCircle(persos[i].getPosx(),persos[i].getPosy(),persos[i].getWidth());
 			}
 			if(persos[i].color == "o" )
 			{
 				StdDraw.setPenColor(StdDraw.ORANGE);
+				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"forange.jpg", 5, 5);
 			}
 			if(persos[i].color == "p" )
 			{
 				StdDraw.setPenColor(StdDraw.PINK);
+				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"frose.jpg", 5, 5);
 			}
 			if(persos[i].color == "b" )
 			{
 				StdDraw.setPenColor(StdDraw.BLUE);
-				//StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Bleu.jpg", 5, 5);
+				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"fbleu.jpg", 5, 5);
 				
 			}
 			if(persos[i].color == "r" )
 			{
 				StdDraw.setPenColor(StdDraw.RED);
+				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"frouge.jpg", 5, 5);
 			}
 			//effectue un cercle représentant le personnage à sa position
-			StdDraw.filledCircle(persos[i].getPosx(),persos[i].getPosy(),persos[i].getWidth());
+			//StdDraw.filledCircle(persos[i].getPosx(),persos[i].getPosy(),persos[i].getWidth());
 			//StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Bleu.jpg", 5, 5);
 		}
 		

@@ -73,7 +73,6 @@ public class Labyrinthe {
 	public boolean checkMur(int choix, double pos_x, double pos_y)
 	{	
 		
-		
 		switch(choix){
 		
 		case 0:
@@ -87,8 +86,8 @@ public class Labyrinthe {
 			}
 		
 		case 1:
-			if(pos_y> this.nextMur(pos_x,pos_y,1).hitbox_y2)
-			{	
+			if(pos_y> this.nextMur(pos_x,pos_y,1).hitbox_y2 && pos_x-ligne/2 - this.nextCase(pos_x,pos_y,1).hitbox_x2 == -6 && pos_x+ligne/2 - this.nextCase(pos_x,pos_y,1).hitbox_x1 == 6)
+			{	 
 				return true;
 			}
 			else //trop bas
@@ -96,7 +95,7 @@ public class Labyrinthe {
 				return false;
 			}
 		case 2:
-			if(pos_y < this.nextMur(pos_x,pos_y,2).hitbox_y1)
+			if(pos_y < this.nextMur(pos_x,pos_y,2).hitbox_y1 && pos_x-ligne/2 - this.nextCase(pos_x,pos_y,2).hitbox_x2 == -6 && pos_x+ligne/2 - this.nextCase(pos_x,pos_y,2).hitbox_x1 == 6)
 			{	
 				return true;
 			}
@@ -105,7 +104,7 @@ public class Labyrinthe {
 				return false;
 			}
 		case 3:
-			if(pos_x > this.nextMur(pos_x,pos_y,3).hitbox_x2)
+			if(pos_x > this.nextMur(pos_x,pos_y,3).hitbox_x2 && pos_y-ligne/2 - this.nextCase(pos_x,pos_y,3).hitbox_y2 == -6 && pos_y+ligne/2 - this.nextCase(pos_x,pos_y,3).hitbox_y1 == 6)
 			{	
 				return true;
 			}
@@ -114,7 +113,7 @@ public class Labyrinthe {
 				return false;
 			}
 		case 4:
-			if(pos_x < this.nextMur(pos_x,pos_y,4).hitbox_x1)
+			if(pos_x < this.nextMur(pos_x,pos_y,4).hitbox_x1 && pos_y-ligne/2 - this.nextCase(pos_x,pos_y,4).hitbox_y2 == -6 && pos_y+ligne/2 - this.nextCase(pos_x,pos_y,4).hitbox_y1 == 6)
 			{	
 				return true;
 			}
@@ -215,6 +214,20 @@ switch(choix){
 		}
 	}
 	
+	public Mur nextCase(double pos_x, double pos_y, int choix)
+	{
+		switch(choix){
+		
+		case 1:
+			return tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)-1];
+		case 2:
+			return tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)+1];
+		case 3:
+			return tab_murs[(int) Math.round(pos_x/ligne)-1][(int) Math.round(pos_y/colonne)];
+		default:
+			return tab_murs[(int) Math.round(pos_x/ligne)+1][(int) Math.round(pos_y/colonne)];
+		}
+	}
 	
 
 	public int getMax_x()

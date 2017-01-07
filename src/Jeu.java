@@ -1,3 +1,5 @@
+import java.sql.Date;
+
 import edu.princeton.cs.introcs.StdDraw;
 
 //cette classe ne doit contenir que la fonction main
@@ -5,18 +7,33 @@ public class Jeu {
 
 	public static void main(String[] args) {
 		
+		
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		 * ======================================= INITILISATION ======================================= *
+		 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 		boolean keepPlaying = true, player2;
 		int choixP1 = 0, choixP2 = 0, choixF1 = 1, choixF2 = 2, choixF3 = 3, choixF4 = 3;
 		player2 = GestionDuJeu.affichage(); //propose l'ajout d'un 2nd joueur et affiche le menu
+		
+		// Init labyrinthe :
 		Labyrinthe Lab = new Labyrinthe(); //Labyrinthe de taille 500x760
-		Pacman Pac1 = new Pacman(84, 80, 2, 0.5 , "y"); //(pos_x, pos_y, largeur, vitesse, couleur)
-		Pacman Pac2 = new Pacman(60,60, 2, 0.5, "g");
+		
+		// Init Pacman(s)
+		Pacman Pac1 = new Pacman(54, 28, 2.5, 0.5, "y"); //(pos_x, pos_y, largeur, vitesse, couleur)
+		Pacman Pac2 = new Pacman(54,100, 2.5, 0.5, "g");
+		
+		// Init Joueur(s) :
 		Joueur J1 = new Joueur(Pac1); 
 		Joueur J2 = new Joueur(Pac2);
-		Fantome FantomeRose = new Fantome(54, 76, 2, 0.5 , "p");
-		Fantome FantomeBleu = new Fantome(52, 60, 2, 0.5, "b");
-		Fantome FantomeRouge = new Fantome(56, 60, 2, 0.5, "r");
-		Fantome FantomeOrange = new Fantome(54, 60, 2, 0.5, "o");
+		
+		// Init Fantômes :
+		Fantome FantomeRouge = new Fantome(54, 76, 2.5, 0.5, "r"); // déjà dehors
+		Fantome FantomeRose = new Fantome(54, 64, 2.5, 0.5, "p"); // 2e à sortir (au lancement du jeu)
+		Fantome FantomeBleu = new Fantome(46, 64, 2.5, 0.5, "b"); // 3e à sortir (après 4 secondes de jeu)
+		Fantome FantomeOrange = new Fantome(62, 64, 2.5, 0.5, "o"); // 4e à sortir (après 8 secondes de jeu)
+		
+		// Init Chrono :
+		Chrono chrono = new Chrono();
 		
 		Graine [][] graines; 
 		
@@ -24,6 +41,9 @@ public class Jeu {
 		graines = Lab.i_graines();
 		
 		
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		 * ============================================ BOUCLE ============================================= *
+		 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 		do
 		{
 			// affiche le lab et les personnages
@@ -32,6 +52,7 @@ public class Jeu {
 				Pac1.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 				Pac2.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 				Lab.affichage(Lab, graines, Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+				
 			}
 			else
 			{
@@ -64,7 +85,7 @@ public class Jeu {
 			
 		
 		} while(keepPlaying); //on sort de la boucle lorsque E est pressé
-
+		
 	}
 
 }

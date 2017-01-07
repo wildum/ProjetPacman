@@ -14,7 +14,7 @@ public class Fantome extends Personnage{
 	static Random rd = new Random(System.currentTimeMillis());
 	
 	//choix de la direction du fantome
-	//elle prend en argumente le labyrinthe pour le obstacles et le choix
+	//elle prend en argument le labyrinthe pour le obstacles et le choix
 	//le choix est gardé s'il n'y a pas d'obstacle, sinon on le change
 	public int choixDirection(Labyrinthe Lab, int choix)
 	{

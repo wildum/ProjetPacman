@@ -18,7 +18,7 @@ public class Jeu {
 		Fantome FantomeRouge = new Fantome(56, 60, 2, 0.5, "r");
 		Fantome FantomeOrange = new Fantome(54, 60, 2, 0.5, "o");
 		
-		Graine [][] graines = new Graine[25][25]; 
+		Graine [][] graines; 
 		
 	
 		graines = Lab.i_graines();

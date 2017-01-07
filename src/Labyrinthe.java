@@ -1,3 +1,4 @@
+import java.awt.Font;
 import edu.princeton.cs.introcs.StdDraw;
 
 public class Labyrinthe {
@@ -55,6 +56,8 @@ public class Labyrinthe {
 	//cette méthode gère l'affichage du lab et des personnages :
 	public void affichage(Labyrinthe Lab,Graine [][] tab_graines,Personnage... persos) //on peut ajouter autant de perso que l'on veut
 	{
+		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
+		StdDraw.setFont(font);
 		
 		//affichage du terrain :
 		StdDraw.setXscale(-2,110);
@@ -67,10 +70,10 @@ public class Labyrinthe {
 		
 		// affichage des vies :
 		if (persos[0].getColor() == "y" && persos[1].getColor() == "g") { // s'il y a 2 joueurs
-			double a = 22, b = 92;
+			double a = 24, b = 94;			
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.text(10, -7, "LIVES P1 :");
-			StdDraw.text(80, -7, "LIVES P2 :");
+			StdDraw.text(10, -8, "LIVES P1 :");
+			StdDraw.text(80, -8, "LIVES P2 :");
 			StdDraw.setPenColor(StdDraw.YELLOW);
 			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) { 
 				StdDraw.filledCircle(a,-7,2.5);
@@ -84,14 +87,13 @@ public class Labyrinthe {
 		} else { //S'il n'y en a qu'un seul
 			double a = 17;
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.text(6, -7, "LIVES :");
+			StdDraw.text(6, -8, "LIVES :");
 			StdDraw.setPenColor(StdDraw.YELLOW);
 			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) {
 				StdDraw.filledCircle(a,-7,2.5);
 				a=a+6.5;
 			}
 		}
-		
 		
 		//affichage des persos :
 		for(int i = 0; i<persos.length;i++)

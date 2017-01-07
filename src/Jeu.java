@@ -1,4 +1,4 @@
-import java.sql.Date;
+
 
 import edu.princeton.cs.introcs.StdDraw;
 
@@ -18,14 +18,14 @@ public class Jeu {
 		// Init labyrinthe :
 		Labyrinthe Lab = new Labyrinthe(); //Labyrinthe de taille 500x760
 		
-		// Init Pacman(s)
-		Pacman Pac1 = new Pacman(54, 28, 2.5, 0.5, "y"); //(pos_x, pos_y, largeur, vitesse, couleur)
-		Pacman Pac2 = new Pacman(54,100, 2.5, 0.5, "g");
-		
 		// Init Joueur(s) :
-		Joueur J1 = new Joueur(Pac1); 
-		Joueur J2 = new Joueur(Pac2);
+		Joueur J1 = new Joueur(); 
+		Joueur J2 = new Joueur();
 		
+		// Init Pacman(s)
+		Pacman Pac1 = new Pacman(54, 28, 2.5, 0.5, "y",J1); //(pos_x, pos_y, largeur, vitesse, couleur)
+		Pacman Pac2 = new Pacman(54,100, 2.5, 0.5, "g",J2);
+						
 		// Init Fantômes :
 		Fantome FantomeRouge = new Fantome(54, 76, 2.5, 0.5, "r"); // déjà dehors
 		Fantome FantomeRose = new Fantome(54, 64, 2.5, 0.5, "p"); // 2e à sortir (au lancement du jeu)
@@ -57,6 +57,7 @@ public class Jeu {
 			{
 				Pac1.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 				Lab.affichage(Lab, graines, Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+				
 			}
 			
 			choixP1 = Pac1.choixDeLaDirectionP1(choixP1); //choix direction avec les touches zqsd

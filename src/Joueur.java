@@ -1,11 +1,12 @@
 
 public class Joueur {
-	private int score = 0, vie = 3;
+	private int score, vie;
 	private final String nom = new String();
 	private Pacman pacman;
 	
-	public Joueur(Pacman pac){
-		pacman = pac;
+	public Joueur(){
+		score = 0;
+		vie = 3;
 	}
 	
 	public int getVie() {
@@ -32,7 +33,5 @@ public class Joueur {
 	public String getNom() {
 		return nom;
 	}
-	
-	
 	
 }

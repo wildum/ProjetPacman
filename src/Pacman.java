@@ -3,11 +3,12 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class Pacman extends Personnage{
 	
+	private Joueur joueur ;
 	
-	
-	public Pacman(double position_x,double position_y, double width, double speed, String color)
+	public Pacman(double position_x,double position_y, double width, double speed, String color, Joueur player)
 	{
 		super(position_x,position_y, width, speed, color);
+		joueur = player;
 	}
 	
 	//cette méthode permet au joueur 1 de choisir sa direction en appuyant sur une touche 
@@ -95,8 +96,13 @@ public class Pacman extends Personnage{
 					this.hitbox_y1 < fantomes[a].gethy2() &&
 					this.hitbox_y2 > fantomes[a].gethy1())
 			{
+				// on remet le pacamn à sa position initiale :
 				this.position_x = this.position_i_x;
 				this.position_y = this.position_i_y;
+				
+				// on enlève une vie au joueur :
+				this.getJoueur().setVie(this.getJoueur().getVie()-1);
+				
 				this.hitbox_x1 = this.position_x-this.width;
 				this.hitbox_x2 = this.position_x+this.width;
 				this.hitbox_y1= this.position_y-this.width;
@@ -105,11 +111,12 @@ public class Pacman extends Personnage{
 			}
 		}
 		
-		
-		
+				
 	}
 	
-	
+	public Joueur getJoueur() {
+		return joueur;
+	}
 	
 	
 }

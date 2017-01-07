@@ -53,17 +53,47 @@ public class Labyrinthe {
 	}
 	
 	//cette méthode gère l'affichage du lab et des personnages :
-	public void affichage(Labyrinthe Lab,Graine [][] tab_graines ,Personnage... persos) //on peut ajouter autant de perso que l'on veut
+	public void affichage(Labyrinthe Lab,Graine [][] tab_graines,Personnage... persos) //on peut ajouter autant de perso que l'on veut
 	{
 		
-		//affichage du terrain
+		//affichage du terrain :
 		StdDraw.setXscale(-2,110);
 		StdDraw.setYscale(-27,149); // pour placer les points ou on veut
 		StdDraw.clear(StdDraw.BLACK);
 		StdDraw.picture(54.5,60,"Terrain.jpg",115,127); // pour placer l'image (Paint)
 		Lab.affiche_graines(tab_graines);
-		//Lab.affiche_mur();
-		//affichage des persos
+		/*Lab.affiche_mur();*/
+		
+		
+		// affichage des vies :
+		if (persos[0].getColor() == "y" && persos[1].getColor() == "g") { // s'il y a 2 joueurs
+			double a = 22, b = 92;
+			StdDraw.setPenColor(StdDraw.WHITE);
+			StdDraw.text(10, -7, "LIVES P1 :");
+			StdDraw.text(80, -7, "LIVES P2 :");
+			StdDraw.setPenColor(StdDraw.YELLOW);
+			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) { 
+				StdDraw.filledCircle(a,-7,2.5);
+				a=a+6.5;
+			}
+			StdDraw.setPenColor(StdDraw.GREEN);
+			for(int i = 0; i < ((Pacman)persos[1]).getJoueur().getVie(); i++) {
+				StdDraw.filledCircle(b,-7,2.5);
+				b=b+6.5;
+			}
+		} else { //S'il n'y en a qu'un seul
+			double a = 17;
+			StdDraw.setPenColor(StdDraw.WHITE);
+			StdDraw.text(6, -7, "LIVES :");
+			StdDraw.setPenColor(StdDraw.YELLOW);
+			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) {
+				StdDraw.filledCircle(a,-7,2.5);
+				a=a+6.5;
+			}
+		}
+		
+		
+		//affichage des persos :
 		for(int i = 0; i<persos.length;i++)
 		{	
 			//change de couleur le crayon suivant le personnage
@@ -278,8 +308,6 @@ switch(choix){
 	{
 		return max_y;
 	}
-	
-	
 
 	
 }

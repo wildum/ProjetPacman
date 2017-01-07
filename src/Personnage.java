@@ -31,12 +31,12 @@ public class Personnage {
 	public boolean deplacer(Labyrinthe Lab, int choix)
 	{
 		
-		if(Math.round(this.position_x) == 4 && (Math.round(this.position_y) == 64 ||  Math.round(this.position_y) == 65) && choix == 3)
+		if(Math.round(this.position_x) < 6 && (Math.round(this.position_y) == 64 ||  Math.round(this.position_y) == 65) && choix == 3)
 		{
 			this.position_x = 104;
 		}
 		
-		if(Math.round(this.position_x) == 104 && (Math.round(this.position_y) == 64 ||  Math.round(this.position_y) == 65) && choix == 4)
+		if(Math.round(this.position_x) > 103 && (Math.round(this.position_y) == 64 ||  Math.round(this.position_y) == 65) && choix == 4)
 		{
 			this.position_x = 4;
 		}

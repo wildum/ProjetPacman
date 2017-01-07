@@ -28,11 +28,11 @@ public class Fantome extends Personnage{
 		{
 			directionInverse = choix-1;
 		}
-		while(directionInverse == choix || Lab.checkMur(choix, this.position_x, this.position_y) == false) 
+			do
 			{	
 				this.speed = speed_init;
 				choix = rd.nextInt(4)+1;
-			}
+			} while(directionInverse == choix || Lab.checkMur(choix, this.position_x, this.position_y) == false);
 		
 		
 	

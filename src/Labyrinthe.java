@@ -54,7 +54,7 @@ public class Labyrinthe {
 	}
 	
 	//cette méthode gère l'affichage du lab et des personnages :
-	public void affichage(Labyrinthe Lab,Graine [][] tab_graines,Personnage... persos) //on peut ajouter autant de perso que l'on veut
+	public void affichage(Labyrinthe Lab,Graine [][] tab_graines,Chrono chrono,Personnage... persos) //on peut ajouter autant de perso que l'on veut
 	{
 		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
 		StdDraw.setFont(font);
@@ -63,21 +63,23 @@ public class Labyrinthe {
 		StdDraw.setXscale(-2,110);
 		StdDraw.setYscale(-27,149); // pour placer les points ou on veut
 		StdDraw.clear(StdDraw.BLACK);
-		StdDraw.picture(54.5,60,"Terrain.jpg",115,127); // pour placer l'image (Paint)
+		StdDraw.picture(54.5,60,"Images/Terrain.jpg",115,127); // pour placer l'image (Paint)
 		Lab.affiche_graines(tab_graines);
 		/*Lab.affiche_mur();*/
 		
-		// affichage des vies et du score :
+		// affichage des vies, du chrono et du score :
 		if (persos[0].getColor() == "y" && persos[1].getColor() == "g") { // s'il y a 2 joueurs
 			double a = 24, b = 94;			
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.text(10, -8, "LIVES P1 :");
-			StdDraw.text(80, -8, "LIVES P2 :");
+			StdDraw.text(10, -8, "LIVES P1 :"); // vies P1
+			StdDraw.text(80, -8, "LIVES P2 :"); // vies P2
+			
+			StdDraw.text(40, -16, "TIME : " + chrono.getDureeMs()); // Chrono
 			
 			String score1 = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
-			StdDraw.textLeft(-1.5, 125.5, "SCORE P1 : " + score1);
+			StdDraw.textLeft(-1.5, 125.5, "SCORE P1 : " + score1); // score P1
 			String score2 = Integer.toString(((Pacman)persos[1]).getJoueur().getScore());
-			StdDraw.textRight(109.5, 125.5, "SCORE P2 : " + score2);
+			StdDraw.textRight(109.5, 125.5, "SCORE P2 : " + score2); // score P2
 			
 			StdDraw.setPenColor(StdDraw.YELLOW);
 			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) { 
@@ -92,10 +94,12 @@ public class Labyrinthe {
 		} else { //S'il n'y en a qu'un seul
 			double a = 17;
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.text(6, -8, "LIVES :");
+			StdDraw.text(6, -8, "LIVES :"); // Vies joueur
+			
+			StdDraw.text(40, -16, "TIME : " + chrono.getDureeMs()); // Chrono
 			
 			String score = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
-			StdDraw.textLeft(-1.5, 125.5, "SCORE : " + score);
+			StdDraw.textLeft(-1.5, 125.5, "SCORE : " + score); // score joueur
 			
 			StdDraw.setPenColor(StdDraw.YELLOW);
 			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) {
@@ -121,23 +125,23 @@ public class Labyrinthe {
 			if(persos[i].color == "o" )
 			{
 				StdDraw.setPenColor(StdDraw.ORANGE);
-				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"forange.jpg", 5, 5);
+				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Images/forange.jpg", 5, 5);
 			}
 			if(persos[i].color == "p" )
 			{
 				StdDraw.setPenColor(StdDraw.PINK);
-				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"frose.jpg", 5, 5);
+				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Images/frose.jpg", 5, 5);
 			}
 			if(persos[i].color == "b" )
 			{
 				StdDraw.setPenColor(StdDraw.BLUE);
-				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"fbleu.jpg", 5, 5);
+				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Images/fbleu.jpg", 5, 5);
 				
 			}
 			if(persos[i].color == "r" )
 			{
 				StdDraw.setPenColor(StdDraw.RED);
-				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"frouge.jpg", 5, 5);
+				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Images/frouge.jpg", 5, 5);
 			}
 			//effectue un cercle représentant le personnage à sa position
 			//StdDraw.filledCircle(persos[i].getPosx(),persos[i].getPosy(),persos[i].getWidth());

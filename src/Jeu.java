@@ -32,17 +32,19 @@ public class Jeu {
 		Fantome FantomeOrange = new Fantome(62, 64, 2.5, 0.5, "o"); // 4e à sortir (après 8 secondes de jeu)
 		
 		// Init Chrono :
-		Chrono chrono = new Chrono();
+		Chrono chrono = GestionDuJeu.getChrono();
 		
 		Graine [][] graines; 
 		
 		graines = Lab.i_graines();
 		
 		
+		
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 		 * ============================================ BOUCLE ============================================= *
 		 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 		int choixApresMenu1 = GestionDuJeu.affichageMenuPage1();
+		chrono.start();
 		do
 		{
 			// affiche le lab et les personnages
@@ -50,13 +52,13 @@ public class Jeu {
 			{
 				Pac1.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 				Pac2.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
-				Lab.affichage(Lab, graines, Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+				Lab.affichage(Lab, graines, chrono, Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 				
 			}
 			else
 			{
 				Pac1.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
-				Lab.affichage(Lab, graines, Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+				Lab.affichage(Lab, graines, chrono, Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 				
 			}
 			
@@ -85,7 +87,8 @@ public class Jeu {
 			
 		
 		} while(keepPlaying); //on sort de la boucle lorsque E est pressé
-		
+		chrono.stop();
+		System.out.println(chrono.getDureeMs());
 	}
 
 }

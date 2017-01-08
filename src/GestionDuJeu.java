@@ -6,6 +6,13 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class GestionDuJeu {
 	
+	// Chronomètre du jeu :
+	static Chrono chrono = new Chrono();
+	
+	public static Chrono getChrono() {
+		return chrono;
+	}
+
 	//cette méthode gère l'affichage du menu
 	//elle renvoie si oui ou non un 2nd joueur a été choisi
 	public static boolean affichage()
@@ -67,7 +74,7 @@ public class GestionDuJeu {
 		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
 		StdDraw.setFont(font);
 		StdDraw.clear(StdDraw.BLACK);
-		StdDraw.picture(54,114,"TitreMenu.png",80,30);
+		StdDraw.picture(54,114,"Images/TitreMenu.png",80,30);
 		
 		while(cliqueCase)
 		{

@@ -86,19 +86,48 @@ public class Jeu {
 				Pac2.deplacer(Lab, choixP2);
 			}
 			
+			//etat initial des fantômes
+			GestionDuJeu.getChrono().pause();
+			if(FantomeRose.getEtat().equals("initial"))
+			{
+				FantomeRose.transitionBox(GestionDuJeu.getChrono());
+			}
+			if(FantomeBleu.getEtat().equals("initial"))
+			{
+				FantomeBleu.transitionBox(GestionDuJeu.getChrono());
+			}
+			if(FantomeRouge.getEtat().equals("initial"))
+			{
+				FantomeRouge.transitionBox(GestionDuJeu.getChrono());
+			}
+			if(FantomeOrange.getEtat().equals("initial"))
+			{
+				FantomeOrange.transitionBox(GestionDuJeu.getChrono());
+			}
+			GestionDuJeu.getChrono().resume();
 			
 			
-			choixF1 = FantomeRose.choixDirection(Lab, choixF1); //choix de la direction random
-			FantomeRose.deplacer(Lab, choixF1); 
-		
-			choixF2 = FantomeBleu.choixDirection(Lab, choixF2);
-			FantomeBleu.deplacer(Lab, choixF2);
-			
-			choixF3 = FantomeRouge.choixDirection(Lab, choixF3);
-			FantomeRouge.deplacer(Lab, choixF3);
-			
-			choixF4 = FantomeOrange.choixDirection(Lab, choixF4);
-			FantomeOrange.deplacer(Lab, choixF4);
+			//etat normal des fantomes
+			if(FantomeRose.getEtat().equals("normal"))
+			{
+				choixF1 = FantomeRose.choixDirection(Lab, choixF1); 
+				FantomeRose.deplacer(Lab, choixF1); 
+			}
+			if(FantomeBleu.getEtat().equals("normal"))
+			{
+				choixF2 = FantomeBleu.choixDirection(Lab, choixF2);
+				FantomeBleu.deplacer(Lab, choixF2);
+			}
+			if(FantomeRouge.getEtat().equals("normal"))
+			{
+				choixF3 = FantomeRouge.choixDirection(Lab, choixF3);
+				FantomeRouge.deplacer(Lab, choixF3);
+			}
+			if(FantomeOrange.getEtat().equals("normal"))
+			{
+				choixF4 = FantomeOrange.choixDirection(Lab, choixF4);
+				FantomeOrange.deplacer(Lab, choixF4);
+			}
 			
 			if(fin == 1 || fin == 2)
 			{

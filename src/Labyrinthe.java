@@ -65,7 +65,7 @@ public class Labyrinthe {
 		StdDraw.clear(StdDraw.BLACK);
 		StdDraw.picture(54.5,60,"Terrain.jpg",115,127); // pour placer l'image (Paint)
 		Lab.affiche_graines(tab_graines);
-		Lab.affiche_mur();
+		//Lab.affiche_mur();
 		
 		
 		// affichage des vies :

@@ -1,4 +1,8 @@
+import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.util.Scanner;
+import edu.princeton.cs.introcs.StdDraw;
+
 
 public class GestionDuJeu {
 	
@@ -51,6 +55,69 @@ public class GestionDuJeu {
 		
 		
 		return p2; 
+	}
+	
+	public static int affichageMenuPage1()
+	{
+		boolean cliqueCase = true;
+		int choixDuJoueur = 0;
+		StdDraw.setCanvasSize(500,760); 
+		StdDraw.setXscale(-2,110);
+		StdDraw.setYscale(-27,149); 
+		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
+		StdDraw.setFont(font);
+		StdDraw.clear(StdDraw.BLACK);
+		StdDraw.picture(54,114,"TitreMenu.png",80,30);
+		
+		while(cliqueCase)
+		{
+		while(StdDraw.mousePressed() == false)
+		{
+			cliqueCase = true;
+			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 71 && StdDraw.mouseY() < 91)
+			{
+				choixDuJoueur = 1;
+				cliqueCase = false;
+				StdDraw.setPenColor(StdDraw.YELLOW);
+				StdDraw.filledRectangle(54.5, 76, 30, 10);
+			}
+			else
+			{
+				StdDraw.setPenColor(StdDraw.BLUE);
+				StdDraw.filledRectangle(54.5, 76, 30, 10);
+			}
+			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 41 && StdDraw.mouseY() < 61)
+			{
+				choixDuJoueur = 2;
+				cliqueCase = false;
+				StdDraw.setPenColor(StdDraw.YELLOW);
+				StdDraw.filledRectangle(54.5, 46, 30, 10);
+			}
+			else
+			{
+				StdDraw.setPenColor(StdDraw.BLUE);
+				StdDraw.filledRectangle(54.5, 46, 30, 10);
+			}
+			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 11 && StdDraw.mouseY() < 31)
+			{
+				choixDuJoueur = 3;
+				cliqueCase = false;
+				StdDraw.setPenColor(StdDraw.YELLOW);
+				StdDraw.filledRectangle(54.5, 16, 30, 10);
+			}
+			else
+			{
+				StdDraw.setPenColor(StdDraw.BLUE);
+				StdDraw.filledRectangle(54.5, 16, 30, 10);
+			}
+			StdDraw.setPenColor(StdDraw.WHITE);
+			StdDraw.text(54, 74, "One Player");
+			StdDraw.text(54, 44, "Two Players");
+			StdDraw.text(54, 14, "High Scores");
+			StdDraw.show(20);
+		}
+		}
+		return choixDuJoueur;
 	}
 	
 }

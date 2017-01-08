@@ -11,9 +11,8 @@ public class Jeu {
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 		 * ======================================= INITILISATION ======================================= *
 		 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-		boolean keepPlaying = true, player2;
+		boolean keepPlaying = true;
 		int choixP1 = 0, choixP2 = 0, choixF1 = 1, choixF2 = 2, choixF3 = 3, choixF4 = 3;
-		player2 = GestionDuJeu.affichage(); //propose l'ajout d'un 2nd joueur et affiche le menu
 		
 		// Init labyrinthe :
 		Labyrinthe Lab = new Labyrinthe(); //Labyrinthe de taille 500x760
@@ -43,10 +42,11 @@ public class Jeu {
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 		 * ============================================ BOUCLE ============================================= *
 		 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+		int choixApresMenu1 = GestionDuJeu.affichageMenuPage1();
 		do
 		{
 			// affiche le lab et les personnages
-			if(player2)
+			if(choixApresMenu1 == 2)
 			{
 				Pac1.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 				Pac2.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
@@ -63,7 +63,7 @@ public class Jeu {
 			choixP1 = Pac1.choixDeLaDirectionP1(choixP1); //choix direction avec les touches zqsd
 			keepPlaying = Pac1.deplacer(Lab, choixP1); //deplace le personnage, renvoie false si E a été pressé
 			
-			if(player2)
+			if(choixApresMenu1 == 2)
 			{
 				choixP2 = Pac2.choixDeLaDirectionP2(choixP2);
 				keepPlaying = Pac2.deplacer(Lab, choixP2);

@@ -14,6 +14,7 @@ public class Jeu {
 		 * ======================================= INITILISATION ======================================= *
 		 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 		boolean keepPlaying = true;
+		int fin = 0;
 		int choixP1 = 0, choixP2 = 0, choixF1 = 1, choixF2 = 2, choixF3 = 3, choixF4 = 3;
 		
 		// Init labyrinthe :
@@ -47,11 +48,13 @@ public class Jeu {
 		GestionDuJeu.getChrono().start(); // on lance le chrono du jeu
 		do
 		{
-			// affichage du menu pause si la touche ECHAP est pressée :
-			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
+			// affichage du menu pause si la touche Espace est pressée :
+			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE))
 			{
 				GestionDuJeu.getChrono().pause(); // on met le chrono en pause pour qu'il ne continue pas le temps de la pause
+				StdDraw.pause(300);
 				keepPlaying = GestionDuJeu.affichageMenuPause();
+				StdDraw.pause(300);
 				GestionDuJeu.getChrono().resume(); // on fait repartir le chrono
 			}
 			
@@ -63,12 +66,14 @@ public class Jeu {
 				Pac1.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 				Pac2.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 				Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+				fin = GestionDuJeu.checkWinLoose(graines, J1, J2);
 				
 			}
 			else
 			{
 				Pac1.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 				Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+				fin = GestionDuJeu.checkWinLoose(graines, J1);
 				
 			}
 			
@@ -95,9 +100,16 @@ public class Jeu {
 			choixF4 = FantomeOrange.choixDirection(Lab, choixF4);
 			FantomeOrange.deplacer(Lab, choixF4);
 			
+			if(fin == 1 || fin == 2)
+			{
+				keepPlaying = false;
+			}
+			
 		
 		} while(keepPlaying); //on sort de la boucle lorsque E est pressé
 		GestionDuJeu.getChrono().stop();
+		
+		GestionDuJeu.affichageFin(fin);
 	}
 
 }

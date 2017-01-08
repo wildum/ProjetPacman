@@ -121,6 +121,12 @@ public class GestionDuJeu {
 			StdDraw.text(54, 74, "One Player");
 			StdDraw.text(54, 44, "Two Players");
 			StdDraw.text(54, 14, "High Scores");
+			StdDraw.setPenRadius(0.01);
+			StdDraw.setPenColor(StdDraw.GRAY);
+			StdDraw.rectangle(54.5, 76, 30, 10);
+			StdDraw.rectangle(54.5, 46, 30, 10);
+			StdDraw.rectangle(54.5, 16, 30, 10);
+			StdDraw.setPenRadius();
 			StdDraw.show(20);
 		}
 		}
@@ -131,6 +137,7 @@ public class GestionDuJeu {
 	{
 		boolean cliqueCase = true;
 		boolean choixDuJoueur = true;
+		boolean loop = true;
 		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
 		StdDraw.setFont(font);
 		StdDraw.setPenColor(StdDraw.YELLOW);
@@ -139,9 +146,13 @@ public class GestionDuJeu {
 		StdDraw.setFont(font2);
 		while(cliqueCase)
 		{
-		while(StdDraw.mousePressed() == false)
+		while(loop)
 		{
 			cliqueCase = true;
+			if(StdDraw.mousePressed())
+			{
+				loop = false;
+			}
 			if(StdDraw.mouseX() > 21.5 && StdDraw.mouseX() < 51.5 && StdDraw.mouseY() > 59.5 && StdDraw.mouseY() < 70.5)
 			{
 				cliqueCase = false;
@@ -166,14 +177,81 @@ public class GestionDuJeu {
 				StdDraw.setPenColor(StdDraw.BLUE);
 				StdDraw.filledRectangle(71.5, 64, 15, 5);
 			}
+			StdDraw.setPenRadius(0.01);
+			StdDraw.setPenColor(StdDraw.GRAY);
+			StdDraw.rectangle(71.5, 64, 15, 5);
+			StdDraw.rectangle(36.5, 64, 15, 5);
+			StdDraw.setPenRadius();
 			StdDraw.setPenColor(StdDraw.WHITE);
 			StdDraw.text(36, 62, "Resume");
 			StdDraw.text(71, 62, "Quit");
 			StdDraw.show(20);
+			
+			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE))
+			{
+				loop = false;
+				choixDuJoueur = true;
+				cliqueCase = false;
+			}
+			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
+			{
+				loop = false;
+				choixDuJoueur = false;
+				cliqueCase = false;
+			}
+
 		}
 		}
 		
 		return choixDuJoueur;
+	}
+	
+	public static int checkWinLoose(Graine [][] tab_graines, Joueur...joueurs)
+	{
+		int fin = 0, compteur = 0;
+		
+		for(int i = 0; i < tab_graines.length;i++)
+		{
+			for(int j = 0; j < tab_graines[i].length; j++)
+			{
+				if(tab_graines[i][j].type == "standard")
+				{
+					compteur++;
+				}
+			}
+		}
+		
+		if(compteur == 0)
+		{
+			fin = 1; //win
+		}
+		
+		for(int a = 0; a < joueurs.length; a++)
+		{
+			if(joueurs[a].getVie() == 0)
+			{
+				fin = 2; //loose
+			}
+		}
+		
+		return fin;
+	}
+	
+	public static void affichageFin(int fin)
+	{
+		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
+		StdDraw.setFont(font);
+		if(fin == 1)
+		{
+			StdDraw.setPenColor(StdDraw.GREEN);
+			StdDraw.text(57, 77, "WIN");
+		}
+		else
+		{
+			StdDraw.setPenColor(StdDraw.RED);
+			StdDraw.text(51, 77, "GAME OVER");
+		}
+		StdDraw.show(20);
 	}
 	
 }

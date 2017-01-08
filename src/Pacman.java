@@ -60,9 +60,6 @@ public class Pacman extends Personnage{
         	this.speed = speed_init;
             return choix = 4;
         }
-        if (StdDraw.isKeyPressed(KeyEvent.VK_E)) {
-            return choix = 5;
-        }
         else
         {
         	return choix;

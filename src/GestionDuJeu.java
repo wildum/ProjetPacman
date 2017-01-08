@@ -127,4 +127,53 @@ public class GestionDuJeu {
 		return choixDuJoueur;
 	}
 	
+	public static boolean affichageMenuPause()
+	{
+		boolean cliqueCase = true;
+		boolean choixDuJoueur = true;
+		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
+		StdDraw.setFont(font);
+		StdDraw.setPenColor(StdDraw.YELLOW);
+		StdDraw.text(55, 77, "PAUSED");
+		Font font2 = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
+		StdDraw.setFont(font2);
+		while(cliqueCase)
+		{
+		while(StdDraw.mousePressed() == false)
+		{
+			cliqueCase = true;
+			if(StdDraw.mouseX() > 21.5 && StdDraw.mouseX() < 51.5 && StdDraw.mouseY() > 59.5 && StdDraw.mouseY() < 70.5)
+			{
+				cliqueCase = false;
+				StdDraw.setPenColor(StdDraw.YELLOW);
+				StdDraw.filledRectangle(36.5, 64, 15, 5);
+				choixDuJoueur = true;
+			}
+			else
+			{
+				StdDraw.setPenColor(StdDraw.BLUE);
+				StdDraw.filledRectangle(36.5, 64, 15, 5);
+			}
+			if(StdDraw.mouseX() > 56.5 && StdDraw.mouseX() < 86.5 && StdDraw.mouseY() > 59.5 && StdDraw.mouseY() < 70.5)
+			{
+				cliqueCase = false;
+				StdDraw.setPenColor(StdDraw.YELLOW);
+				StdDraw.filledRectangle(71.5, 64, 15, 5);
+				choixDuJoueur = false;
+			}
+			else
+			{
+				StdDraw.setPenColor(StdDraw.BLUE);
+				StdDraw.filledRectangle(71.5, 64, 15, 5);
+			}
+			StdDraw.setPenColor(StdDraw.WHITE);
+			StdDraw.text(36, 62, "Resume");
+			StdDraw.text(71, 62, "Quit");
+			StdDraw.show(20);
+		}
+		}
+		
+		return choixDuJoueur;
+	}
+	
 }

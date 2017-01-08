@@ -28,7 +28,7 @@ public class Personnage {
 	//cette méthode déplace les personnages dans le labyrinthe
 	//elle prend en argument le Labyrinthe et le la direction choisie
 	//elle renvoie false si le joueur a décidé d'arrêter de jouer, true sinon
-	public boolean deplacer(Labyrinthe Lab, int choix)
+	public void deplacer(Labyrinthe Lab, int choix)
 	{
 		
 		if(Math.round(this.position_x) < 6 && (Math.round(this.position_y) == 64 ||  Math.round(this.position_y) == 65) && choix == 3)
@@ -92,8 +92,6 @@ public class Personnage {
 					this.deplacer(Lab, choix);
 				}
 				break;
-			case 5:
-				return false; //E a été choisi
 			
 			default:
 				break;
@@ -102,7 +100,6 @@ public class Personnage {
 		this.hitbox_x2 = this. position_x+this.width;
 		this.hitbox_y1= this.position_y-this.width;
 		this.hitbox_y2 = this.position_y+this.width;
-		return true;
 				
 	}
 

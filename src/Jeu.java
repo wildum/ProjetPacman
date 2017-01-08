@@ -1,5 +1,7 @@
 
 
+import java.awt.event.KeyEvent;
+
 import edu.princeton.cs.introcs.StdDraw;
 
 //cette classe ne doit contenir que la fonction main
@@ -47,6 +49,14 @@ public class Jeu {
 		chrono.start();
 		do
 		{
+			//affichage du menu pause si la touche ECHAP est pressée
+			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
+			{
+				keepPlaying = GestionDuJeu.affichageMenuPause();
+			}
+			
+			
+			
 			// affiche le lab et les personnages
 			if(choixApresMenu1 == 2)
 			{
@@ -63,12 +73,12 @@ public class Jeu {
 			}
 			
 			choixP1 = Pac1.choixDeLaDirectionP1(choixP1); //choix direction avec les touches zqsd
-			keepPlaying = Pac1.deplacer(Lab, choixP1); //deplace le personnage, renvoie false si E a été pressé
+			Pac1.deplacer(Lab, choixP1); //deplace le personnage, renvoie false si E a été pressé
 			
 			if(choixApresMenu1 == 2)
 			{
 				choixP2 = Pac2.choixDeLaDirectionP2(choixP2);
-				keepPlaying = Pac2.deplacer(Lab, choixP2);
+				Pac2.deplacer(Lab, choixP2);
 			}
 			
 			

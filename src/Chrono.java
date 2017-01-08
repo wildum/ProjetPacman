@@ -1,12 +1,12 @@
 public class Chrono {
 
-    private long tempsDepart = 0;
-    private long tempsFin = 0;
-    private long pauseDepart = 0;
-    private long pauseFin = 0;
-    private long duree = 0;
+    private double tempsDepart = 0;
+    private double tempsFin = 0;
+    private double pauseDepart = 0;
+    private double pauseFin = 0;
+    private double duree = 0;
 
-    public void start() { // pour faire démarrer le chrono
+    public void start() { // départ chrono
         tempsDepart = System.currentTimeMillis();
         tempsFin = 0;
         pauseDepart = 0;
@@ -14,12 +14,12 @@ public class Chrono {
         duree = 0;
     }
 
-    public void pause() { // pause du chrono
-        
+    public void pause() { // pause chrono
         pauseDepart = System.currentTimeMillis();
+        duree = (tempsFin - tempsDepart) - (pauseFin - pauseDepart);
     }
 
-    public void resume() { // reprendre le chrono après une pause
+    public void resume() { // reprise chrono
         pauseFin = System.currentTimeMillis();
         tempsDepart = tempsDepart + pauseFin - pauseDepart;
         tempsFin = 0;
@@ -28,7 +28,7 @@ public class Chrono {
         duree = 0;
     }
         
-    public void stop() { // stoper le chrono (définitif)
+    public void stop() { // arrêt chrono
         tempsFin = System.currentTimeMillis();
         duree = (tempsFin - tempsDepart) - (pauseFin - pauseDepart);
         tempsDepart = 0;
@@ -37,11 +37,12 @@ public class Chrono {
         pauseFin = 0;
         }        
 
-    public long getDureeSec() { // obtenir la durée en secondes
+    public double getDureeSec() {
         return duree/1000;
     }
         
-    public long getDureeMs() { // obtenir la durée en millisecondes
+    public double getDureeMs() {
         return duree;
-    }        
+    }      
+
 }

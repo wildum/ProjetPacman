@@ -74,7 +74,9 @@ public class Labyrinthe {
 			StdDraw.text(10, -8, "LIVES P1 :"); // vies P1
 			StdDraw.text(80, -8, "LIVES P2 :"); // vies P2
 			
-			StdDraw.text(40, -16, "TIME : " + chrono.getDureeMs()); // Chrono
+			chrono.pause();
+			StdDraw.textLeft(38, -16, "TIME : " + chrono.getDureeMs()/1000 + " s"); // Chrono
+			chrono.resume();
 			
 			String score1 = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
 			StdDraw.textLeft(-1.5, 125.5, "SCORE P1 : " + score1); // score P1
@@ -96,7 +98,9 @@ public class Labyrinthe {
 			StdDraw.setPenColor(StdDraw.WHITE);
 			StdDraw.text(6, -8, "LIVES :"); // Vies joueur
 			
-			StdDraw.text(40, -16, "TIME : " + chrono.getDureeMs()); // Chrono
+			chrono.pause();
+			StdDraw.textLeft(38, -16, "TIME : " + chrono.getDureeMs()/1000 + " s"); // Chrono
+			chrono.resume();
 			
 			String score = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
 			StdDraw.textLeft(-1.5, 125.5, "SCORE : " + score); // score joueur

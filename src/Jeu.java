@@ -33,8 +33,6 @@ public class Jeu {
 		Fantome FantomeBleu = new Fantome(46, 64, 2.5, 0.5, "b"); // 3e à sortir (après 4 secondes de jeu)
 		Fantome FantomeOrange = new Fantome(62, 64, 2.5, 0.5, "o"); // 4e à sortir (après 8 secondes de jeu)
 		
-		// Init Chrono :
-		Chrono chrono = GestionDuJeu.getChrono();
 		
 		Graine [][] graines; 
 		
@@ -46,29 +44,31 @@ public class Jeu {
 		 * ============================================ BOUCLE ============================================= *
 		 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 		int choixApresMenu1 = GestionDuJeu.affichageMenuPage1();
-		chrono.start();
+		GestionDuJeu.getChrono().start(); // on lance le chrono du jeu
 		do
 		{
-			//affichage du menu pause si la touche ECHAP est pressée
+			// affichage du menu pause si la touche ECHAP est pressée :
 			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
 			{
+				GestionDuJeu.getChrono().pause(); // on met le chrono en pause pour qu'il ne continue pas le temps de la pause
 				keepPlaying = GestionDuJeu.affichageMenuPause();
+				GestionDuJeu.getChrono().resume(); // on fait repartir le chrono
 			}
 			
 			
 			
-			// affiche le lab et les personnages
+			// affiche le lab et les personnages :
 			if(choixApresMenu1 == 2)
 			{
 				Pac1.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 				Pac2.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
-				Lab.affichage(Lab, graines, chrono, Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+				Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 				
 			}
 			else
 			{
 				Pac1.interraction(graines, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
-				Lab.affichage(Lab, graines, chrono, Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+				Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 				
 			}
 			
@@ -97,8 +97,7 @@ public class Jeu {
 			
 		
 		} while(keepPlaying); //on sort de la boucle lorsque E est pressé
-		chrono.stop();
-		System.out.println(chrono.getDureeMs());
+		GestionDuJeu.getChrono().stop();
 	}
 
 }

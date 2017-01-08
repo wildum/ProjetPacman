@@ -65,15 +65,20 @@ public class Labyrinthe {
 		StdDraw.clear(StdDraw.BLACK);
 		StdDraw.picture(54.5,60,"Terrain.jpg",115,127); // pour placer l'image (Paint)
 		Lab.affiche_graines(tab_graines);
-		Lab.affiche_mur();
+		/*Lab.affiche_mur();*/
 		
-		
-		// affichage des vies :
+		// affichage des vies et du score :
 		if (persos[0].getColor() == "y" && persos[1].getColor() == "g") { // s'il y a 2 joueurs
 			double a = 24, b = 94;			
 			StdDraw.setPenColor(StdDraw.WHITE);
 			StdDraw.text(10, -8, "LIVES P1 :");
 			StdDraw.text(80, -8, "LIVES P2 :");
+			
+			String score1 = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
+			StdDraw.textLeft(-1.5, 125.5, "SCORE P1 : " + score1);
+			String score2 = Integer.toString(((Pacman)persos[1]).getJoueur().getScore());
+			StdDraw.textRight(109.5, 125.5, "SCORE P2 : " + score2);
+			
 			StdDraw.setPenColor(StdDraw.YELLOW);
 			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) { 
 				StdDraw.filledCircle(a,-7,2.5);
@@ -88,13 +93,17 @@ public class Labyrinthe {
 			double a = 17;
 			StdDraw.setPenColor(StdDraw.WHITE);
 			StdDraw.text(6, -8, "LIVES :");
+			
+			String score = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
+			StdDraw.textLeft(-1.5, 125.5, "SCORE : " + score);
+			
 			StdDraw.setPenColor(StdDraw.YELLOW);
 			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) {
 				StdDraw.filledCircle(a,-7,2.5);
 				a=a+6.5;
 			}
 		}
-		
+				
 		//affichage des persos :
 		for(int i = 0; i<persos.length;i++)
 		{	

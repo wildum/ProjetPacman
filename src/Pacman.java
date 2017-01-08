@@ -84,6 +84,7 @@ public class Pacman extends Personnage{
 					if(tab_graines[i][j].type == "standard")
 					{
 						tab_graines[i][j].setType("null");
+						this.getJoueur().setScore(this.getJoueur().getScore()+10);
 					}
 				}
 			}

@@ -13,8 +13,10 @@ public class Jeu {
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 		 * ======================================= INITILISATION ======================================= *
 		 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-		boolean keepPlaying = true; boolean resterDansLeJeu = true;
-		int fin = 0, choixApresMenu1;
+		boolean keepPlaying = true; 
+		boolean resterDansLeJeu = true;
+		boolean nePasRejouer = true;
+		int fin = 0, choixApresMenu1 = 0;
 		int choixP1 = 0, choixP2 = 0, choixF1 = 1, choixF2 = 2, choixF3 = 3, choixF4 = 3;
 		
 
@@ -28,7 +30,10 @@ public class Jeu {
 		 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 		while(resterDansLeJeu)
 		{
-			choixApresMenu1 = GestionDuJeu.affichageMenuPage1();
+			if(nePasRejouer)
+			{
+				choixApresMenu1 = GestionDuJeu.affichageMenuPage1();
+			}
 			keepPlaying = true;
 			GestionDuJeu.getChrono().start(); // on lance le chrono du jeu
 			// Init labyrinthe :
@@ -144,7 +149,7 @@ public class Jeu {
 			} while(keepPlaying); 
 			GestionDuJeu.getChrono().stop();
 			
-			GestionDuJeu.affichageFin(fin);
+			nePasRejouer = GestionDuJeu.affichageFin(fin);
 
 		}
 			

@@ -3,10 +3,12 @@ public class Joueur {
 	private int score, vie;
 	private final String nom = new String();
 	private Pacman pacman;
+	private boolean vivant;
 	
 	public Joueur(){
 		score = 0;
 		vie = 3;
+		vivant = true;
 	}
 	
 	public int getVie() {
@@ -32,6 +34,15 @@ public class Joueur {
 	
 	public String getNom() {
 		return nom;
+	}
+	
+	public boolean isVivant()
+	{
+		return vivant;
+	}
+	public void setVivant(boolean vivant)
+	{
+		this.vivant = vivant;
 	}
 	
 }

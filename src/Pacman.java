@@ -3,67 +3,84 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class Pacman extends Personnage{
 	
-	private Joueur joueur ;
+	private Joueur joueur;
 	
 	public Pacman(double position_x,double position_y, double width, double speed, String color, Joueur player)
 	{
 		super(position_x,position_y, width, speed, color);
-		joueur = player;
+		this.joueur = player;
 	}
 	
 	//cette méthode permet au joueur 1 de choisir sa direction en appuyant sur une touche 
 	//elle prend en argument la direction précédente et la renvoie si le joueur n'appuie sur rien
 	public int choixDeLaDirectionP1(int choix)
 	{
-		if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {
-			this.speed = speed_init; //la vitesse est remise à la vitesse initiale au cas où le pacman serait à l'arrêt
-            return choix = 1;
-        }
-        if (StdDraw.isKeyPressed(KeyEvent.VK_UP))  {
-        	this.speed = speed_init;
-            return choix = 2;
-        }
-        if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) {
-        	this.speed = speed_init;
-            return choix = 3;
-        }
-        if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) {
-        	this.speed = speed_init;
-            return choix = 4;
-        }
-        if (StdDraw.isKeyPressed(KeyEvent.VK_E)) {
-            return choix = 5;
-        }
-        else
-        {
-        	return choix; // si rien n'est pressé on garde la même direction
-        }
+		if(this.joueur.isVivant())
+		{
+			if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {
+				this.speed = speed_init; //la vitesse est remise à la vitesse initiale au cas où le pacman serait à l'arrêt
+	            return choix = 1;
+	        }
+	        if (StdDraw.isKeyPressed(KeyEvent.VK_UP))  {
+	        	this.speed = speed_init;
+	            return choix = 2;
+	        }
+	        if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) {
+	        	this.speed = speed_init;
+	            return choix = 3;
+	        }
+	        if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) {
+	        	this.speed = speed_init;
+	            return choix = 4;
+	        }
+	        else
+	        {
+	        	return choix; // si rien n'est pressé on garde la même direction
+	        }
+		}
+		else
+		{	
+			this.position_x = 1000;
+			this.position_y = 1000;
+			choix = 5;
+			return choix;
+		}
         
 	}
 	
 	//cette méthode permet au joueur 2 de choisir sa direction en appuyant sur une touche
 	public int choixDeLaDirectionP2(int choix)
 	{
-		if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
-			this.speed = speed_init;
-            return choix = 1;
-        }
-        if (StdDraw.isKeyPressed(KeyEvent.VK_Z))  {
-        	this.speed = speed_init;
-            return choix = 2;
-        }
-        if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
-        	this.speed = speed_init;
-            return choix = 3;
-        }
-        if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
-        	this.speed = speed_init;
-            return choix = 4;
-        }
-        else
-        {
-        	return choix;
-        }
+		if(this.joueur.isVivant())
+		{
+			if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
+				this.speed = speed_init;
+	            return choix = 1;
+	        }
+	        if (StdDraw.isKeyPressed(KeyEvent.VK_Z))  {
+	        	this.speed = speed_init;
+	            return choix = 2;
+	        }
+	        if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
+	        	this.speed = speed_init;
+	            return choix = 3;
+	        }
+	        if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
+	        	this.speed = speed_init;
+	            return choix = 4;
+	        }
+	        else
+	        {
+	        	return choix;
+	        }
+		}
+		else
+		{
+			this.position_x = 1000;
+			this.position_y = 1000;
+			choix = 5;
+			return choix;
+		}
 	}
 	
 	public void interraction(Graine [][] tab_graines, Pacman AutrePac ,Fantome...fantomes)
@@ -89,10 +106,10 @@ public class Pacman extends Personnage{
 		
 		for(int a = 0; a < fantomes.length;a++)
 		{
-			if(this.position_x < fantomes[a].gethx2() &&
-					this.position_x > fantomes[a].gethx1() &&
-					this.position_y < fantomes[a].gethy2() &&
-					this.position_y> fantomes[a].gethy1())
+			if(this.gethx1() < fantomes[a].getPosx() &&
+					this.gethx2() > fantomes[a].getPosx() &&
+					this.gethy1() < fantomes[a].getPosy() &&
+					this.gethy2()> fantomes[a].getPosy())
 			{
 				// on remet le pacamn à sa position initiale :
 				this.position_x = this.position_i_x;
@@ -128,7 +145,7 @@ public class Pacman extends Personnage{
 	}
 	
 	public Joueur getJoueur() {
-		return joueur;
+		return this.joueur;
 	}
 	
 	

@@ -66,17 +66,17 @@ public class Pacman extends Personnage{
         }
 	}
 	
-	public void interraction(Graine [][] tab_graines, Fantome...fantomes)
+	public void interraction(Graine [][] tab_graines, Pacman AutrePac ,Fantome...fantomes)
 	{
 		for(int i = 0; i < tab_graines.length;i++)
 		{
 			for(int j = 0; j < tab_graines[i].length; j++)
 			{
 				if(		
-						this.hitbox_x1 < tab_graines[i][j].gethx2() &&
-						this.hitbox_x2 > tab_graines[i][j].gethx1() &&
-						this.hitbox_y1 < tab_graines[i][j].gethy2() &&
-						this.hitbox_y2 > tab_graines[i][j].gethy1()   )
+						this.position_x < tab_graines[i][j].gethx2() &&
+						this.position_x > tab_graines[i][j].gethx1() &&
+						this.position_y < tab_graines[i][j].gethy2() &&
+						this.position_y > tab_graines[i][j].gethy1()   )
 				{
 					if(tab_graines[i][j].type == "standard")
 					{
@@ -89,14 +89,29 @@ public class Pacman extends Personnage{
 		
 		for(int a = 0; a < fantomes.length;a++)
 		{
-			if(this.hitbox_x1 < fantomes[a].gethx2() &&
-					this.hitbox_x2 > fantomes[a].gethx1() &&
-					this.hitbox_y1 < fantomes[a].gethy2() &&
-					this.hitbox_y2 > fantomes[a].gethy1())
+			if(this.position_x < fantomes[a].gethx2() &&
+					this.position_x > fantomes[a].gethx1() &&
+					this.position_y < fantomes[a].gethy2() &&
+					this.position_y> fantomes[a].gethy1())
 			{
 				// on remet le pacamn à sa position initiale :
 				this.position_x = this.position_i_x;
 				this.position_y = this.position_i_y;
+				AutrePac.position_x = AutrePac.position_i_x;
+				AutrePac.position_y = AutrePac.position_i_y;
+				
+				// on remet les fantômes à leur position initiale
+				for(int b = 0; b< fantomes.length;b++)
+				{
+					fantomes[b].position_x = fantomes[b].position_i_x;
+					fantomes[b].position_y = fantomes[b].position_i_y;
+					fantomes[b].setEtat("initial");
+					GestionDuJeu.getChrono().pause();
+					fantomes[b].setTimer(GestionDuJeu.getChrono().getDureeSec());
+					GestionDuJeu.getChrono().resume();
+					fantomes[b].check1 = false;
+					fantomes[b].check2 = false;
+				}
 				
 				// on enlève une vie au joueur :
 				this.getJoueur().setVie(this.getJoueur().getVie()-1);

@@ -4,11 +4,13 @@ public class Fantome extends Personnage{
 	
 	protected int directionInverse = 1;
 	protected double timer_init;
+	protected double timer;
 	protected String etat;
 	protected boolean check1, check2;
-	public Fantome(double position_x,double position_y, double width, double speed, String color)
+	public Fantome(double position_x,double position_y, double width, double speed, String color, Chrono t)
 	{
 		super(position_x,position_y, width, speed, color);
+		this.timer = t.getDureeSec();
 		
 		if(this.color.equals("r"))
 		{
@@ -69,9 +71,9 @@ public class Fantome extends Personnage{
 		
 	}
 	
-	public void transitionBox(Chrono t)
+	public void transitionBox()
 	{		
-			if(t.getDureeSec() > this.timer_init && this.check2 == false)
+			if(GestionDuJeu.getChrono().getDureeSec() - this.timer > this.timer_init && this.check2 == false)
 			{
 				if(this.position_x != 54)
 				{
@@ -108,6 +110,16 @@ public class Fantome extends Personnage{
 	public String getEtat()
 	{
 		return etat;
+	}
+	
+	public void setEtat(String etat)
+	{
+		this.etat = etat;
+	}
+	
+	public void setTimer(double t)
+	{
+		this.timer = t;
 	}
 
 }

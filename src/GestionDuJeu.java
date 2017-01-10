@@ -81,51 +81,66 @@ public class GestionDuJeu {
 		while(StdDraw.mousePressed() == false)
 		{
 			cliqueCase = true;
-			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 71 && StdDraw.mouseY() < 91)
+			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 76 && StdDraw.mouseY() < 86)
 			{
 				choixDuJoueur = 1;
 				cliqueCase = false;
 				StdDraw.setPenColor(StdDraw.YELLOW);
-				StdDraw.filledRectangle(54.5, 76, 30, 10);
+				StdDraw.filledRectangle(54.5, 76, 30, 5);
 			}
 			else
 			{
 				StdDraw.setPenColor(StdDraw.BLUE);
-				StdDraw.filledRectangle(54.5, 76, 30, 10);
+				StdDraw.filledRectangle(54.5, 76, 30, 5);
 			}
-			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 41 && StdDraw.mouseY() < 61)
+			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 56 && StdDraw.mouseY() < 66)
 			{
 				choixDuJoueur = 2;
 				cliqueCase = false;
 				StdDraw.setPenColor(StdDraw.YELLOW);
-				StdDraw.filledRectangle(54.5, 46, 30, 10);
+				StdDraw.filledRectangle(54.5, 56, 30, 5);
 			}
 			else
 			{
 				StdDraw.setPenColor(StdDraw.BLUE);
-				StdDraw.filledRectangle(54.5, 46, 30, 10);
+				StdDraw.filledRectangle(54.5, 56, 30, 5);
 			}
-			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 11 && StdDraw.mouseY() < 31)
+			
+			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 36 && StdDraw.mouseY() < 46)
 			{
 				choixDuJoueur = 3;
 				cliqueCase = false;
 				StdDraw.setPenColor(StdDraw.YELLOW);
-				StdDraw.filledRectangle(54.5, 16, 30, 10);
+				StdDraw.filledRectangle(54.5, 36, 30, 5);
 			}
 			else
 			{
 				StdDraw.setPenColor(StdDraw.BLUE);
-				StdDraw.filledRectangle(54.5, 16, 30, 10);
+				StdDraw.filledRectangle(54.5, 36, 30, 5);
+			}
+			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 16 && StdDraw.mouseY() < 26)
+			{
+				choixDuJoueur = 4;
+				cliqueCase = false;
+				StdDraw.setPenColor(StdDraw.YELLOW);
+				StdDraw.filledRectangle(54.5, 16, 30, 5);
+			}
+			else
+			{
+				StdDraw.setPenColor(StdDraw.BLUE);
+				StdDraw.filledRectangle(54.5, 16, 30, 5);
 			}
 			StdDraw.setPenColor(StdDraw.WHITE);
 			StdDraw.text(54, 74, "One Player");
-			StdDraw.text(54, 44, "Two Players");
-			StdDraw.text(54, 14, "High Scores");
+			StdDraw.text(54, 54, "Two Players");
+			StdDraw.text(54, 34, "High Scores");
+			StdDraw.text(56, 14, "Quit");
 			StdDraw.setPenRadius(0.01);
 			StdDraw.setPenColor(StdDraw.GRAY);
-			StdDraw.rectangle(54.5, 76, 30, 10);
-			StdDraw.rectangle(54.5, 46, 30, 10);
-			StdDraw.rectangle(54.5, 16, 30, 10);
+			StdDraw.rectangle(54.5, 76, 30, 5);
+			StdDraw.rectangle(54.5, 56, 30, 5);
+			StdDraw.rectangle(54.5, 36, 30, 5);
+			StdDraw.rectangle(54.5, 16, 30, 5);
 			StdDraw.setPenRadius();
 			StdDraw.show(20);
 		}
@@ -135,7 +150,6 @@ public class GestionDuJeu {
 	
 	public static boolean affichageMenuPause()
 	{
-		boolean cliqueCase = true;
 		boolean choixDuJoueur = true;
 		boolean loop = true;
 		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
@@ -144,21 +158,17 @@ public class GestionDuJeu {
 		StdDraw.text(55, 77, "PAUSED");
 		Font font2 = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
 		StdDraw.setFont(font2);
-		while(cliqueCase)
-		{
 		while(loop)
 		{
-			cliqueCase = true;
-			if(StdDraw.mousePressed())
-			{
-				loop = false;
-			}
 			if(StdDraw.mouseX() > 21.5 && StdDraw.mouseX() < 51.5 && StdDraw.mouseY() > 59.5 && StdDraw.mouseY() < 70.5)
 			{
-				cliqueCase = false;
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(36.5, 64, 15, 5);
-				choixDuJoueur = true;
+				if(StdDraw.mousePressed())
+				{
+					loop = false;
+					choixDuJoueur = true;
+				}
 			}
 			else
 			{
@@ -167,10 +177,13 @@ public class GestionDuJeu {
 			}
 			if(StdDraw.mouseX() > 56.5 && StdDraw.mouseX() < 86.5 && StdDraw.mouseY() > 59.5 && StdDraw.mouseY() < 70.5)
 			{
-				cliqueCase = false;
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(71.5, 64, 15, 5);
-				choixDuJoueur = false;
+				if(StdDraw.mousePressed())
+				{
+					loop = false;
+					choixDuJoueur = false;
+				}
 			}
 			else
 			{
@@ -191,17 +204,15 @@ public class GestionDuJeu {
 			{
 				loop = false;
 				choixDuJoueur = true;
-				cliqueCase = false;
 			}
 			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
 			{
 				loop = false;
 				choixDuJoueur = false;
-				cliqueCase = false;
 			}
 
 		}
-		}
+		
 		
 		return choixDuJoueur;
 	}
@@ -252,6 +263,7 @@ public class GestionDuJeu {
 			StdDraw.text(51, 77, "GAME OVER");
 		}
 		StdDraw.show(20);
+		StdDraw.pause(2000);
 	}
 	
 }

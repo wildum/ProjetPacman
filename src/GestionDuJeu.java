@@ -189,10 +189,22 @@ public class GestionDuJeu {
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(36.5, 64, 15, 5);
-				if(StdDraw.mousePressed())
+				if(Jeu.correctionBugClic)
 				{
-					loop = false;
-					choixDuJoueur = true;
+					if(StdDraw.mousePressed())
+					{
+						loop = false;
+						choixDuJoueur = true; 
+					}
+				}
+				else
+				{
+					if(StdDraw.mousePressed() == false)
+					{
+						loop = false;
+						choixDuJoueur = true;
+						Jeu.correctionBugClic = true;
+					}
 				}
 			}
 			else
@@ -204,10 +216,22 @@ public class GestionDuJeu {
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(71.5, 64, 15, 5);
-				if(StdDraw.mousePressed())
+				if(Jeu.correctionBugClic)
 				{
-					loop = false;
-					choixDuJoueur = false;
+					if(StdDraw.mousePressed())
+					{
+						loop = false;
+						choixDuJoueur = false; 
+					}
+				}
+				else
+				{
+					if(StdDraw.mousePressed() == false)
+					{
+						loop = false;
+						choixDuJoueur = false;
+						Jeu.correctionBugClic = true;
+					}
 				}
 			}
 			else
@@ -316,7 +340,7 @@ public class GestionDuJeu {
 			if(fin == 1)
 			{
 				StdDraw.setPenColor(StdDraw.GREEN);
-				StdDraw.text(57, 77, "WIN");
+				StdDraw.text(52, 77, "WIN");
 			}
 			else
 			{
@@ -325,16 +349,35 @@ public class GestionDuJeu {
 			}
 			Font font2 = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
 			StdDraw.setFont(font2);
+			StdDraw.setPenColor(StdDraw.GRAY);
+			while(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) != true)
+			{
+				StdDraw.text(54, 67, "(PRESS SPACE TO CONTINUE)");
+				StdDraw.show(20);
+			}
+			StdDraw.clear(StdDraw.BLACK);
 		while(loop)
 		{
 			if(StdDraw.mouseX() > 21.5 && StdDraw.mouseX() < 51.5 && StdDraw.mouseY() > 64 && StdDraw.mouseY() < 74)
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(36.5, 64, 15, 5);
-				if(StdDraw.mousePressed())
+				if(Jeu.correctionBugClic)
 				{
-					loop = false;
-					choixDuJoueur = false;
+					if(StdDraw.mousePressed())
+					{
+						loop = false;
+						choixDuJoueur = false; 
+					}
+				}
+				else
+				{
+					if(StdDraw.mousePressed() == false)
+					{
+						loop = false;
+						choixDuJoueur = false;
+						Jeu.correctionBugClic = true;
+					}
 				}
 			}
 			else
@@ -346,10 +389,22 @@ public class GestionDuJeu {
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(71.5, 64, 15, 5);
-				if(StdDraw.mousePressed())
+				if(Jeu.correctionBugClic)
 				{
-					loop = false;
-					choixDuJoueur = true;
+					if(StdDraw.mousePressed())
+					{
+						loop = false;
+						choixDuJoueur = true; 
+					}
+				}
+				else
+				{
+					if(StdDraw.mousePressed() == false)
+					{
+						loop = false;
+						choixDuJoueur = true;
+						Jeu.correctionBugClic = true;
+					}
 				}
 			}
 			else

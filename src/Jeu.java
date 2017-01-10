@@ -7,6 +7,8 @@ import edu.princeton.cs.introcs.StdDraw;
 //cette classe ne doit contenir que la fonction main
 public class Jeu {
 
+static boolean correctionBugClic = false;
+	
 	public static void main(String[] args) {
 		
 		
@@ -16,6 +18,7 @@ public class Jeu {
 		boolean keepPlaying = true; 
 		boolean resterDansLeJeu = true;
 		boolean nePasRejouer = true;
+		boolean affichageFin = true; 
 		int fin = 0, choixApresMenu1 = 0;
 		int choixP1 = 0, choixP2 = 0, choixF1 = 1, choixF2 = 2, choixF3 = 3, choixF4 = 3;
 		
@@ -71,6 +74,10 @@ public class Jeu {
 					GestionDuJeu.getChrono().pause(); // on met le chrono en pause pour qu'il ne continue pas le temps de la pause
 					StdDraw.pause(300);
 					keepPlaying = GestionDuJeu.affichageMenuPause();
+					if(keepPlaying == false)
+					{
+						affichageFin = false;
+					}
 					StdDraw.pause(300);
 					GestionDuJeu.getChrono().resume(); // on fait repartir le chrono
 				}
@@ -151,11 +158,21 @@ public class Jeu {
 					keepPlaying = false;
 				}
 				
+				if(StdDraw.mousePressed() == false)
+				{
+					correctionBugClic = true;
+				}
 			
 			} while(keepPlaying); 
 			GestionDuJeu.getChrono().stop();
-			
-			nePasRejouer = GestionDuJeu.affichageFin(fin);
+			if(affichageFin)
+			{
+				nePasRejouer = GestionDuJeu.affichageFin(fin);
+			}
+			else
+			{
+				affichageFin = false;
+			}
 
 		}
 			
@@ -164,8 +181,9 @@ public class Jeu {
 				resterDansLeJeu = false;
 			}
 			}
+		StdDraw.setXscale(-2,110);
+		StdDraw.setYscale(-27,149);
 		StdDraw.clear(StdDraw.BLACK);
-		StdDraw.show(20);
 	}
 	
 

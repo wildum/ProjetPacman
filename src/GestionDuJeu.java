@@ -185,7 +185,7 @@ public class GestionDuJeu {
 		StdDraw.setFont(font2);
 		while(loop)
 		{
-			if(StdDraw.mouseX() > 21.5 && StdDraw.mouseX() < 51.5 && StdDraw.mouseY() > 59.5 && StdDraw.mouseY() < 70.5)
+			if(StdDraw.mouseX() > 21.5 && StdDraw.mouseX() < 51.5 && StdDraw.mouseY() > 64 && StdDraw.mouseY() < 74)
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(36.5, 64, 15, 5);
@@ -200,7 +200,7 @@ public class GestionDuJeu {
 				StdDraw.setPenColor(StdDraw.BLUE);
 				StdDraw.filledRectangle(36.5, 64, 15, 5);
 			}
-			if(StdDraw.mouseX() > 56.5 && StdDraw.mouseX() < 86.5 && StdDraw.mouseY() > 59.5 && StdDraw.mouseY() < 70.5)
+			if(StdDraw.mouseX() > 56.5 && StdDraw.mouseX() < 86.5 && StdDraw.mouseY() > 64 && StdDraw.mouseY() < 74)
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(71.5, 64, 15, 5);
@@ -254,7 +254,7 @@ public class GestionDuJeu {
 	
 	public static int checkWinLoose(Graine [][] tab_graines, Joueur...joueurs)
 	{
-		int fin = 0, compteur = 0;
+		int fin = 0, compteur = 0, compteur2 = 0;
 		
 		for(int i = 0; i < tab_graines.length;i++)
 		{
@@ -274,31 +274,81 @@ public class GestionDuJeu {
 		
 		for(int a = 0; a < joueurs.length; a++)
 		{
-			if(joueurs[a].getVie() == 0)
+			if(joueurs[a].getVie() <= 0)
 			{
-				fin = 2; //loose
+				compteur2++;
+				joueurs[a].setVivant(false);
 			}
+		}
+		if(compteur2 == joueurs.length)
+		{
+			fin = 2; //loose
 		}
 		
 		return fin;
 	}
 	
-	public static void affichageFin(int fin)
+	public static boolean affichageFin(int fin)
 	{
 		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
 		StdDraw.setFont(font);
-		if(fin == 1)
+		boolean loop = true;
+		boolean choixDuJoueur = true;
+			if(fin == 1)
+			{
+				StdDraw.setPenColor(StdDraw.GREEN);
+				StdDraw.text(57, 77, "WIN");
+			}
+			else
+			{
+				StdDraw.setPenColor(StdDraw.RED);
+				StdDraw.text(53, 77, "GAME OVER");
+			}
+			Font font2 = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
+			StdDraw.setFont(font2);
+		while(loop)
 		{
-			StdDraw.setPenColor(StdDraw.GREEN);
-			StdDraw.text(57, 77, "WIN");
+			if(StdDraw.mouseX() > 21.5 && StdDraw.mouseX() < 51.5 && StdDraw.mouseY() > 64 && StdDraw.mouseY() < 74)
+			{
+				StdDraw.setPenColor(StdDraw.YELLOW);
+				StdDraw.filledRectangle(36.5, 64, 15, 5);
+				if(StdDraw.mousePressed())
+				{
+					loop = false;
+					choixDuJoueur = false;
+				}
+			}
+			else
+			{
+				StdDraw.setPenColor(StdDraw.BLUE);
+				StdDraw.filledRectangle(36.5, 64, 15, 5);
+			}
+			if(StdDraw.mouseX() > 56.5 && StdDraw.mouseX() < 86.5 && StdDraw.mouseY() > 64 && StdDraw.mouseY() < 74)
+			{
+				StdDraw.setPenColor(StdDraw.YELLOW);
+				StdDraw.filledRectangle(71.5, 64, 15, 5);
+				if(StdDraw.mousePressed())
+				{
+					loop = false;
+					choixDuJoueur = true;
+				}
+			}
+			else
+			{
+				StdDraw.setPenColor(StdDraw.BLUE);
+				StdDraw.filledRectangle(71.5, 64, 15, 5);
+			}
+			StdDraw.setPenRadius(0.01);
+			StdDraw.setPenColor(StdDraw.GRAY);
+			StdDraw.rectangle(71.5, 64, 15, 5);
+			StdDraw.rectangle(36.5, 64, 15, 5);
+			StdDraw.setPenRadius();
+			StdDraw.setPenColor(StdDraw.WHITE);
+			StdDraw.text(36, 62, "Rejouer");
+			StdDraw.text(71, 62, "Quit");
+			StdDraw.show(20);
+		
 		}
-		else
-		{
-			StdDraw.setPenColor(StdDraw.RED);
-			StdDraw.text(51, 77, "GAME OVER");
-		}
-		StdDraw.show(20);
-		StdDraw.pause(2000);
+		return choixDuJoueur;
 	}
-	
 }

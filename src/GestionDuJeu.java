@@ -81,7 +81,9 @@ public class GestionDuJeu {
 		while(StdDraw.mousePressed() == false)
 		{
 			cliqueCase = true;
-			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 76 && StdDraw.mouseY() < 86)
+			
+			// ONE PLAYER :
+			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 76 && StdDraw.mouseY() < 86) // choix du mode 1 joueur
 			{
 				choixDuJoueur = 1;
 				cliqueCase = false;
@@ -93,7 +95,9 @@ public class GestionDuJeu {
 				StdDraw.setPenColor(StdDraw.BLUE);
 				StdDraw.filledRectangle(54.5, 76, 30, 5);
 			}
-			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 56 && StdDraw.mouseY() < 66)
+			
+			// TWO PLAYER :
+			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 56 && StdDraw.mouseY() < 66) // choix du mode 2 joueurs
 			{
 				choixDuJoueur = 2;
 				cliqueCase = false;
@@ -106,7 +110,8 @@ public class GestionDuJeu {
 				StdDraw.filledRectangle(54.5, 56, 30, 5);
 			}
 			
-			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 36 && StdDraw.mouseY() < 46)
+			// HIGHSCORE :
+			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 36 && StdDraw.mouseY() < 46) // choix de regarder les meilleurs scores
 			{
 				choixDuJoueur = 3;
 				cliqueCase = false;
@@ -118,9 +123,11 @@ public class GestionDuJeu {
 				StdDraw.setPenColor(StdDraw.BLUE);
 				StdDraw.filledRectangle(54.5, 36, 30, 5);
 			}
+			
+			// CONTROLS :
 			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 16 && StdDraw.mouseY() < 26)
 			{
-				choixDuJoueur = 4;
+				choixDuJoueur = 5;
 				cliqueCase = false;
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(54.5, 16, 30, 5);
@@ -130,20 +137,38 @@ public class GestionDuJeu {
 				StdDraw.setPenColor(StdDraw.BLUE);
 				StdDraw.filledRectangle(54.5, 16, 30, 5);
 			}
+			
+			
+			// QUIT :
+			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > -6 && StdDraw.mouseY() < 6) // choix de quitter
+			{
+				choixDuJoueur = 4;
+				cliqueCase = false;
+				StdDraw.setPenColor(StdDraw.YELLOW);
+				StdDraw.filledRectangle(54.5, -4, 30, 5);
+			}
+			else
+			{
+				StdDraw.setPenColor(StdDraw.BLUE);
+				StdDraw.filledRectangle(54.5, -4, 30, 5);
+			}
+			
 			StdDraw.setPenColor(StdDraw.WHITE);
 			StdDraw.text(54, 74, "One Player");
 			StdDraw.text(54, 54, "Two Players");
 			StdDraw.text(54, 34, "High Scores");
-			StdDraw.text(56, 14, "Quit");
+			StdDraw.text(54, 14, "Controls");
+			StdDraw.text(54, -5, "Quit");
 			StdDraw.setPenRadius(0.01);
 			StdDraw.setPenColor(StdDraw.GRAY);
 			StdDraw.rectangle(54.5, 76, 30, 5);
 			StdDraw.rectangle(54.5, 56, 30, 5);
 			StdDraw.rectangle(54.5, 36, 30, 5);
 			StdDraw.rectangle(54.5, 16, 30, 5);
+			StdDraw.rectangle(54.5, -4, 30, 5);
 			StdDraw.setPenRadius();
 			StdDraw.show(20);
-		}
+			}
 		}
 		return choixDuJoueur;
 	}
@@ -215,6 +240,16 @@ public class GestionDuJeu {
 		
 		
 		return choixDuJoueur;
+	}
+	
+	public static void affichageMenuControl() {
+		StdDraw.setCanvasSize(500,760); 
+		StdDraw.setXscale(-2,110);
+		StdDraw.setYscale(-27,149); 
+		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
+		StdDraw.setFont(font);
+		StdDraw.clear(StdDraw.BLACK);
+		
 	}
 	
 	public static int checkWinLoose(Graine [][] tab_graines, Joueur...joueurs)

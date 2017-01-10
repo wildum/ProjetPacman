@@ -75,13 +75,15 @@ public class Labyrinthe {
 			StdDraw.text(80, -8, "LIVES P2 :"); // vies P2
 			
 			chrono.pause();
-			StdDraw.textLeft(38, -16, "TIME : " + chrono.getDureeMs()/1000 + " s"); // Chrono
+			StdDraw.textLeft(-1.8, 135, "TIME : " + chrono.getDureeMs()/1000 + " s"); // Chrono
 			chrono.resume();
 			
 			String score1 = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
 			StdDraw.textLeft(-1.5, 125.5, "SCORE P1 : " + score1); // score P1
 			String score2 = Integer.toString(((Pacman)persos[1]).getJoueur().getScore());
 			StdDraw.textRight(109.5, 125.5, "SCORE P2 : " + score2); // score P2
+			
+			StdDraw.textRight(109.5, 135, "HIGHSCORE : " + "00000");// meilleur score
 			
 			StdDraw.setPenColor(StdDraw.YELLOW);
 			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) { 
@@ -99,11 +101,13 @@ public class Labyrinthe {
 			StdDraw.text(6, -8, "LIVES :"); // Vies joueur
 			
 			chrono.pause();
-			StdDraw.textLeft(38, -16, "TIME : " + chrono.getDureeMs()/1000 + " s"); // Chrono
+			StdDraw.textLeft(-1.8, 135, "TIME : " + chrono.getDureeMs()/1000 + " s"); // Chrono
 			chrono.resume();
 			
 			String score = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
 			StdDraw.textLeft(-1.5, 125.5, "SCORE : " + score); // score joueur
+			
+			StdDraw.textRight(109.5, 135, "HIGHSCORE : " + "00000");// meilleur score
 			
 			StdDraw.setPenColor(StdDraw.YELLOW);
 			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) {

@@ -49,7 +49,10 @@ public class Jeu {
 			Fantome FantomeOrange = new Fantome(62, 64, 2.5, 0.5, "o", GestionDuJeu.getChrono()); // 4e à sortir (après 8 secondes de jeu)
 			
 			
+			
 			graines = Lab.i_graines();
+			
+			
 			if(choixApresMenu1 != 4)
 			{
 			do

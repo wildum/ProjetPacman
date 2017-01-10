@@ -57,8 +57,11 @@ public class Jeu {
 			
 			graines = Lab.i_graines();
 			
-			
-			if(choixApresMenu1 != 4)
+			if (choixApresMenu1 == 5)
+			{
+				GestionDuJeu.affichageMenuControl();
+			}
+			else if(choixApresMenu1 != 4)
 			{
 			do
 			{

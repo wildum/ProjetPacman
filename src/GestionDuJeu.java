@@ -242,14 +242,33 @@ public class GestionDuJeu {
 		return choixDuJoueur;
 	}
 	
-	public static void affichageMenuControl() {
-		StdDraw.setCanvasSize(500,760); 
+	public static boolean affichageMenuControl() {
+		boolean stop = true;
+		StdDraw.setCanvasSize(500,760);
 		StdDraw.setXscale(-2,110);
-		StdDraw.setYscale(-27,149); 
+		StdDraw.setYscale(-27,149);
+		StdDraw.clear(StdDraw.BLACK);
+		StdDraw.picture(54,114,"Images/TitreMenu.png",80,30);
 		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
 		StdDraw.setFont(font);
-		StdDraw.clear(StdDraw.BLACK);
+		StdDraw.setPenColor(StdDraw.WHITE);
+		while(stop)
+		{
+			StdDraw.text(15, 80, "Player 1 :");
+			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
+			{
+				stop = false;
+			}
+			StdDraw.show(20);
+		}
+			
 		
+		
+		
+		
+		
+		
+		return stop;
 	}
 	
 	public static int checkWinLoose(Graine [][] tab_graines, Joueur...joueurs)

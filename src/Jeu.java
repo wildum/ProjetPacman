@@ -6,11 +6,10 @@ import edu.princeton.cs.introcs.StdDraw;
 
 //cette classe ne doit contenir que la fonction main
 public class Jeu {
-
-static boolean correctionBugClic = false;
+	
+	public static boolean mousePressed;
 	
 	public static void main(String[] args) {
-		
 		
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 		 * ======================================= INITILISATION ======================================= *
@@ -21,10 +20,12 @@ static boolean correctionBugClic = false;
 		boolean affichageFin = true; 
 		int fin = 0, choixApresMenu1 = 0;
 		int choixP1 = 0, choixP2 = 0, choixF1 = 1, choixF2 = 2, choixF3 = 3, choixF4 = 3;
-		
 
 		
 		Graine [][] graines; 
+		StdDraw.setCanvasSize(500,760);
+		StdDraw.setXscale(-2,110);
+		StdDraw.setYscale(-27,149); 
 		
 		
 		
@@ -38,6 +39,7 @@ static boolean correctionBugClic = false;
 				choixApresMenu1 = GestionDuJeu.affichageMenuPage1();
 			}
 			keepPlaying = true;
+			affichageFin = true;
 			GestionDuJeu.getChrono().start(); // on lance le chrono du jeu
 			// Init labyrinthe :
 			Labyrinthe Lab = new Labyrinthe(); //Labyrinthe de taille 500x760
@@ -56,15 +58,21 @@ static boolean correctionBugClic = false;
 			Fantome FantomeBleu = new Fantome(46, 64, 2.5, 0.5, "b", GestionDuJeu.getChrono()); // 3e à sortir (après 4 secondes de jeu)
 			Fantome FantomeOrange = new Fantome(62, 64, 2.5, 0.5, "o", GestionDuJeu.getChrono()); // 4e à sortir (après 8 secondes de jeu)
 			
-			
-			
+			// Init graines : 
 			graines = Lab.i_graines();
+			
+			
+			if(choixApresMenu1 == 3)
+			{
+				GestionDuJeu.highscores(false);
+			}
 			
 			if (choixApresMenu1 == 5)
 			{
 				GestionDuJeu.affichageMenuControl();
 			}
-			else if(choixApresMenu1 != 4)
+			
+			if(choixApresMenu1 == 1 || choixApresMenu1 == 2)
 			{
 			do
 			{
@@ -81,7 +89,6 @@ static boolean correctionBugClic = false;
 					StdDraw.pause(300);
 					GestionDuJeu.getChrono().resume(); // on fait repartir le chrono
 				}
-				
 				
 				
 				// affiche le lab et les personnages :
@@ -109,7 +116,6 @@ static boolean correctionBugClic = false;
 					choixP2 = Pac2.choixDeLaDirectionP2(choixP2);
 					Pac2.deplacer(Lab, choixP2);
 				}
-				
 				//etat initial des fantômes
 				GestionDuJeu.getChrono().pause();
 				if(FantomeRose.getEtat().equals("initial"))
@@ -157,11 +163,6 @@ static boolean correctionBugClic = false;
 				{
 					keepPlaying = false;
 				}
-				
-				if(StdDraw.mousePressed() == false)
-				{
-					correctionBugClic = true;
-				}
 			
 			} while(keepPlaying); 
 			GestionDuJeu.getChrono().stop();
@@ -176,7 +177,7 @@ static boolean correctionBugClic = false;
 
 		}
 			
-			else
+			if(choixApresMenu1 == 4)
 			{
 				resterDansLeJeu = false;
 			}

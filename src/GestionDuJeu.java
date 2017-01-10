@@ -2,6 +2,11 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.util.Scanner;
 import edu.princeton.cs.introcs.StdDraw;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class GestionDuJeu {
@@ -9,84 +14,28 @@ public class GestionDuJeu {
 	// Chronomètre du jeu :
 	static Chrono chrono = new Chrono();
 	
+	
 	public static Chrono getChrono() {
 		return chrono;
-	}
-
-	//cette méthode gère l'affichage du menu
-	//elle renvoie si oui ou non un 2nd joueur a été choisi
-	public static boolean affichage()
-	{	
-		boolean p2 = false, check_1;
-		Scanner in = new Scanner(System.in);
-		do{
-		 System.out.println("Souhaitez-vous jouer a deux? (y/n)");
-		 String rep = in.nextLine();
-		 if(rep.equals("y"))
-		 {	
-			 p2 = true; //entrée du 2nd joueur
-			 check_1 = false;//sortie de la boucle
-		 }
-		 else if(rep.equals("n"))
-		 {	
-			 p2 = false; //pas de 2nd joueur
-			 check_1 = false; //sortie de la boucle
-		 }
-		 else
-		 {
-			 check_1 = true;
-		 }
-		} while(check_1); //tant qu'on ne met pas y ou n, la question est réposée
-		
-		if(p2) //affichage avec 2nd joueur
-		{
-			System.out.println("Les touches sont: ");
-			System.out.println("");
-			System.out.println("P1:                          P2:");
-			System.out.println("UP pour monter               Z pour monter");
-			System.out.println("DOWN pour descendre          S pour descendre");
-			System.out.println("LEFT pour aller a gauche     Q pour aller a gauche");
-			System.out.println("RIGHT pour aller a droite    D pour aller a droite");
-			System.out.println("               E pour quitter");
-		}
-		else //affichage sans 2nd joueur
-		{
-			System.out.println("Les touches sont: ");
-			System.out.println("");
-			System.out.println("UP pour monter");
-			System.out.println("DOWN pour descendre");
-			System.out.println("LEFT pour aller a gauche");
-			System.out.println("RIGHT pour aller a droite");
-			System.out.println("E pour quitter");
-		}
-		
-		
-		return p2; 
 	}
 	
 	public static int affichageMenuPage1()
 	{
-		boolean cliqueCase = true;
-		int choixDuJoueur = 0;
-		StdDraw.setCanvasSize(500,760); 
-		StdDraw.setXscale(-2,110);
-		StdDraw.setYscale(-27,149); 
+		boolean clique = true, position = true;
+		int choixDuJoueur = 0; 
+		StdDraw.clear(StdDraw.BLACK);
 		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
 		StdDraw.setFont(font);
-		StdDraw.clear(StdDraw.BLACK);
 		StdDraw.picture(54,114,"Images/TitreMenu.png",80,30);
-		
-		while(cliqueCase)
-		{
-		while(StdDraw.mousePressed() == false)
-		{
-			cliqueCase = true;
-			
+		boolean firstLoop = true;
+		do 
+		{   
+			position = true;
 			// ONE PLAYER :
 			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 76 && StdDraw.mouseY() < 86) // choix du mode 1 joueur
 			{
 				choixDuJoueur = 1;
-				cliqueCase = false;
+				position = false;
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(54.5, 76, 30, 5);
 			}
@@ -100,7 +49,7 @@ public class GestionDuJeu {
 			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 56 && StdDraw.mouseY() < 66) // choix du mode 2 joueurs
 			{
 				choixDuJoueur = 2;
-				cliqueCase = false;
+				position = false;
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(54.5, 56, 30, 5);
 			}
@@ -114,7 +63,7 @@ public class GestionDuJeu {
 			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 36 && StdDraw.mouseY() < 46) // choix de regarder les meilleurs scores
 			{
 				choixDuJoueur = 3;
-				cliqueCase = false;
+				position = false;
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(54.5, 36, 30, 5);
 			}
@@ -128,7 +77,7 @@ public class GestionDuJeu {
 			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > 16 && StdDraw.mouseY() < 26)
 			{
 				choixDuJoueur = 5;
-				cliqueCase = false;
+				position= false;
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(54.5, 16, 30, 5);
 			}
@@ -143,7 +92,7 @@ public class GestionDuJeu {
 			if(StdDraw.mouseX() > 24.5 && StdDraw.mouseX() < 84.5 && StdDraw.mouseY() > -6 && StdDraw.mouseY() < 6) // choix de quitter
 			{
 				choixDuJoueur = 4;
-				cliqueCase = false;
+				position = false;
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(54.5, -4, 30, 5);
 			}
@@ -152,7 +101,17 @@ public class GestionDuJeu {
 				StdDraw.setPenColor(StdDraw.BLUE);
 				StdDraw.filledRectangle(54.5, -4, 30, 5);
 			}
-			
+			StdDraw.pause(50);
+			if(StdDraw.mousePressed())
+			{
+				clique = false;
+				StdDraw.pause(50);
+			}
+			else
+			{
+				clique = true;
+			}
+			firstLoop = false;
 			StdDraw.setPenColor(StdDraw.WHITE);
 			StdDraw.text(54, 74, "One Player");
 			StdDraw.text(54, 54, "Two Players");
@@ -168,8 +127,7 @@ public class GestionDuJeu {
 			StdDraw.rectangle(54.5, -4, 30, 5);
 			StdDraw.setPenRadius();
 			StdDraw.show(20);
-			}
-		}
+		} while(position || clique);
 		return choixDuJoueur;
 	}
 	
@@ -189,22 +147,12 @@ public class GestionDuJeu {
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(36.5, 64, 15, 5);
-				if(Jeu.correctionBugClic)
+				StdDraw.pause(50);
+				if(StdDraw.mousePressed())
 				{
-					if(StdDraw.mousePressed())
-					{
-						loop = false;
-						choixDuJoueur = true; 
-					}
-				}
-				else
-				{
-					if(StdDraw.mousePressed() == false)
-					{
-						loop = false;
-						choixDuJoueur = true;
-						Jeu.correctionBugClic = true;
-					}
+					StdDraw.pause(50);
+					loop = false;
+					choixDuJoueur = true; 
 				}
 			}
 			else
@@ -216,22 +164,12 @@ public class GestionDuJeu {
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(71.5, 64, 15, 5);
-				if(Jeu.correctionBugClic)
+				StdDraw.pause(50);
+				if(StdDraw.mousePressed())
 				{
-					if(StdDraw.mousePressed())
-					{
-						loop = false;
-						choixDuJoueur = false; 
-					}
-				}
-				else
-				{
-					if(StdDraw.mousePressed() == false)
-					{
-						loop = false;
-						choixDuJoueur = false;
-						Jeu.correctionBugClic = true;
-					}
+					StdDraw.pause(50);
+					loop = false;
+					choixDuJoueur = false; 
 				}
 			}
 			else
@@ -362,23 +300,13 @@ public class GestionDuJeu {
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(36.5, 64, 15, 5);
-				if(Jeu.correctionBugClic)
+				StdDraw.pause(50);
+				if(StdDraw.mousePressed())
 				{
-					if(StdDraw.mousePressed())
-					{
-						loop = false;
-						choixDuJoueur = false; 
-					}
+					loop = false;
+					choixDuJoueur = false; 
 				}
-				else
-				{
-					if(StdDraw.mousePressed() == false)
-					{
-						loop = false;
-						choixDuJoueur = false;
-						Jeu.correctionBugClic = true;
-					}
-				}
+				
 			}
 			else
 			{
@@ -389,22 +317,11 @@ public class GestionDuJeu {
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(71.5, 64, 15, 5);
-				if(Jeu.correctionBugClic)
+				StdDraw.pause(50);
+				if(StdDraw.mousePressed())
 				{
-					if(StdDraw.mousePressed())
-					{
-						loop = false;
-						choixDuJoueur = true; 
-					}
-				}
-				else
-				{
-					if(StdDraw.mousePressed() == false)
-					{
-						loop = false;
-						choixDuJoueur = true;
-						Jeu.correctionBugClic = true;
-					}
+					loop = false;
+					choixDuJoueur = true; 
 				}
 			}
 			else
@@ -425,4 +342,74 @@ public class GestionDuJeu {
 		}
 		return choixDuJoueur;
 	}
+	
+public static void highscores(boolean save)
+{
+	boolean stay = true;
+	int y = 70;
+	int a = 0;
+	File f = new File("sauvegardes.txt");
+	FileWriter fw;
+	FileReader fr;
+	StdDraw.setXscale(-2,110);
+	StdDraw.setYscale(-27,149);
+	StdDraw.clear(StdDraw.BLACK);
+	StdDraw.setPenColor(StdDraw.WHITE);
+	String dataOut = "";
+	String dataIn;
+	String sample = "";
+	    try {
+	    	if(save)
+	    	{
+	    		fw = new FileWriter(f);
+	    		dataIn = "Bonjour à tous, amis Zéros !\n";
+	    		fw.write(dataIn);
+	    		fw.close();
+	    	}
+	        fr = new FileReader(f);
+	        int i = 0;
+	        while((i = fr.read()) != -1)
+	        {
+	          dataOut += (char)i;
+	        }
+	       while(a < dataOut.length())
+	        {
+	        	while(dataOut.charAt(a) != '$')
+	        	{
+	        		sample += dataOut.charAt(a);
+	        		a++;
+	        	}
+	        	a++;
+	        	StdDraw.text(30, y, sample);
+	        	sample = "";
+	        	while(dataOut.charAt(a) != '@')
+	        	{
+	        		sample += dataOut.charAt(a);
+	        		a++;
+	        	} 
+	        	a++;
+	        	StdDraw.text(60,y,sample);
+	        	sample = "";
+        		y-=10;
+	        }
+	
+	      } catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	      } catch (IOException e) {
+	        e.printStackTrace();
+		
+	      }
+	    StdDraw.show(20);
+	    while(stay)
+		{
+	    	StdDraw.pause(30);
+	    	if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
+	    	{
+	    		StdDraw.pause(50);
+	    		stay = false;
+	    	}
+		}
+	
+	
+}
 }

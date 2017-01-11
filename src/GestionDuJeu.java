@@ -41,7 +41,7 @@ public class GestionDuJeu {
 			
 			do
 			{
-				clic = true;			
+				position = true;			
 				
 				// ONE PLAYER :
 				if(StdDraw.mouseX() > 39.5 && StdDraw.mouseX() < 69 && StdDraw.mouseY() > 36 && StdDraw.mouseY() < 40.5) // choix du mode 1 joueur
@@ -419,6 +419,14 @@ public static void highscores(boolean save)
 	String dataOut = "";
 	String dataIn;
 	String sample = "";
+	String [] tab_pseudo;
+	int [] tab_scores;
+	int numberScore;
+	int tailleTab = 0;
+	int compteur = 0;
+	int change;
+	String changement = "";
+	StdDraw.setFont(normale);
 	    try {
 	    	if(save)
 	    	{
@@ -433,6 +441,15 @@ public static void highscores(boolean save)
 	        {
 	          dataOut += (char)i;
 	        }
+	        for(int b = 0; b< dataOut.length(); b++)
+	        {
+	        	if(dataOut.charAt(b) == '$')
+	        	{
+	        		tailleTab++;
+	        	}
+	        }
+	        tab_pseudo = new String[tailleTab];
+        	tab_scores = new int[tailleTab];
 	       while(a < dataOut.length())
 	        {
 	        	while(dataOut.charAt(a) != '$')
@@ -441,7 +458,7 @@ public static void highscores(boolean save)
 	        		a++;
 	        	}
 	        	a++;
-	        	StdDraw.text(30, y, sample);
+	        	tab_pseudo[compteur] = sample;
 	        	sample = "";
 	        	while(dataOut.charAt(a) != '@')
 	        	{
@@ -449,10 +466,33 @@ public static void highscores(boolean save)
 	        		a++;
 	        	} 
 	        	a++;
-	        	StdDraw.text(60,y,sample);
+	        	numberScore = Integer.parseInt(sample);
 	        	sample = "";
-        		y-=10;
+	        	tab_scores[compteur] = numberScore;
+	        	compteur++;
 	        }
+	       
+	       for(int s = 0; s < tab_scores.length; s++)
+	       {
+	    	   for(int t = 0; t < s; t++)
+	    	   {
+	    		   if(tab_scores[t] < tab_scores[s])
+	    		   {
+	    			   change = tab_scores[t];
+	    			   tab_scores[t] = tab_scores[s];
+	    			   tab_scores[s] = change;
+	    			   changement = tab_pseudo[t];
+	    			   tab_pseudo[t] = tab_pseudo[s];
+	    			   tab_pseudo[s] = changement;
+	    		   }
+	    	   }
+	       }
+	       
+	       for(int l = 0; l < tab_scores.length; l++)
+	       {
+	    	   StdDraw.textLeft(35, y, Integer.toString(l+1) + "." + tab_pseudo[l] + "     " + Integer.toString(tab_scores[l]));
+	    	   y -= 10;
+	       }
 	
 	      } catch (FileNotFoundException e) {
 	        e.printStackTrace();

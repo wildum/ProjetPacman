@@ -41,7 +41,7 @@ public class GestionDuJeu {
 			
 			do
 			{
-				clic = true;			
+				position = true;			
 				
 				// ONE PLAYER :
 				if(StdDraw.mouseX() > 39.5 && StdDraw.mouseX() < 69 && StdDraw.mouseY() > 36 && StdDraw.mouseY() < 40.5) // choix du mode 1 joueur
@@ -237,7 +237,7 @@ public class GestionDuJeu {
 	}
 	
 	public static boolean affichageMenuControl() {
-		boolean stop = true;
+		boolean clic = true, position = true, choixDuJoueur = false;
 		StdDraw.setCanvasSize(500,760); 
 		StdDraw.setXscale(-2,110);
 		StdDraw.setYscale(-27,149); 
@@ -260,36 +260,37 @@ public class GestionDuJeu {
 		StdDraw.text(55, 20, "SPACE: PAUSE/RESUME");
 		StdDraw.text(55, 14, "ECHAP: EXIT");
 		
-		StdDraw.setPenColor(200, 200, 200);
-		StdDraw.text(55, -4, "GO BACK");
-		
-		
-		while(stop) {
-			stop = true;
-			while(StdDraw.mousePressed() == false) {
-				if (StdDraw.mouseX()>60 && StdDraw.mouseX()<70 && StdDraw.mouseY()>-10 && StdDraw.mouseY()<0) {
-					StdDraw.setPenColor(StdDraw.WHITE);
-					StdDraw.filledRectangle(55, -4, 50, 50);
-					System.out.println("T'es dedans !");
-					
-				} else {
-					
-					
-				}
+				
+		do {
+			position = true;
+			
+			if (StdDraw.mouseX() > 43 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > -1 && StdDraw.mouseY() < 4) {
+				choixDuJoueur = true;
+				position = false;
+				StdDraw.setPenColor(StdDraw.BLACK);
+				StdDraw.filledRectangle(55, -4, 30, 5);
+				StdDraw.setFont(selection);
+				StdDraw.setPenColor(StdDraw.WHITE);
+				StdDraw.text(54, -4.3, "GO BACK");
+			} else {
+				StdDraw.setPenColor(StdDraw.BLACK);
+				StdDraw.filledRectangle(55, -4, 30, 5);
+				StdDraw.setFont(normale);
+				StdDraw.setPenColor(200, 200, 200);
+				StdDraw.text(54, -4, "GO BACK");				
 			}
-			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE)) {
-				stop = false;
+			
+			StdDraw.pause(50);
+			if (StdDraw.mousePressed()) {
+				StdDraw.pause(50);
+				clic = false;
+			} else {
+				clic = true;
 			}
 			StdDraw.show(20);
-		}
-			
+		} while(clic || position);
 		
-		
-		
-		
-		
-		
-		return stop;
+		return choixDuJoueur;
 	}
 	
 	public static int checkWinLoose(Graine [][] tab_graines, Joueur...joueurs)

@@ -19,57 +19,7 @@ public class GestionDuJeu {
 		return chrono;
 	}
 
-	//cette méthode gère l'affichage du menu
-	//elle renvoie si oui ou non un 2nd joueur a été choisi
-	public static boolean affichage()
-	{	
-		boolean p2 = false, check_1;
-		Scanner in = new Scanner(System.in);
-		do{
-		 System.out.println("Souhaitez-vous jouer a deux? (y/n)");
-		 String rep = in.nextLine();
-		 if(rep.equals("y"))
-		 {	
-			 p2 = true; //entrée du 2nd joueur
-			 check_1 = false;//sortie de la boucle
-		 }
-		 else if(rep.equals("n"))
-		 {	
-			 p2 = false; //pas de 2nd joueur
-			 check_1 = false; //sortie de la boucle
-		 }
-		 else
-		 {
-			 check_1 = true;
-		 }
-		} while(check_1); //tant qu'on ne met pas y ou n, la question est réposée
-		
-		if(p2) //affichage avec 2nd joueur
-		{
-			System.out.println("Les touches sont: ");
-			System.out.println("");
-			System.out.println("P1:                          P2:");
-			System.out.println("UP pour monter               Z pour monter");
-			System.out.println("DOWN pour descendre          S pour descendre");
-			System.out.println("LEFT pour aller a gauche     Q pour aller a gauche");
-			System.out.println("RIGHT pour aller a droite    D pour aller a droite");
-			System.out.println("               E pour quitter");
-		}
-		else //affichage sans 2nd joueur
-		{
-			System.out.println("Les touches sont: ");
-			System.out.println("");
-			System.out.println("UP pour monter");
-			System.out.println("DOWN pour descendre");
-			System.out.println("LEFT pour aller a gauche");
-			System.out.println("RIGHT pour aller a droite");
-			System.out.println("E pour quitter");
-		}
-		
-		
-		return p2; 
-	}
-	
+	// affichageMenuPage1() gère l'affiche du menu principal	
 	public static int affichageMenuPage1()
 	{
 		boolean cliqueCase = true;
@@ -90,7 +40,6 @@ public class GestionDuJeu {
 			// ONE PLAYER :
 			if(StdDraw.mouseX() > 39.5 && StdDraw.mouseX() < 69 && StdDraw.mouseY() > 36 && StdDraw.mouseY() < 40.5) // choix du mode 1 joueur
 			{
-				StdDraw.pause(50);
 				choixDuJoueur = 1;
 				cliqueCase = false;
 				StdDraw.setPenColor(StdDraw.BLACK);
@@ -102,7 +51,6 @@ public class GestionDuJeu {
 			}
 			else
 			{
-				StdDraw.pause(50);
 				StdDraw.setPenColor(StdDraw.BLACK);
 				StdDraw.filledRectangle(54.5, 34, 30, 3.5);
 				StdDraw.setFont(normale);
@@ -195,7 +143,7 @@ public class GestionDuJeu {
 			
 			
 			StdDraw.show(20);
-			StdDraw.pause(50);
+			
 			}
 		}
 		return choixDuJoueur;
@@ -316,21 +264,22 @@ public class GestionDuJeu {
 		StdDraw.text(55, 20, "SPACE: PAUSE/RESUME");
 		StdDraw.text(55, 14, "ECHAP: EXIT");
 		
-		StdDraw.setPenColor(200, 200, 200);
-		StdDraw.text(55, -4, "GO BACK");
-		
-		
+				
 		while(stop) {
-			stop = true;
 			while(StdDraw.mousePressed() == false) {
+				stop = true;
 				if (StdDraw.mouseX()>60 && StdDraw.mouseX()<70 && StdDraw.mouseY()>-10 && StdDraw.mouseY()<0) {
-					StdDraw.setPenColor(StdDraw.WHITE);
+					StdDraw.setPenColor(StdDraw.BLACK);
 					StdDraw.filledRectangle(55, -4, 50, 50);
-					System.out.println("T'es dedans !");
-					
+					StdDraw.setFont(selection);
+					StdDraw.setPenColor(StdDraw.WHITE);
+					StdDraw.text(55, -4, "GO BACK");	
 				} else {
-					
-					
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.filledRectangle(55, -4, 50, 50);
+					StdDraw.setFont(normale);
+					StdDraw.setPenColor(200,200,200);
+					StdDraw.text(55, -5, "GO BACK");
 				}
 			}
 			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE)) {
@@ -338,12 +287,7 @@ public class GestionDuJeu {
 			}
 			StdDraw.show(20);
 		}
-			
-		
-		
-		
-		
-		
+				
 		
 		return stop;
 	}

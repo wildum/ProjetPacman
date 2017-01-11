@@ -1,17 +1,13 @@
-import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
-import java.util.Scanner;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 import edu.princeton.cs.introcs.StdDraw;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileOutputStream;
+
 
 
 public class GestionDuJeu {
@@ -26,7 +22,7 @@ public class GestionDuJeu {
 	}
 	
 	// affichageMenuPage1() gère l'affiche du menu principal	
-		public static int affichageMenuPage1()
+	public static int affichageMenuPage1()
 		{
 			boolean clic = true;
 			boolean position = true;
@@ -37,7 +33,6 @@ public class GestionDuJeu {
 			StdDraw.setFont(normale);
 			StdDraw.clear(StdDraw.BLACK);
 			StdDraw.picture(54,114,"Images/TitreMenu.png",80,30);
-			
 			
 			do
 			{
@@ -169,75 +164,32 @@ public class GestionDuJeu {
 	{
 		boolean choixDuJoueur = true;
 		boolean loop = true;;
-		StdDraw.setFont(grande);
+		StdDraw.setFont(selection);
 		StdDraw.setPenColor(StdDraw.YELLOW);
-		StdDraw.text(55, 77, "PAUSED");;
+		StdDraw.text(54.5, 74.5, "PAUSED");
+		StdDraw.setPenColor(StdDraw.WHITE);
 		StdDraw.setFont(normale);
+		StdDraw.text(54, 51, "QUIT? Y/N");
 		while(loop)
 		{
-			if(StdDraw.mouseX() > 21.5 && StdDraw.mouseX() < 51.5 && StdDraw.mouseY() > 64 && StdDraw.mouseY() < 74)
-			{
-				StdDraw.setPenColor(StdDraw.YELLOW);
-				StdDraw.filledRectangle(36.5, 64, 15, 5);
-				StdDraw.pause(50);
-				if(StdDraw.mousePressed())
-				{
-					StdDraw.pause(50);
-					loop = false;
-					choixDuJoueur = true; 
-				}
-			}
-			else
-			{
-				StdDraw.setPenColor(StdDraw.BLUE);
-				StdDraw.filledRectangle(36.5, 64, 15, 5);
-			}
-			if(StdDraw.mouseX() > 56.5 && StdDraw.mouseX() < 86.5 && StdDraw.mouseY() > 64 && StdDraw.mouseY() < 74)
-			{
-				StdDraw.setPenColor(StdDraw.YELLOW);
-				StdDraw.filledRectangle(71.5, 64, 15, 5);
-				StdDraw.pause(50);
-				if(StdDraw.mousePressed())
-				{
-					StdDraw.pause(50);
-					loop = false;
-					choixDuJoueur = false; 
-				}
-			}
-			else
-			{
-				StdDraw.setPenColor(StdDraw.BLUE);
-				StdDraw.filledRectangle(71.5, 64, 15, 5);
-			}
-			StdDraw.setPenRadius(0.01);
-			StdDraw.setPenColor(StdDraw.GRAY);
-			StdDraw.rectangle(71.5, 64, 15, 5);
-			StdDraw.rectangle(36.5, 64, 15, 5);
-			StdDraw.setPenRadius();
-			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.text(36, 62, "Resume");
-			StdDraw.text(71, 62, "Quit");
 			StdDraw.show(20);
-			
-			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE))
+			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) || StdDraw.isKeyPressed(KeyEvent.VK_N))
 			{
 				loop = false;
 				choixDuJoueur = true;
 			}
-			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
+			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE) || StdDraw.isKeyPressed(KeyEvent.VK_Y))
 			{
 				loop = false;
 				choixDuJoueur = false;
 			}
-
 		}
-		
-		
 		return choixDuJoueur;
 	}
 	
+	
 	public static boolean affichageMenuControl() {
-		boolean stop = true;
+		boolean clic = true, position = true, choixDuJoueur = false;
 		StdDraw.setCanvasSize(500,760); 
 		StdDraw.setXscale(-2,110);
 		StdDraw.setYscale(-27,149); 
@@ -260,36 +212,37 @@ public class GestionDuJeu {
 		StdDraw.text(55, 20, "SPACE: PAUSE/RESUME");
 		StdDraw.text(55, 14, "ECHAP: EXIT");
 		
-		StdDraw.setPenColor(200, 200, 200);
-		StdDraw.text(55, -4, "GO BACK");
-		
-		
-		while(stop) {
-			stop = true;
-			while(StdDraw.mousePressed() == false) {
-				if (StdDraw.mouseX()>60 && StdDraw.mouseX()<70 && StdDraw.mouseY()>-10 && StdDraw.mouseY()<0) {
-					StdDraw.setPenColor(StdDraw.WHITE);
-					StdDraw.filledRectangle(55, -4, 50, 50);
-					System.out.println("T'es dedans !");
-					
-				} else {
-					
-					
-				}
+				
+		do {
+			position = true;
+			
+			if (StdDraw.mouseX() > 43 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > -1 && StdDraw.mouseY() < 4) {
+				choixDuJoueur = true;
+				position = false;
+				StdDraw.setPenColor(StdDraw.BLACK);
+				StdDraw.filledRectangle(55, -4, 30, 5);
+				StdDraw.setFont(selection);
+				StdDraw.setPenColor(StdDraw.WHITE);
+				StdDraw.text(54, -4.3, "GO BACK");
+			} else {
+				StdDraw.setPenColor(StdDraw.BLACK);
+				StdDraw.filledRectangle(55, -4, 30, 5);
+				StdDraw.setFont(normale);
+				StdDraw.setPenColor(200, 200, 200);
+				StdDraw.text(54, -4, "GO BACK");				
 			}
-			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE)) {
-				stop = false;
+			
+			StdDraw.pause(50);
+			if (StdDraw.mousePressed()) {
+				StdDraw.pause(300);
+				clic = false;
+			} else {
+				clic = true;
 			}
 			StdDraw.show(20);
-		}
-			
+		} while(clic || position);
 		
-		
-		
-		
-		
-		
-		return stop;
+		return choixDuJoueur;
 	}
 	
 	public static int checkWinLoose(Graine [][] tab_graines, Joueur...joueurs)
@@ -350,6 +303,7 @@ public class GestionDuJeu {
 			while(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) != true)
 			{
 				StdDraw.text(54, 67, "(PRESS SPACE TO CONTINUE)");
+				StdDraw.pause(50);
 				StdDraw.show(20);
 			}
 			StdDraw.clear(StdDraw.BLACK);
@@ -390,24 +344,18 @@ public class GestionDuJeu {
 				StdDraw.setPenColor(StdDraw.BLUE);
 				StdDraw.filledRectangle(71.5, 64, 15, 5);
 			}
-			StdDraw.setPenRadius(0.01);
-			StdDraw.setPenColor(StdDraw.GRAY);
-			StdDraw.rectangle(71.5, 64, 15, 5);
-			StdDraw.rectangle(36.5, 64, 15, 5);
-			StdDraw.setPenRadius();
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.text(36, 62, "Rejouer");
-			StdDraw.text(71, 62, "Quit");
+			StdDraw.text(36, 62, "PLAY AGAIN? Y/N");
 			StdDraw.show(20);
 		
 		}
 		return choixDuJoueur;
 	}
 	
-public static void highscores(boolean save)
+public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 {
 	boolean stay = true;
-	int y = 70;
+	int y = 90;
 	int a = 0;
 	File f = new File("sauvegardes.txt");
 	FileWriter fw;
@@ -424,16 +372,103 @@ public static void highscores(boolean save)
 	int numberScore;
 	int tailleTab = 0;
 	int compteur = 0;
-	int change;
+	int change, tailleMax;
+	boolean enter = false;
+	boolean enter2 = false;
 	String changement = "";
 	StdDraw.setFont(normale);
 	    try {
 	    	if(save)
 	    	{
-	    		fw = new FileWriter(f);
-	    		dataIn += StdDraw.nextKeyTyped();
-	    		fw.write(dataIn);
+	    		fw = new FileWriter(f,true);
+	    		while(enter || dataIn == "")
+	    		{
+	    			StdDraw.pause(50);
+	    			if(StdDraw.hasNextKeyTyped() && dataIn.length() < 15)
+	    			{
+	    				dataIn += StdDraw.nextKeyTyped();
+	    			}
+	    			if(StdDraw.isKeyPressed(KeyEvent.VK_ENTER))
+	    			{
+	    				enter = false;
+	    			}
+	    			else
+	    			{
+	    				enter = true;
+	    			}
+	    			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && dataIn != "")
+	    			{
+	    				dataIn = dataIn.substring(0, dataIn.length()-2);
+	    				StdDraw.clear(StdDraw.BLACK);
+	    				StdDraw.pause(50);
+	    			}
+	    			StdDraw.setFont(grande);
+		    		StdDraw.text(50, 100, "SAVE YOUR SCORE");
+		    		StdDraw.setFont(petite);
+	    			StdDraw.setPenColor(StdDraw.YELLOW);
+	    			StdDraw.textLeft(30, 80, dataIn);
+	    			StdDraw.setPenColor(StdDraw.WHITE);
+	    			StdDraw.textRight(80, 80, Integer.toString(joueurs[0].getScore()));
+	    			StdDraw.show(20);
+	    		}
+	    		fw.write("\r\n");
+	    		for(int u = 0; u<dataIn.length();u++)
+	    		{
+		    		fw.write(dataIn.charAt(u));
+	    		}
+	    		fw.write('$');
+	    		String scoreJ1 = Integer.toString(joueurs[0].getScore());
+	    		fw.write(scoreJ1);
+	    		fw.write('@');
+	    		if(P2)
+	    		{
+	    			String dataJ1 = dataIn;
+	    			dataIn = "";
+	    			while(enter2 || dataIn == "")
+		    		{
+		    			StdDraw.pause(50);
+		    			if(StdDraw.hasNextKeyTyped() && dataIn.length() < 15)
+		    			{
+		    				dataIn += StdDraw.nextKeyTyped();
+		    			}
+		    			if(StdDraw.isKeyPressed(KeyEvent.VK_ENTER))
+		    			{
+		    				enter2 = false;
+		    			}
+		    			else
+		    			{
+		    				enter2 = true;
+		    			}
+		    			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && dataIn != "")
+		    			{
+		    				dataIn = dataIn.substring(0, dataIn.length()-2);
+		    				StdDraw.clear(StdDraw.BLACK);
+		    				StdDraw.pause(50);
+		    			}
+		    			StdDraw.setFont(grande);
+			    		StdDraw.text(50, 100, "SAVE YOUR SCORE");
+			    		StdDraw.setFont(petite);
+			    		StdDraw.setPenColor(StdDraw.YELLOW);
+		    			StdDraw.textLeft(30, 80, dataJ1);
+		    			StdDraw.setPenColor(StdDraw.GREEN);
+		    			StdDraw.textLeft(30, 70, dataIn);
+		    			StdDraw.setPenColor(StdDraw.WHITE);
+		    			StdDraw.textRight(80, 80, Integer.toString(joueurs[0].getScore()));
+		    			StdDraw.textRight(80, 70, Integer.toString(joueurs[1].getScore()));
+		    			StdDraw.show(20);
+		    		}
+	    			fw.write("\r\n");
+	    			for(int w = 0; w<dataIn.length();w++)
+		    		{
+			    		fw.write(dataIn.charAt(w));
+		    		}		    		
+	    			fw.write('$');
+		    		String scoreJ2 = Integer.toString(joueurs[1].getScore());
+		    		fw.write(scoreJ2);
+		    		fw.write('@');
+	    		}
 	    		fw.close();
+	    		StdDraw.clear(StdDraw.BLACK);
 	    	}
 	        fr = new FileReader(f);
 	        int i = 0;
@@ -450,7 +485,7 @@ public static void highscores(boolean save)
 	        }
 	        tab_pseudo = new String[tailleTab];
         	tab_scores = new int[tailleTab];
-	       while(a < dataOut.length() || compteur < 10)
+	       while(a < dataOut.length())
 	        {
 	        	while(dataOut.charAt(a) != '$')
 	        	{
@@ -487,8 +522,15 @@ public static void highscores(boolean save)
 	    		   }
 	    	   }
 	       }
-	       
-	       for(int l = 0; l < tab_scores.length; l++)
+	       if(tab_scores.length < 10)
+	       {
+	    	   tailleMax = tab_scores.length;
+	       }
+	       else
+	       {
+	    	   tailleMax = 10;
+	       }
+	       for(int l = 0; l < tailleMax; l++)
 	       {
 	    	   StdDraw.textLeft(35, y, Integer.toString(l+1) + "." + tab_pseudo[l] + "     " + Integer.toString(tab_scores[l]));
 	    	   y -= 10;
@@ -498,7 +540,6 @@ public static void highscores(boolean save)
 	        e.printStackTrace();
 	      } catch (IOException e) {
 	        e.printStackTrace();
-		
 	      }
 	    StdDraw.show(20);
 	    while(stay)
@@ -510,7 +551,5 @@ public static void highscores(boolean save)
 	    		stay = false;
 	    	}
 		}
-	
-	
 }
 }

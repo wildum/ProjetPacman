@@ -7,6 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import edu.princeton.cs.introcs.StdDraw;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class GestionDuJeu {
@@ -15,139 +20,150 @@ public class GestionDuJeu {
 	static Chrono chrono = new Chrono();
 	static Font petite = new Font("SHOWCARD GOTHIC", Font.BOLD, 18), normale = new Font("SHOWCARD GOTHIC", Font.BOLD, 20), selection = new Font("SHOWCARD GOTHIC", Font.BOLD, 22), grande = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
 	
+	
 	public static Chrono getChrono() {
 		return chrono;
 	}
-
+	
 	// affichageMenuPage1() gère l'affiche du menu principal	
-	public static int affichageMenuPage1()
-	{
-		boolean cliqueCase = true;
-		int choixDuJoueur = 0;
-		StdDraw.setCanvasSize(500,760); 
-		StdDraw.setXscale(-2,110);
-		StdDraw.setYscale(-27,149);
-		StdDraw.setFont(normale);
-		StdDraw.clear(StdDraw.BLACK);
-		StdDraw.picture(54,114,"Images/TitreMenu.png",80,30);
-		
-		while(cliqueCase)
+		public static int affichageMenuPage1()
 		{
-		while(StdDraw.mousePressed() == false)
-		{
-			cliqueCase = true;			
+			boolean clic = true;
+			boolean position = true;
+			int choixDuJoueur = 0;
+			StdDraw.setCanvasSize(500,760); 
+			StdDraw.setXscale(-2,110);
+			StdDraw.setYscale(-27,149);
+			StdDraw.setFont(normale);
+			StdDraw.clear(StdDraw.BLACK);
+			StdDraw.picture(54,114,"Images/TitreMenu.png",80,30);
 			
-			// ONE PLAYER :
-			if(StdDraw.mouseX() > 39.5 && StdDraw.mouseX() < 69 && StdDraw.mouseY() > 36 && StdDraw.mouseY() < 40.5) // choix du mode 1 joueur
+			
+			do
 			{
-				choixDuJoueur = 1;
-				cliqueCase = false;
-				StdDraw.setPenColor(StdDraw.BLACK);
-				StdDraw.filledRectangle(54.5, 34, 30, 5);
-				StdDraw.setFont(selection);
-				StdDraw.setPenColor(StdDraw.WHITE);
-				StdDraw.text(54, 31.8, "One Player");
+				clic = true;			
 				
-			}
-			else
-			{
-				StdDraw.setPenColor(StdDraw.BLACK);
-				StdDraw.filledRectangle(54.5, 34, 30, 3.5);
-				StdDraw.setFont(normale);
-				StdDraw.setPenColor(200,200,200);
-				StdDraw.text(54, 32, "One Player");
-			}
-			
-			// TWO PLAYER :
-			if(StdDraw.mouseX() > 37.2 && StdDraw.mouseX() < 71.1 && StdDraw.mouseY() > 26.3 && StdDraw.mouseY() < 30) // choix du mode 2 joueurs
-			{
-				choixDuJoueur = 2;
-				cliqueCase = false;
-				StdDraw.setPenColor(StdDraw.BLACK);
-				StdDraw.filledRectangle(54.5, 25, 30, 3.5);
-				StdDraw.setFont(selection);
-				StdDraw.setPenColor(StdDraw.WHITE);
-				StdDraw.text(54, 21.77, "Two Players");
-			}
-			else
-			{
-				StdDraw.setPenColor(StdDraw.BLACK);
-				StdDraw.filledRectangle(54.5, 25, 30, 4);
-				StdDraw.setFont(normale);
-				StdDraw.setPenColor(200,200,200);
-				StdDraw.text(54, 22, "Two Players");
+				// ONE PLAYER :
+				if(StdDraw.mouseX() > 39.5 && StdDraw.mouseX() < 69 && StdDraw.mouseY() > 36 && StdDraw.mouseY() < 40.5) // choix du mode 1 joueur
+				{
+					choixDuJoueur = 1;
+					position = false;
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.filledRectangle(54.5, 34, 30, 5);
+					StdDraw.setFont(selection);
+					StdDraw.setPenColor(StdDraw.WHITE);
+					StdDraw.text(54, 31.8, "One Player");
+					
+				}
+				else
+				{
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.filledRectangle(54.5, 34, 30, 3.5);
+					StdDraw.setFont(normale);
+					StdDraw.setPenColor(200,200,200);
+					StdDraw.text(54, 32, "One Player");
+				}
 				
-			}
-			
-			// HIGHSCORE :
-			if(StdDraw.mouseX() > 39.5 && StdDraw.mouseX() < 69.5 && StdDraw.mouseY() > 17.1 && StdDraw.mouseY() < 21) // choix de regarder les meilleurs scores
-			{
-				choixDuJoueur = 3;
-				cliqueCase = false;
-				StdDraw.setPenColor(StdDraw.BLACK);
-				StdDraw.filledRectangle(54.5, 16, 30, 5);
-				StdDraw.setFont(selection);
-				StdDraw.setPenColor(StdDraw.WHITE);
-				StdDraw.text(54, 12.75, "High Scores");
+				// TWO PLAYER :
+				if(StdDraw.mouseX() > 37.2 && StdDraw.mouseX() < 71.1 && StdDraw.mouseY() > 26.3 && StdDraw.mouseY() < 30) // choix du mode 2 joueurs
+				{
+					choixDuJoueur = 2;
+					position = false;
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.filledRectangle(54.5, 25, 30, 3.5);
+					StdDraw.setFont(selection);
+					StdDraw.setPenColor(StdDraw.WHITE);
+					StdDraw.text(54, 21.77, "Two Players");
+				}
+				else
+				{
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.filledRectangle(54.5, 25, 30, 4);
+					StdDraw.setFont(normale);
+					StdDraw.setPenColor(200,200,200);
+					StdDraw.text(54, 22, "Two Players");
+					
+				}
 				
-			}
-			else
-			{
-				StdDraw.setPenColor(StdDraw.BLACK);
-				StdDraw.filledRectangle(54.5, 16, 30, 5);
-				StdDraw.setFont(normale);
-				StdDraw.setPenColor(200,200,200);
-				StdDraw.text(54, 13, "High Scores");
-			}
+				// HIGHSCORE :
+				if(StdDraw.mouseX() > 39.5 && StdDraw.mouseX() < 69.5 && StdDraw.mouseY() > 17.1 && StdDraw.mouseY() < 21) // choix de regarder les meilleurs scores
+				{
+					choixDuJoueur = 3;
+					position = false;
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.filledRectangle(54.5, 16, 30, 5);
+					StdDraw.setFont(selection);
+					StdDraw.setPenColor(StdDraw.WHITE);
+					StdDraw.text(54, 12.75, "High Scores");
+					
+				}
+				else
+				{
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.filledRectangle(54.5, 16, 30, 5);
+					StdDraw.setFont(normale);
+					StdDraw.setPenColor(200,200,200);
+					StdDraw.text(54, 13, "High Scores");
+				}
+				
+				// CONTROLS :
+				if(StdDraw.mouseX() > 41 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > 8 && StdDraw.mouseY() < 12)
+				{
+					choixDuJoueur = 5;
+					position = false;
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.filledRectangle(54.5, 6, 30, 5);
+					StdDraw.setFont(selection);
+					StdDraw.setPenColor(StdDraw.WHITE);
+					StdDraw.text(54, 3.7, "Controls");
+				}
+				else
+				{
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.filledRectangle(54.5, 6, 30, 5);
+					StdDraw.setFont(normale);
+					StdDraw.setPenColor(200,200,200);
+					StdDraw.text(54, 4, "Controls");
+				}
+				
+				
+				// QUIT :
+				if(StdDraw.mouseX() > 47 && StdDraw.mouseX() < 61 && StdDraw.mouseY() > -2 && StdDraw.mouseY() < 4) // choix de quitter
+				{
+					choixDuJoueur = 4;
+					position = false;
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.filledRectangle(54.5, -4, 30, 5);
+					StdDraw.setFont(selection);
+					StdDraw.setPenColor(StdDraw.WHITE);
+					StdDraw.text(54, -5.2, "Quit");
+				}
+				else
+				{
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.filledRectangle(54.5, -4, 30, 5);
+					StdDraw.setFont(normale);
+					StdDraw.setPenColor(200,200,200);
+					StdDraw.text(54, -5, "Quit");
+				}
+				StdDraw.pause(50);
+				if(StdDraw.mousePressed())
+				{
+					StdDraw.pause(50);
+					clic = false;
+				}
+				else
+				{
+					clic = true;
+				}
+				
+				
+				StdDraw.show(20);
+				StdDraw.pause(50);
+				} while(clic || position);
 			
-			// CONTROLS :
-			if(StdDraw.mouseX() > 41 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > 8 && StdDraw.mouseY() < 12)
-			{
-				choixDuJoueur = 5;
-				cliqueCase = false;
-				StdDraw.setPenColor(StdDraw.BLACK);
-				StdDraw.filledRectangle(54.5, 6, 30, 5);
-				StdDraw.setFont(selection);
-				StdDraw.setPenColor(StdDraw.WHITE);
-				StdDraw.text(54, 3.7, "Controls");
-			}
-			else
-			{
-				StdDraw.setPenColor(StdDraw.BLACK);
-				StdDraw.filledRectangle(54.5, 6, 30, 5);
-				StdDraw.setFont(normale);
-				StdDraw.setPenColor(200,200,200);
-				StdDraw.text(54, 4, "Controls");
-			}
-			
-			
-			// QUIT :
-			if(StdDraw.mouseX() > 47 && StdDraw.mouseX() < 61 && StdDraw.mouseY() > -2 && StdDraw.mouseY() < 4) // choix de quitter
-			{
-				choixDuJoueur = 4;
-				cliqueCase = false;
-				StdDraw.setPenColor(StdDraw.BLACK);
-				StdDraw.filledRectangle(54.5, -4, 30, 5);
-				StdDraw.setFont(selection);
-				StdDraw.setPenColor(StdDraw.WHITE);
-				StdDraw.text(54, -5.2, "Quit");
-			}
-			else
-			{
-				StdDraw.setPenColor(StdDraw.BLACK);
-				StdDraw.filledRectangle(54.5, -4, 30, 5);
-				StdDraw.setFont(normale);
-				StdDraw.setPenColor(200,200,200);
-				StdDraw.text(54, -5, "Quit");
-			}
-			
-			
-			StdDraw.show(20);
-			
-			}
+			return choixDuJoueur;
 		}
-		return choixDuJoueur;
-	}
 
 	public static boolean affichageMenuPause()
 	{
@@ -163,22 +179,12 @@ public class GestionDuJeu {
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(36.5, 64, 15, 5);
-				if(Jeu.correctionBugClic)
+				StdDraw.pause(50);
+				if(StdDraw.mousePressed())
 				{
-					if(StdDraw.mousePressed())
-					{
-						loop = false;
-						choixDuJoueur = true; 
-					}
-				}
-				else
-				{
-					if(StdDraw.mousePressed() == false)
-					{
-						loop = false;
-						choixDuJoueur = true;
-						Jeu.correctionBugClic = true;
-					}
+					StdDraw.pause(50);
+					loop = false;
+					choixDuJoueur = true; 
 				}
 			}
 			else
@@ -190,22 +196,12 @@ public class GestionDuJeu {
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(71.5, 64, 15, 5);
-				if(Jeu.correctionBugClic)
+				StdDraw.pause(50);
+				if(StdDraw.mousePressed())
 				{
-					if(StdDraw.mousePressed())
-					{
-						loop = false;
-						choixDuJoueur = false; 
-					}
-				}
-				else
-				{
-					if(StdDraw.mousePressed() == false)
-					{
-						loop = false;
-						choixDuJoueur = false;
-						Jeu.correctionBugClic = true;
-					}
+					StdDraw.pause(50);
+					loop = false;
+					choixDuJoueur = false; 
 				}
 			}
 			else
@@ -264,22 +260,21 @@ public class GestionDuJeu {
 		StdDraw.text(55, 20, "SPACE: PAUSE/RESUME");
 		StdDraw.text(55, 14, "ECHAP: EXIT");
 		
-				
+		StdDraw.setPenColor(200, 200, 200);
+		StdDraw.text(55, -4, "GO BACK");
+		
+		
 		while(stop) {
+			stop = true;
 			while(StdDraw.mousePressed() == false) {
-				stop = true;
 				if (StdDraw.mouseX()>60 && StdDraw.mouseX()<70 && StdDraw.mouseY()>-10 && StdDraw.mouseY()<0) {
-					StdDraw.setPenColor(StdDraw.BLACK);
-					StdDraw.filledRectangle(55, -4, 50, 50);
-					StdDraw.setFont(selection);
 					StdDraw.setPenColor(StdDraw.WHITE);
-					StdDraw.text(55, -4, "GO BACK");	
-				} else {
-					StdDraw.setPenColor(StdDraw.BLACK);
 					StdDraw.filledRectangle(55, -4, 50, 50);
-					StdDraw.setFont(normale);
-					StdDraw.setPenColor(200,200,200);
-					StdDraw.text(55, -5, "GO BACK");
+					System.out.println("T'es dedans !");
+					
+				} else {
+					
+					
 				}
 			}
 			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE)) {
@@ -287,7 +282,12 @@ public class GestionDuJeu {
 			}
 			StdDraw.show(20);
 		}
-				
+			
+		
+		
+		
+		
+		
 		
 		return stop;
 	}
@@ -359,23 +359,14 @@ public class GestionDuJeu {
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(36.5, 64, 15, 5);
-				if(Jeu.correctionBugClic)
+				StdDraw.pause(50);
+				if(StdDraw.mousePressed())
 				{
-					if(StdDraw.mousePressed())
-					{
-						loop = false;
-						choixDuJoueur = false; 
-					}
+					StdDraw.pause(50);
+					loop = false;
+					choixDuJoueur = false; 
 				}
-				else
-				{
-					if(StdDraw.mousePressed() == false)
-					{
-						loop = false;
-						choixDuJoueur = false;
-						Jeu.correctionBugClic = true;
-					}
-				}
+				
 			}
 			else
 			{
@@ -386,22 +377,12 @@ public class GestionDuJeu {
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
 				StdDraw.filledRectangle(71.5, 64, 15, 5);
-				if(Jeu.correctionBugClic)
+				StdDraw.pause(50);
+				if(StdDraw.mousePressed())
 				{
-					if(StdDraw.mousePressed())
-					{
-						loop = false;
-						choixDuJoueur = true; 
-					}
-				}
-				else
-				{
-					if(StdDraw.mousePressed() == false)
-					{
-						loop = false;
-						choixDuJoueur = true;
-						Jeu.correctionBugClic = true;
-					}
+					StdDraw.pause(50);
+					loop = false;
+					choixDuJoueur = true; 
 				}
 			}
 			else
@@ -422,4 +403,74 @@ public class GestionDuJeu {
 		}
 		return choixDuJoueur;
 	}
+	
+public static void highscores(boolean save)
+{
+	boolean stay = true;
+	int y = 70;
+	int a = 0;
+	File f = new File("sauvegardes.txt");
+	FileWriter fw;
+	FileReader fr;
+	StdDraw.setXscale(-2,110);
+	StdDraw.setYscale(-27,149);
+	StdDraw.clear(StdDraw.BLACK);
+	StdDraw.setPenColor(StdDraw.WHITE);
+	String dataOut = "";
+	String dataIn;
+	String sample = "";
+	    try {
+	    	if(save)
+	    	{
+	    		fw = new FileWriter(f);
+	    		dataIn = "Bonjour à tous, amis Zéros !\n";
+	    		fw.write(dataIn);
+	    		fw.close();
+	    	}
+	        fr = new FileReader(f);
+	        int i = 0;
+	        while((i = fr.read()) != -1)
+	        {
+	          dataOut += (char)i;
+	        }
+	       while(a < dataOut.length())
+	        {
+	        	while(dataOut.charAt(a) != '$')
+	        	{
+	        		sample += dataOut.charAt(a);
+	        		a++;
+	        	}
+	        	a++;
+	        	StdDraw.text(30, y, sample);
+	        	sample = "";
+	        	while(dataOut.charAt(a) != '@')
+	        	{
+	        		sample += dataOut.charAt(a);
+	        		a++;
+	        	} 
+	        	a++;
+	        	StdDraw.text(60,y,sample);
+	        	sample = "";
+        		y-=10;
+	        }
+	
+	      } catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	      } catch (IOException e) {
+	        e.printStackTrace();
+		
+	      }
+	    StdDraw.show(20);
+	    while(stay)
+		{
+	    	StdDraw.pause(50);
+	    	if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
+	    	{
+	    		StdDraw.pause(50);
+	    		stay = false;
+	    	}
+		}
+	
+	
+}
 }

@@ -417,7 +417,7 @@ public static void highscores(boolean save)
 	StdDraw.clear(StdDraw.BLACK);
 	StdDraw.setPenColor(StdDraw.WHITE);
 	String dataOut = "";
-	String dataIn;
+	String dataIn = "";
 	String sample = "";
 	String [] tab_pseudo;
 	int [] tab_scores;
@@ -431,7 +431,7 @@ public static void highscores(boolean save)
 	    	if(save)
 	    	{
 	    		fw = new FileWriter(f);
-	    		dataIn = "Bonjour à tous, amis Zéros !\n";
+	    		dataIn += StdDraw.nextKeyTyped();
 	    		fw.write(dataIn);
 	    		fw.close();
 	    	}
@@ -450,7 +450,7 @@ public static void highscores(boolean save)
 	        }
 	        tab_pseudo = new String[tailleTab];
         	tab_scores = new int[tailleTab];
-	       while(a < dataOut.length())
+	       while(a < dataOut.length() || compteur < 10)
 	        {
 	        	while(dataOut.charAt(a) != '$')
 	        	{

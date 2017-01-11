@@ -65,7 +65,7 @@ public class Labyrinthe {
 		StdDraw.clear(StdDraw.BLACK);
 		StdDraw.picture(54.5,60,"Images/Terrain.jpg",115,127); // pour placer l'image (Paint)
 		Lab.affiche_graines(tab_graines);
-		/*Lab.affiche_mur();*/
+		
 		
 		// affichage des vies, du chrono et du score :
 		if (persos[0].getColor() == "y" && persos[1].getColor() == "g") { // s'il y a 2 joueurs
@@ -126,6 +126,7 @@ public class Labyrinthe {
 			if(persos[i].color == "y" )
 			{
 				StdDraw.setPenColor(StdDraw.YELLOW);
+				//StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Images/test.gif", 5, 5);
 				StdDraw.filledCircle(persos[i].getPosx(),persos[i].getPosy(),persos[i].getWidth());
 			}
 			if(persos[i].color == "g" )

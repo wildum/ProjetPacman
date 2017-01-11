@@ -102,7 +102,6 @@ public class Jeu {
 					Pac1.interraction(graines,Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 					Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 					fin = GestionDuJeu.checkWinLoose(graines, J1);
-					
 				}
 				
 				choixP1 = Pac1.choixDeLaDirectionP1(choixP1); //choix direction avec les touches zqsd

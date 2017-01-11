@@ -1,11 +1,5 @@
-import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
-import java.util.Scanner;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 import edu.princeton.cs.introcs.StdDraw;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,7 +20,7 @@ public class GestionDuJeu {
 	}
 	
 	// affichageMenuPage1() gère l'affiche du menu principal	
-		public static int affichageMenuPage1()
+	public static int affichageMenuPage1()
 		{
 			boolean clic = true;
 			boolean position = true;
@@ -169,72 +163,29 @@ public class GestionDuJeu {
 	{
 		boolean choixDuJoueur = true;
 		boolean loop = true;;
-		StdDraw.setFont(grande);
+		StdDraw.setFont(selection);
 		StdDraw.setPenColor(StdDraw.YELLOW);
-		StdDraw.text(55, 77, "PAUSED");;
+		StdDraw.text(54.5, 74.5, "PAUSED");
+		StdDraw.setPenColor(StdDraw.WHITE);
 		StdDraw.setFont(normale);
+		StdDraw.text(54, 51, "QUIT? Y/N");
 		while(loop)
 		{
-			if(StdDraw.mouseX() > 21.5 && StdDraw.mouseX() < 51.5 && StdDraw.mouseY() > 64 && StdDraw.mouseY() < 74)
-			{
-				StdDraw.setPenColor(StdDraw.YELLOW);
-				StdDraw.filledRectangle(36.5, 64, 15, 5);
-				StdDraw.pause(50);
-				if(StdDraw.mousePressed())
-				{
-					StdDraw.pause(50);
-					loop = false;
-					choixDuJoueur = true; 
-				}
-			}
-			else
-			{
-				StdDraw.setPenColor(StdDraw.BLUE);
-				StdDraw.filledRectangle(36.5, 64, 15, 5);
-			}
-			if(StdDraw.mouseX() > 56.5 && StdDraw.mouseX() < 86.5 && StdDraw.mouseY() > 64 && StdDraw.mouseY() < 74)
-			{
-				StdDraw.setPenColor(StdDraw.YELLOW);
-				StdDraw.filledRectangle(71.5, 64, 15, 5);
-				StdDraw.pause(50);
-				if(StdDraw.mousePressed())
-				{
-					StdDraw.pause(50);
-					loop = false;
-					choixDuJoueur = false; 
-				}
-			}
-			else
-			{
-				StdDraw.setPenColor(StdDraw.BLUE);
-				StdDraw.filledRectangle(71.5, 64, 15, 5);
-			}
-			StdDraw.setPenRadius(0.01);
-			StdDraw.setPenColor(StdDraw.GRAY);
-			StdDraw.rectangle(71.5, 64, 15, 5);
-			StdDraw.rectangle(36.5, 64, 15, 5);
-			StdDraw.setPenRadius();
-			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.text(36, 62, "Resume");
-			StdDraw.text(71, 62, "Quit");
 			StdDraw.show(20);
-			
-			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE))
+			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) || StdDraw.isKeyPressed(KeyEvent.VK_N))
 			{
 				loop = false;
 				choixDuJoueur = true;
 			}
-			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
+			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE) || StdDraw.isKeyPressed(KeyEvent.VK_Y))
 			{
 				loop = false;
 				choixDuJoueur = false;
 			}
-
 		}
-		
-		
 		return choixDuJoueur;
 	}
+	
 	
 	public static boolean affichageMenuControl() {
 		boolean clic = true, position = true, choixDuJoueur = false;
@@ -282,7 +233,7 @@ public class GestionDuJeu {
 			
 			StdDraw.pause(50);
 			if (StdDraw.mousePressed()) {
-				StdDraw.pause(50);
+				StdDraw.pause(300);
 				clic = false;
 			} else {
 				clic = true;
@@ -351,6 +302,7 @@ public class GestionDuJeu {
 			while(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) != true)
 			{
 				StdDraw.text(54, 67, "(PRESS SPACE TO CONTINUE)");
+				StdDraw.pause(50);
 				StdDraw.show(20);
 			}
 			StdDraw.clear(StdDraw.BLACK);
@@ -391,87 +343,81 @@ public class GestionDuJeu {
 				StdDraw.setPenColor(StdDraw.BLUE);
 				StdDraw.filledRectangle(71.5, 64, 15, 5);
 			}
-			StdDraw.setPenRadius(0.01);
-			StdDraw.setPenColor(StdDraw.GRAY);
-			StdDraw.rectangle(71.5, 64, 15, 5);
-			StdDraw.rectangle(36.5, 64, 15, 5);
-			StdDraw.setPenRadius();
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.text(36, 62, "Rejouer");
-			StdDraw.text(71, 62, "Quit");
+			StdDraw.text(36, 62, "PLAY AGAIN? Y/N");
 			StdDraw.show(20);
 		
 		}
 		return choixDuJoueur;
 	}
 	
-public static void highscores(boolean save)
-{
-	boolean stay = true;
-	int y = 70;
-	int a = 0;
-	File f = new File("sauvegardes.txt");
-	FileWriter fw;
-	FileReader fr;
-	StdDraw.setXscale(-2,110);
-	StdDraw.setYscale(-27,149);
-	StdDraw.clear(StdDraw.BLACK);
-	StdDraw.setPenColor(StdDraw.WHITE);
-	String dataOut = "";
-	String dataIn;
-	String sample = "";
-	    try {
-	    	if(save)
-	    	{
-	    		fw = new FileWriter(f);
-	    		dataIn = "Bonjour à tous, amis Zéros !\n";
-	    		fw.write(dataIn);
-	    		fw.close();
-	    	}
-	        fr = new FileReader(f);
-	        int i = 0;
-	        while((i = fr.read()) != -1)
-	        {
-	          dataOut += (char)i;
-	        }
-	       while(a < dataOut.length())
-	        {
-	        	while(dataOut.charAt(a) != '$')
-	        	{
-	        		sample += dataOut.charAt(a);
-	        		a++;
-	        	}
-	        	a++;
-	        	StdDraw.text(30, y, sample);
-	        	sample = "";
-	        	while(dataOut.charAt(a) != '@')
-	        	{
-	        		sample += dataOut.charAt(a);
-	        		a++;
-	        	} 
-	        	a++;
-	        	StdDraw.text(60,y,sample);
-	        	sample = "";
-        		y-=10;
-	        }
-	
-	      } catch (FileNotFoundException e) {
-	        e.printStackTrace();
-	      } catch (IOException e) {
-	        e.printStackTrace();
+	public static void highscores(boolean save)
+	{
+		boolean stay = true;
+		int y = 70;
+		int a = 0;
+		File f = new File("sauvegardes.txt");
+		FileWriter fw;
+		FileReader fr;
+		StdDraw.setXscale(-2,110);
+		StdDraw.setYscale(-27,149);
+		StdDraw.clear(StdDraw.BLACK);
+		StdDraw.setPenColor(StdDraw.WHITE);
+		String dataOut = "";
+		String dataIn;
+		String sample = "";
+		    try {
+		    	if(save)
+		    	{
+		    		fw = new FileWriter(f);
+		    		dataIn = "Bonjour à tous, amis Zéros !\n";
+		    		fw.write(dataIn);
+		    		fw.close();
+		    	}
+		        fr = new FileReader(f);
+		        int i = 0;
+		        while((i = fr.read()) != -1)
+		        {
+		          dataOut += (char)i;
+		        }
+		       while(a < dataOut.length())
+		        {
+		        	while(dataOut.charAt(a) != '$')
+		        	{
+		        		sample += dataOut.charAt(a);
+		        		a++;
+		        	}
+		        	a++;
+		        	StdDraw.text(30, y, sample);
+		        	sample = "";
+		        	while(dataOut.charAt(a) != '@')
+		        	{
+		        		sample += dataOut.charAt(a);
+		        		a++;
+		        	} 
+		        	a++;
+		        	StdDraw.text(60,y,sample);
+		        	sample = "";
+	        		y-=10;
+		        }
 		
-	      }
-	    StdDraw.show(20);
-	    while(stay)
-		{
-	    	StdDraw.pause(50);
-	    	if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
-	    	{
-	    		StdDraw.pause(50);
-	    		stay = false;
-	    	}
-		}
-	
-	
-}
+		      } catch (FileNotFoundException e) {
+		        e.printStackTrace();
+		      } catch (IOException e) {
+		        e.printStackTrace();
+			
+		      }
+		    StdDraw.show(20);
+		    while(stay)
+			{
+		    	StdDraw.pause(50);
+		    	if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
+		    	{
+		    		StdDraw.pause(50);
+		    		stay = false;
+		    	}
+			}
+		
+		
+	}
 }

@@ -78,11 +78,14 @@ public class Labyrinthe {
 			StdDraw.textLeft(-1.8, 135, "TIME : " + chrono.getDureeMs()/1000 + " s"); // Chrono
 			chrono.resume();
 			
+			StdDraw.setPenColor(StdDraw.YELLOW);
 			String score1 = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
 			StdDraw.textLeft(-1.5, 125.5, "SCORE P1 : " + score1); // score P1
+			StdDraw.setPenColor(StdDraw.GREEN);
 			String score2 = Integer.toString(((Pacman)persos[1]).getJoueur().getScore());
 			StdDraw.textRight(109.5, 125.5, "SCORE P2 : " + score2); // score P2
 			
+			StdDraw.setPenColor(StdDraw.WHITE);
 			StdDraw.textRight(109.5, 135, "HIGHSCORE : " + "00000");// meilleur score
 			
 			StdDraw.setPenColor(StdDraw.YELLOW);

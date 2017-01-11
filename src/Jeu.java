@@ -1,7 +1,4 @@
-
-
 import java.awt.event.KeyEvent;
-
 import edu.princeton.cs.introcs.StdDraw;
 
 //cette classe ne doit contenir que la fonction main

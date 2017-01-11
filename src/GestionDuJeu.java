@@ -396,7 +396,7 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 	    			{
 	    				enter = true;
 	    			}
-	    			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && dataIn != "")
+	    			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && dataIn.length() > 1)
 	    			{
 	    				dataIn = dataIn.substring(0, dataIn.length()-2);
 	    				StdDraw.clear(StdDraw.BLACK);
@@ -439,7 +439,7 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 		    			{
 		    				enter2 = true;
 		    			}
-		    			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && dataIn != "")
+		    			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && dataIn.length() > 1)
 		    			{
 		    				dataIn = dataIn.substring(0, dataIn.length()-2);
 		    				StdDraw.clear(StdDraw.BLACK);

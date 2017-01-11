@@ -61,7 +61,7 @@ public class Jeu {
 			
 			if(choixApresMenu1 == 3)
 			{
-				GestionDuJeu.highscores(false);
+				GestionDuJeu.highscores(false, false);
 			}
 			
 			if (choixApresMenu1 == 5)
@@ -165,6 +165,14 @@ public class Jeu {
 			if(affichageFin)
 			{
 				nePasRejouer = GestionDuJeu.affichageFin(fin);
+				if(choixApresMenu1 == 2)
+				{
+					GestionDuJeu.highscores(true, true, J1, J2);
+				}
+				else
+				{
+					GestionDuJeu.highscores(true, false, J1);
+				}
 			}
 			else
 			{

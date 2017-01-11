@@ -147,7 +147,7 @@ public class Labyrinthe {
 			if(persos[i].color == "b" )
 			{
 				StdDraw.setPenColor(StdDraw.BLUE);
-				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Images/fbleu.jpg", 5, 5);
+				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Images/test2.png", 5, 5);
 				
 			}
 			if(persos[i].color == "r" )

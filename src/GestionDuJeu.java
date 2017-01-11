@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileOutputStream;
+
 
 
 public class GestionDuJeu {
@@ -31,7 +33,6 @@ public class GestionDuJeu {
 			StdDraw.setFont(normale);
 			StdDraw.clear(StdDraw.BLACK);
 			StdDraw.picture(54,114,"Images/TitreMenu.png",80,30);
-			
 			
 			do
 			{
@@ -297,88 +298,217 @@ public class GestionDuJeu {
 			}
 			StdDraw.setFont(trespetite);
 			StdDraw.setPenColor(200,200,200);
+			
+			StdDraw.pause(50);
 			while(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) != true)
 			{
 				StdDraw.show(20);
 				StdDraw.text(54, 51, "(PRESS SPACE TO CONTINUE)");
-				
 			}
-			StdDraw.clear(StdDraw.BLACK);
-		
-			StdDraw.show(20);
+			
 		
 		return choixDuJoueur;
 	}
 	
+
+public static void highscores(boolean save, boolean P2, Joueur...joueurs)
+{
+	boolean stay = true;
+	int y = 90;
+	int a = 0;
+	File f = new File("sauvegardes.txt");
+	FileWriter fw;
+	FileReader fr;
+	StdDraw.setXscale(-2,110);
+	StdDraw.setYscale(-27,149);
+	StdDraw.clear(StdDraw.BLACK);
+	StdDraw.setPenColor(StdDraw.WHITE);
+	String dataOut = "";
+	String dataIn = "";
+	String sample = "";
+	String [] tab_pseudo;
+	int [] tab_scores;
+	int numberScore;
+	int tailleTab = 0;
+	int compteur = 0;
+	int change, tailleMax;
+	boolean enter = false;
+	boolean enter2 = false;
+	String changement = "";
+	StdDraw.setFont(normale);
+	    try {
+	    	if(save)
+	    	{
+	    		fw = new FileWriter(f,true);
+	    		while(enter || dataIn == "")
+	    		{
+	    			StdDraw.pause(50);
+	    			if(StdDraw.hasNextKeyTyped() && dataIn.length() < 15)
+	    			{
+	    				dataIn += StdDraw.nextKeyTyped();
+	    			}
+	    			if(StdDraw.isKeyPressed(KeyEvent.VK_ENTER))
+	    			{
+	    				enter = false;
+	    			}
+	    			else
+	    			{
+	    				enter = true;
+	    			}
+	    			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && dataIn.length() > 1)
+	    			{
+	    				dataIn = dataIn.substring(0, dataIn.length()-2);
+	    				StdDraw.clear(StdDraw.BLACK);
+	    				StdDraw.pause(50);
+	    			}
+	    			StdDraw.setFont(grande);
+		    		StdDraw.text(50, 100, "SAVE YOUR SCORE");
+		    		StdDraw.setFont(petite);
+	    			StdDraw.setPenColor(StdDraw.YELLOW);
+	    			StdDraw.textLeft(30, 80, dataIn);
+	    			StdDraw.setPenColor(StdDraw.WHITE);
+	    			StdDraw.textRight(80, 80, Integer.toString(joueurs[0].getScore()));
+	    			StdDraw.show(20);
+	    		}
+	    		fw.write("\r\n");
+	    		for(int u = 0; u<dataIn.length();u++)
+	    		{
+		    		fw.write(dataIn.charAt(u));
+	    		}
+	    		fw.write('$');
+	    		String scoreJ1 = Integer.toString(joueurs[0].getScore());
+	    		fw.write(scoreJ1);
+	    		fw.write('@');
+	    		if(P2)
+	    		{
+	    			String dataJ1 = dataIn;
+	    			dataIn = "";
+	    			while(enter2 || dataIn == "")
+		    		{
+		    			StdDraw.pause(50);
+		    			if(StdDraw.hasNextKeyTyped() && dataIn.length() < 15)
+		    			{
+		    				dataIn += StdDraw.nextKeyTyped();
+		    			}
+		    			if(StdDraw.isKeyPressed(KeyEvent.VK_ENTER))
+		    			{
+		    				enter2 = false;
+		    			}
+		    			else
+		    			{
+		    				enter2 = true;
+		    			}
+		    			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && dataIn.length() > 1)
+		    			{
+		    				dataIn = dataIn.substring(0, dataIn.length()-2);
+		    				StdDraw.clear(StdDraw.BLACK);
+		    				StdDraw.pause(50);
+		    			}
+		    			StdDraw.setFont(grande);
+			    		StdDraw.text(50, 100, "SAVE YOUR SCORE");
+			    		StdDraw.setFont(petite);
+			    		StdDraw.setPenColor(StdDraw.YELLOW);
+		    			StdDraw.textLeft(30, 80, dataJ1);
+		    			StdDraw.setPenColor(StdDraw.GREEN);
+		    			StdDraw.textLeft(30, 70, dataIn);
+		    			StdDraw.setPenColor(StdDraw.WHITE);
+		    			StdDraw.textRight(80, 80, Integer.toString(joueurs[0].getScore()));
+		    			StdDraw.textRight(80, 70, Integer.toString(joueurs[1].getScore()));
+		    			StdDraw.show(20);
+		    		}
+	    			fw.write("\r\n");
+	    			for(int w = 0; w<dataIn.length();w++)
+		    		{
+			    		fw.write(dataIn.charAt(w));
+		    		}		    		
+	    			fw.write('$');
+		    		String scoreJ2 = Integer.toString(joueurs[1].getScore());
+		    		fw.write(scoreJ2);
+		    		fw.write('@');
+	    		}
+	    		fw.close();
+	    		StdDraw.clear(StdDraw.BLACK);
+	    	}
+	        fr = new FileReader(f);
+	        int i = 0;
+	        while((i = fr.read()) != -1)
+	        {
+	          dataOut += (char)i;
+	        }
+	        for(int b = 0; b< dataOut.length(); b++)
+	        {
+	        	if(dataOut.charAt(b) == '$')
+	        	{
+	        		tailleTab++;
+	        	}
+	        }
+	        tab_pseudo = new String[tailleTab];
+        	tab_scores = new int[tailleTab];
+	       while(a < dataOut.length())
+	        {
+	        	while(dataOut.charAt(a) != '$')
+	        	{
+	        		sample += dataOut.charAt(a);
+	        		a++;
+	        	}
+	        	a++;
+	        	tab_pseudo[compteur] = sample;
+	        	sample = "";
+	        	while(dataOut.charAt(a) != '@')
+	        	{
+	        		sample += dataOut.charAt(a);
+	        		a++;
+	        	} 
+	        	a++;
+	        	numberScore = Integer.parseInt(sample);
+	        	sample = "";
+	        	tab_scores[compteur] = numberScore;
+	        	compteur++;
+	        }
+	       
+	       for(int s = 0; s < tab_scores.length; s++)
+	       {
+	    	   for(int t = 0; t < s; t++)
+	    	   {
+	    		   if(tab_scores[t] < tab_scores[s])
+	    		   {
+	    			   change = tab_scores[t];
+	    			   tab_scores[t] = tab_scores[s];
+	    			   tab_scores[s] = change;
+	    			   changement = tab_pseudo[t];
+	    			   tab_pseudo[t] = tab_pseudo[s];
+	    			   tab_pseudo[s] = changement;
+	    		   }
+	    	   }
+	       }
+	       if(tab_scores.length < 10)
+	       {
+	    	   tailleMax = tab_scores.length;
+	       }
+	       else
+	       {
+	    	   tailleMax = 10;
+	       }
+	       for(int l = 0; l < tailleMax; l++)
+	       {
+	    	   StdDraw.textLeft(35, y, Integer.toString(l+1) + "." + tab_pseudo[l] + "     " + Integer.toString(tab_scores[l]));
+	    	   y -= 10;
+	       }
 	
-	
-	public static void highscores(boolean save)
-	{
-		boolean stay = true;
-		int y = 70;
-		int a = 0;
-		File f = new File("sauvegardes.txt");
-		FileWriter fw;
-		FileReader fr;
-		StdDraw.setXscale(-2,110);
-		StdDraw.setYscale(-27,149);
-		StdDraw.clear(StdDraw.BLACK);
-		StdDraw.setPenColor(StdDraw.WHITE);
-		String dataOut = "";
-		String dataIn;
-		String sample = "";
-		    try {
-		    	if(save)
-		    	{
-		    		fw = new FileWriter(f);
-		    		dataIn = "Bonjour à tous, amis Zéros !\n";
-		    		fw.write(dataIn);
-		    		fw.close();
-		    	}
-		        fr = new FileReader(f);
-		        int i = 0;
-		        while((i = fr.read()) != -1)
-		        {
-		          dataOut += (char)i;
-		        }
-		       while(a < dataOut.length())
-		        {
-		        	while(dataOut.charAt(a) != '$')
-		        	{
-		        		sample += dataOut.charAt(a);
-		        		a++;
-		        	}
-		        	a++;
-		        	StdDraw.text(30, y, sample);
-		        	sample = "";
-		        	while(dataOut.charAt(a) != '@')
-		        	{
-		        		sample += dataOut.charAt(a);
-		        		a++;
-		        	} 
-		        	a++;
-		        	StdDraw.text(60,y,sample);
-		        	sample = "";
-	        		y-=10;
-		        }
-		
-		      } catch (FileNotFoundException e) {
-		        e.printStackTrace();
-		      } catch (IOException e) {
-		        e.printStackTrace();
-			
-		      }
-		    StdDraw.show(20);
-		    while(stay)
-			{
-		    	StdDraw.pause(50);
-		    	if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
-		    	{
-		    		StdDraw.pause(50);
-		    		stay = false;
-		    	}
-			}
-		
-		
+	      } catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	      } catch (IOException e) {
+	        e.printStackTrace();
+	      }
+	    StdDraw.show(20);
+	    while(stay)
+		{
+	    	StdDraw.pause(50);
+	    	if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
+	    	{
+	    		StdDraw.pause(50);
+	    		stay = false;
+	    	}
+		}
 	}
 }

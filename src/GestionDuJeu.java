@@ -33,7 +33,6 @@ public class GestionDuJeu {
 			StdDraw.setFont(normale);
 			StdDraw.clear(StdDraw.BLACK);
 			StdDraw.picture(54,105,"Images/Pacman_menu.png",110,69);
-			
 			do
 			{
 				position = true;			
@@ -156,7 +155,7 @@ public class GestionDuJeu {
 				StdDraw.show(20);
 				StdDraw.pause(50);
 				} while(clic || position);
-			
+			StdDraw.pause(150);
 			return choixDuJoueur;
 		}
 
@@ -336,6 +335,10 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 	boolean enter2 = false;
 	String changement = "";
 	StdDraw.setFont(normale);
+	while(StdDraw.hasNextKeyTyped())
+	{
+		StdDraw.nextKeyTyped();
+	}
 	    try {
 	    	if(save)
 	    	{
@@ -355,7 +358,7 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 	    			{
 	    				enter = true;
 	    			}
-	    			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && dataIn.length() > 1)
+	    			if(StdDraw.isKeyPressed(KeyEvent.VK_BACK_SPACE) && dataIn.length() > 1)
 	    			{
 	    				dataIn = dataIn.substring(0, dataIn.length()-2);
 	    				StdDraw.clear(StdDraw.BLACK);
@@ -398,7 +401,7 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 		    			{
 		    				enter2 = true;
 		    			}
-		    			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) && dataIn.length() > 1)
+		    			if(StdDraw.isKeyPressed(KeyEvent.VK_BACK_SPACE) && dataIn.length() > 1)
 		    			{
 		    				dataIn = dataIn.substring(0, dataIn.length()-2);
 		    				StdDraw.clear(StdDraw.BLACK);
@@ -503,7 +506,7 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 	    StdDraw.show(20);
 	    while(stay)
 		{
-	    	StdDraw.pause(50);
+	    	StdDraw.pause(150);
 	    	if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
 	    	{
 	    		StdDraw.pause(50);

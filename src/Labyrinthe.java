@@ -125,19 +125,18 @@ public class Labyrinthe {
 			//change de couleur le crayon suivant le personnage
 			if(persos[i].color == "y" )
 			{
-				StdDraw.setPenColor(StdDraw.YELLOW);
-				//StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Images/test.gif", 5, 5);
-				StdDraw.filledCircle(persos[i].getPosx(),persos[i].getPosy(),persos[i].getWidth());
+				affichagePacman((Pacman)persos[i], Lab);
 			}
 			if(persos[i].color == "g" )
 			{
-				StdDraw.setPenColor(StdDraw.GREEN);
-				StdDraw.filledCircle(persos[i].getPosx(),persos[i].getPosy(),persos[i].getWidth());
+				affichagePacman((Pacman)persos[i], Lab);
+				
 			}
 			if(persos[i].color == "o" )
 			{
-				StdDraw.setPenColor(StdDraw.ORANGE);
-				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Images/forange.jpg", 5, 5);
+				//StdDraw.setPenColor(StdDraw.ORANGE);
+				//StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Images/forange.jpg", 5, 5);
+				affichageFantome((Fantome)persos[i], Lab);
 			}
 			if(persos[i].color == "p" )
 			{
@@ -155,12 +154,95 @@ public class Labyrinthe {
 				StdDraw.setPenColor(StdDraw.RED);
 				StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Images/frouge.jpg", 5, 5);
 			}
-			//effectue un cercle représentant le personnage à sa position
-			//StdDraw.filledCircle(persos[i].getPosx(),persos[i].getPosy(),persos[i].getWidth());
-			//StdDraw.picture(persos[i].getPosx(),persos[i].getPosy(),"Bleu.jpg", 5, 5);
+			
 		}
 		
 		StdDraw.show(20);
+	}
+	
+	public void affichagePacman(Pacman pac, Labyrinthe Lab) {
+		int direction = pac.getDirection();
+		
+		switch (direction) {
+			case 1:
+				if (pac.color == "y") {
+						StdDraw.picture(pac.getPosx(),pac.getPosy(),"Images/p_jaune_b.png", 5, 5);
+				} else {
+					StdDraw.picture(pac.getPosx(),pac.getPosy(),"Images/p_vert_b.png", 5, 5);
+				}
+				break;
+			
+			case 2:
+				if (pac.color == "y") {
+					StdDraw.picture(pac.getPosx(),pac.getPosy(),"Images/p_jaune_h.png", 5, 5);
+				} else {
+					StdDraw.picture(pac.getPosx(),pac.getPosy(),"Images/p_vert_h.png", 5, 5);
+				}
+				break;
+				
+			case 3:
+				if (pac.color == "y") {
+					StdDraw.picture(pac.getPosx(),pac.getPosy(),"Images/p_jaune_g.png", 5, 5);
+				} else {
+					StdDraw.picture(pac.getPosx(),pac.getPosy(),"Images/p_vert_g.png", 5, 5);
+				}
+				break;
+				
+			case 4:
+				if (pac.color == "y") {
+					StdDraw.picture(pac.getPosx(),pac.getPosy(),"Images/p_jaune_d.png", 5, 5);
+				} else {
+					StdDraw.picture(pac.getPosx(),pac.getPosy(),"Images/p_vert_d.png", 5, 5);
+				}
+				break;
+				
+			default:
+				if (pac.color == "y") {
+					StdDraw.picture(pac.getPosx(),pac.getPosy(),"Images/p_jaune.png", 5, 5);
+				} else {
+					StdDraw.picture(pac.getPosx(),pac.getPosy(),"Images/p_vert.png", 5, 5);
+				}
+				break;
+		}
+		
+		/*if (direction == 1 && Lab.checkMur(direction,pac1.position_x,pac1.position_y)) {
+			StdDraw.picture(pac1.getPosx(),pac1.getPosy(),"Images/p_jaune_b.png", 5, 5);
+		} else if (direction == 2 && Lab.checkMur(direction,pac1.position_x,pac1.position_y)) {
+			StdDraw.picture(pac1.getPosx(),pac1.getPosy(),"Images/p_jaune_h.png", 5, 5);
+		} else if (direction == 3 && Lab.checkMur(direction,pac1.position_x,pac1.position_y)) {
+			StdDraw.picture(pac1.getPosx(),pac1.getPosy(),"Images/p_jaune_g.png", 5, 5);
+		} else if (direction == 4 && Lab.checkMur(direction,pac1.position_x,pac1.position_y)) {
+			StdDraw.picture(pac1.getPosx(),pac1.getPosy(),"Images/p_jaune_d.png", 5, 5);
+		} else {
+			StdDraw.picture(pac1.getPosx(),pac1.getPosy(),"Images/p_jaune.png", 5, 5);
+		}*/
+		
+	}
+
+	public void affichageFantome(Fantome fantome, Labyrinthe Lab) {
+		int direction = fantome.getDirection();
+		
+		switch (direction) {
+		case 1:
+				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f-orange_b.png", 5, 5);
+			break;
+		
+		case 2:
+			StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange_h.png", 5, 5);
+			break;
+			
+		case 3:
+			StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange_g.png", 5, 5);
+			break;
+			
+		case 4:
+			StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange_d.png", 5, 5);
+			break;
+			
+		default:
+			StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange.png", 5, 5);
+			break;
+	}
 	}
 	
 	//on vérifie que la direction choisie est correcte (qu'il n'y a pas d'obstacle)
@@ -221,7 +303,7 @@ public class Labyrinthe {
 		return false;
 	}
 	
-public void affiche_mur()
+	public void affiche_mur()
 {
 	StdDraw.setPenColor(StdDraw.BLUE);
 	for(int i = 0; i < tab_murs.length;i++)
@@ -237,10 +319,10 @@ public void affiche_mur()
 }
 	
 	
-public Mur nextMur(double pos_x, double pos_y, int choix)
+	public Mur nextMur(double pos_x, double pos_y, int choix)
 	{
 		
-switch(choix){
+		switch(choix){
 		
 		case 1:
 			while(tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 1 || tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 2)

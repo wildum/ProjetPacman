@@ -4,8 +4,6 @@ import edu.princeton.cs.introcs.StdDraw;
 //cette classe ne doit contenir que la fonction main
 public class Jeu {
 	
-	public static boolean mousePressed;
-	
 	public static void main(String[] args) {
 		
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

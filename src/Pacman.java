@@ -4,7 +4,7 @@ import edu.princeton.cs.introcs.StdDraw;
 public class Pacman extends Personnage{
 	
 	private Joueur joueur;
-	
+
 	public Pacman(double position_x,double position_y, double width, double speed, String color, Joueur player)
 	{
 		super(position_x,position_y, width, speed, color);
@@ -19,18 +19,22 @@ public class Pacman extends Personnage{
 		{
 			if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {
 				this.speed = speed_init; //la vitesse est remise à la vitesse initiale au cas où le pacman serait à l'arrêt
-	            return choix = 1;
+	            direction = 1;
+				return choix = 1;
 	        }
 	        if (StdDraw.isKeyPressed(KeyEvent.VK_UP))  {
 	        	this.speed = speed_init;
+	        	direction = 2;
 	            return choix = 2;
 	        }
 	        if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) {
 	        	this.speed = speed_init;
+	        	direction = 3;
 	            return choix = 3;
 	        }
 	        if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) {
 	        	this.speed = speed_init;
+	        	direction = 4;
 	            return choix = 4;
 	        }
 	        else
@@ -55,18 +59,22 @@ public class Pacman extends Personnage{
 		{
 			if (StdDraw.isKeyPressed(KeyEvent.VK_S)) {
 				this.speed = speed_init;
+				direction = 1;
 	            return choix = 1;
 	        }
 	        if (StdDraw.isKeyPressed(KeyEvent.VK_Z))  {
 	        	this.speed = speed_init;
+	        	direction = 2;
 	            return choix = 2;
 	        }
 	        if (StdDraw.isKeyPressed(KeyEvent.VK_Q)) {
 	        	this.speed = speed_init;
+	        	direction = 3;
 	            return choix = 3;
 	        }
 	        if (StdDraw.isKeyPressed(KeyEvent.VK_D)) {
 	        	this.speed = speed_init;
+	        	direction = 4;
 	            return choix = 4;
 	        }
 	        else

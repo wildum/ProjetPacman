@@ -6,6 +6,11 @@ public class Personnage {
 	protected String color;
 	protected double hitbox_x1, hitbox_x2, hitbox_y1, hitbox_y2;
 	protected int choix_precedent = 0;
+	protected int direction;
+	
+	public int getDirection() {
+		return this.direction;
+	}
 	
 	
 	public Personnage(double position_x,double position_y, double width, double speed, String color)

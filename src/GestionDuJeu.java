@@ -194,21 +194,23 @@ public class GestionDuJeu {
 		StdDraw.setXscale(-2,110);
 		StdDraw.setYscale(-27,149); 
 		StdDraw.clear(StdDraw.BLACK);
-		StdDraw.picture(54,114,"Images/TitreMenu.png",80,30);
+		StdDraw.picture(54,105,"Images/Pacman_menu.png",110,69);
 		
+		StdDraw.setFont(normale);
+		StdDraw.setPenColor(StdDraw.YELLOW);
+		StdDraw.text(24, 60, "PLAYER 1:");
+		StdDraw.setPenColor(StdDraw.GREEN);
+		StdDraw.text(81, 60, "PLAYER 2:");
 		StdDraw.setPenColor(StdDraw.WHITE);
-		StdDraw.setFont(normale);		
-		StdDraw.text(57, 85, "PLAYER 1 : ");
-		StdDraw.text(57, 65, "PLAYER 2 : ");
-		StdDraw.text(56, 27, "GAME : ");
+		StdDraw.text(56, 27, "GAME:");
 						
 		StdDraw.setPenColor(180, 180, 180);
 		StdDraw.setFont(petite);
-		StdDraw.text(55, 78, "ARROW KEYS");
-		StdDraw.text(55, 58, "Z: UP");
-		StdDraw.text(55, 52, "Q: LEFT");
-		StdDraw.text(55, 46, "S: DOWN");
-		StdDraw.text(55, 40, "D: RIGHT");
+		StdDraw.text(22, 53, "ARROW KEYS");
+		StdDraw.text(79, 53, "Z: UP");
+		StdDraw.text(79, 47, "Q: LEFT");
+		StdDraw.text(79, 41, "S: DOWN");
+		StdDraw.text(79, 35, "D: RIGHT");
 		StdDraw.text(55, 20, "SPACE: PAUSE/RESUME");
 		StdDraw.text(55, 14, "ECHAP: EXIT");
 		

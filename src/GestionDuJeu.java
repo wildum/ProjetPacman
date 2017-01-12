@@ -14,7 +14,7 @@ public class GestionDuJeu {
 	
 	// Chronomètre du jeu :
 	static Chrono chrono = new Chrono();
-	static Font petite = new Font("SHOWCARD GOTHIC", Font.BOLD, 18), normale = new Font("SHOWCARD GOTHIC", Font.BOLD, 20), selection = new Font("SHOWCARD GOTHIC", Font.BOLD, 22), grande = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
+	static Font trespetite = new Font("SHOWCARD GOTHIC", Font.BOLD, 15), petite = new Font("SHOWCARD GOTHIC", Font.BOLD, 18), normale = new Font("SHOWCARD GOTHIC", Font.BOLD, 20), selection = new Font("SHOWCARD GOTHIC", Font.BOLD, 22), grande = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
 	
 	
 	public static Chrono getChrono() {
@@ -32,7 +32,7 @@ public class GestionDuJeu {
 			StdDraw.setYscale(-27,149);
 			StdDraw.setFont(normale);
 			StdDraw.clear(StdDraw.BLACK);
-			StdDraw.picture(54,114,"Images/TitreMenu.png",80,30);
+			StdDraw.picture(54,105,"Images/Pacman_menu.png",110,69);
 			
 			do
 			{
@@ -283,75 +283,34 @@ public class GestionDuJeu {
 	
 	public static boolean affichageFin(int fin)
 	{
-		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
-		StdDraw.setFont(font);
+		StdDraw.setFont(grande);
 		boolean loop = true;
 		boolean choixDuJoueur = true;
 			if(fin == 1)
 			{
 				StdDraw.setPenColor(StdDraw.GREEN);
-				StdDraw.text(52, 77, "WIN");
+				StdDraw.text(52, 74.5, "WIN");
 			}
 			else
 			{
 				StdDraw.setPenColor(StdDraw.RED);
-				StdDraw.text(53, 77, "GAME OVER");
+				StdDraw.text(53, 74.5, "GAME OVER");
 			}
-			Font font2 = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
-			StdDraw.setFont(font2);
-			StdDraw.setPenColor(StdDraw.GRAY);
+			StdDraw.setFont(trespetite);
+			StdDraw.setPenColor(200,200,200);
+			
+			StdDraw.pause(50);
 			while(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) != true)
 			{
-				StdDraw.text(54, 67, "(PRESS SPACE TO CONTINUE)");
-				StdDraw.pause(50);
 				StdDraw.show(20);
+				StdDraw.text(54, 51, "(PRESS SPACE TO CONTINUE)");
 			}
-			StdDraw.clear(StdDraw.BLACK);
-		while(loop)
-		{
-			if(StdDraw.mouseX() > 21.5 && StdDraw.mouseX() < 51.5 && StdDraw.mouseY() > 64 && StdDraw.mouseY() < 74)
-			{
-				StdDraw.setPenColor(StdDraw.YELLOW);
-				StdDraw.filledRectangle(36.5, 64, 15, 5);
-				StdDraw.pause(50);
-				if(StdDraw.mousePressed())
-				{
-					StdDraw.pause(50);
-					loop = false;
-					choixDuJoueur = false; 
-				}
-				
-			}
-			else
-			{
-				StdDraw.setPenColor(StdDraw.BLUE);
-				StdDraw.filledRectangle(36.5, 64, 15, 5);
-			}
-			if(StdDraw.mouseX() > 56.5 && StdDraw.mouseX() < 86.5 && StdDraw.mouseY() > 64 && StdDraw.mouseY() < 74)
-			{
-				StdDraw.setPenColor(StdDraw.YELLOW);
-				StdDraw.filledRectangle(71.5, 64, 15, 5);
-				StdDraw.pause(50);
-				if(StdDraw.mousePressed())
-				{
-					StdDraw.pause(50);
-					loop = false;
-					choixDuJoueur = true; 
-				}
-			}
-			else
-			{
-				StdDraw.setPenColor(StdDraw.BLUE);
-				StdDraw.filledRectangle(71.5, 64, 15, 5);
-			}
-			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.text(36, 62, "PLAY AGAIN? Y/N");
-			StdDraw.show(20);
+			
 		
-		}
 		return choixDuJoueur;
 	}
 	
+
 public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 {
 	boolean stay = true;
@@ -551,5 +510,5 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 	    		stay = false;
 	    	}
 		}
-}
+	}
 }

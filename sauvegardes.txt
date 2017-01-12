@@ -42,7 +42,23 @@ salut
 $420@
  test
 $340@
+<<<<<<< HEAD
  hjkk
 $200@
  eli
 $250@
+=======
+ Eliott
+$310@
+ E
+$310@
+2seg
+$70@
+
+$310@
+
+$120@
+>>>>>>> branch 'master' of https://github.com/wildum/ProjetPacman.git
+
+ camarche
+$410@

@@ -524,4 +524,75 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 	    	}
 		}
 	}
+
+public static double getHighscore()
+{
+	double score = 0;
+	int a = 0;
+	File f = new File("sauvegardes.txt");
+	FileReader fr;
+	String dataOut = "";
+	String sample = "";
+	int [] tab_scores;
+	int numberScore;
+	int tailleTab = 0;
+	int compteur = 0;
+	int change;
+    int i = 0;
+    try
+    {
+    	fr = new FileReader(f);
+    while((i = fr.read()) != -1)
+    {
+      dataOut += (char)i;
+    }
+    for(int b = 0; b< dataOut.length(); b++)
+    {
+    	if(dataOut.charAt(b) == '$')
+    	{
+    		tailleTab++;
+    	}
+    }
+	tab_scores = new int[tailleTab];
+   while(a < dataOut.length())
+    {
+	   while(dataOut.charAt(a) != '$')
+   	{
+   		a++;
+   	} 
+	   a++;
+    	while(dataOut.charAt(a) != '@')
+    	{
+    		sample += dataOut.charAt(a);
+    		a++;
+    	} 
+    	a++;
+    	numberScore = Integer.parseInt(sample);
+    	sample = "";
+    	tab_scores[compteur] = numberScore;
+    	compteur++;
+    }
+   
+   for(int s = 0; s < tab_scores.length; s++)
+   {
+	   for(int t = 0; t < s; t++)
+	   {
+		   if(tab_scores[t] < tab_scores[s])
+		   {
+			   change = tab_scores[t];
+			   tab_scores[t] = tab_scores[s];
+			   tab_scores[s] = change;
+		   }
+	   }
+   }
+   
+   score = tab_scores[0];
+
+  } catch (FileNotFoundException e) {
+    e.printStackTrace();
+  } catch (IOException e) {
+    e.printStackTrace();
+  }
+	return score;
+}
 }

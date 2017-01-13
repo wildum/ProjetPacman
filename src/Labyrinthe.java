@@ -110,7 +110,7 @@ public class Labyrinthe {
 			String score = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
 			StdDraw.textLeft(-1.5, 125.5, "SCORE : " + score); // score joueur
 			
-			StdDraw.textRight(109.5, 135, "HIGHSCORE : " + "00000");// meilleur score
+			StdDraw.textRight(109.5, 135, "HIGHSCORE : " + GestionDuJeu.getHighscore());// meilleur score
 			
 			StdDraw.setPenColor(StdDraw.YELLOW);
 			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) {

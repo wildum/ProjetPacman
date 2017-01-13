@@ -132,24 +132,52 @@ public class Jeu {
 				
 				
 				//etat normal des fantomes
-				if(FantomeRose.getEtat().equals("normal"))
+				if(FantomeRose.getEtat().equals("standard") || FantomeRose.getEtat().equals("apeure"))
 				{
-					choixF1 = FantomeRose.choixDirection(Lab, choixF1); 
+					if(choixApresMenu1 == 2)
+					{
+						choixF1 = FantomeRose.choixDirection(Lab, choixF1,Pac1,Pac2); 
+					}
+					else
+					{
+						choixF1 = FantomeRose.choixDirection(Lab, choixF1,Pac1);
+					}
 					FantomeRose.deplacer(Lab, choixF1); 
 				}
-				if(FantomeBleu.getEtat().equals("normal"))
+				if(FantomeBleu.getEtat().equals("standard") || FantomeBleu.getEtat().equals("apeure"))
 				{
-					choixF2 = FantomeBleu.choixDirection(Lab, choixF2);
+					if(choixApresMenu1 == 2)
+					{
+						choixF2 = FantomeBleu.choixDirection(Lab, choixF2,Pac1,Pac2);
+					}
+					else
+					{
+						choixF2 = FantomeBleu.choixDirection(Lab, choixF2,Pac1);
+					}
 					FantomeBleu.deplacer(Lab, choixF2);
 				}
-				if(FantomeRouge.getEtat().equals("normal"))
+				if(FantomeRouge.getEtat().equals("standard") || FantomeRouge.getEtat().equals("apeure"))
 				{
-					choixF3 = FantomeRouge.choixDirection(Lab, choixF3);
+					if(choixApresMenu1 == 2)
+					{
+						choixF3 = FantomeRouge.choixDirection(Lab, choixF3,Pac1,Pac2);
+					}
+					else
+					{
+						choixF3 = FantomeRouge.choixDirection(Lab, choixF3,Pac1);
+					}
 					FantomeRouge.deplacer(Lab, choixF3);
 				}
-				if(FantomeOrange.getEtat().equals("normal"))
+				if(FantomeOrange.getEtat().equals("standard") || FantomeOrange.getEtat().equals("apeure"))
 				{
-					choixF4 = FantomeOrange.choixDirection(Lab, choixF4);
+					if(choixApresMenu1 == 2)
+					{
+						choixF4 = FantomeOrange.choixDirection(Lab, choixF4,Pac1,Pac2);
+					}
+					else
+					{
+						choixF4 = FantomeOrange.choixDirection(Lab, choixF4,Pac1);
+					}
 					FantomeOrange.deplacer(Lab, choixF4);
 				}
 				

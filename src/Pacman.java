@@ -5,6 +5,15 @@ public class Pacman extends Personnage{
 	
 	private Joueur joueur;
 	private double tempsChgtImage = 0; 
+	private String etat = "";
+	private double minuterieEnerveS = -8;
+	
+	public Pacman(double position_x,double position_y, double width, double speed, String color, Joueur player)
+	{
+		super(position_x,position_y, width, speed, color);
+		this.joueur = player;
+		this.etat = "standard";
+	}
 	
 	public double getTempsChgtImage () {
 		return this.tempsChgtImage;
@@ -38,104 +47,252 @@ public class Pacman extends Personnage{
 
 	public void animationPacman1(Chrono chrono, int direction) {
 		chrono.pause();
+		
+		///gestion du mode enerve
+		
+		if(chrono.getDureeSec() > this.minuterieEnerveS + 8)
+		{
+			this.setEtat("standard");
+		}
+		
+		
+		
 		double sous = chrono.getDureeMs() - tempsChgtImage;
-		if (sous <= 100) {
-			StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune.png", 5, 5);
-		} else if (sous <= 200) {
-			if (direction == 1) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_bmi.png", 5, 5);
-			} else if (direction == 2) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_hmi.png", 5, 5);
-			} else if (direction == 3) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_gmi.png", 5, 5);
-			} else if (direction == 4){
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_dmi.png", 5, 5);
-			}  else {
+		
+		if(this.etat == "standard")
+		{
+			if (sous <= 100) {
 				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune.png", 5, 5);
+			} else if (sous <= 200) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_bmi.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_hmi.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_gmi.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_dmi.png", 5, 5);
+				}  else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune.png", 5, 5);
+				}
+			} else if (sous <= 300) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_b.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_h.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_g.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_d.png", 5, 5);
+				}  else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune.png", 5, 5);
+				}
+			} else if (sous <= 400) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_bmi.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_hmi.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_gmi.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_dmi.png", 5, 5);
+				}  else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune.png", 5, 5);
+				}
+			} else {
+				tempsChgtImage = chrono.getDureeMs();
+				chrono.resume();
 			}
-		} else if (sous <= 300) {
-			if (direction == 1) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_b.png", 5, 5);
-			} else if (direction == 2) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_h.png", 5, 5);
-			} else if (direction == 3) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_g.png", 5, 5);
-			} else if (direction == 4){
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_d.png", 5, 5);
-			}  else {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune.png", 5, 5);
+		}
+		if(this.etat == "enerve")
+		{
+			if (sous <= 100) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_h.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_g.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_d.png", 5, 5);
+				}  else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 5);
+				}
+			} else if (sous <= 200) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_bmi.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_hmi.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_gmi.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_dmi.png", 5, 5);
+				}  else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 5);
+				}
+			} else if (sous <= 300) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_h.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_g.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_d.png", 5, 5);
+				}  else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 5);
+				}
+			} else if (sous <= 400) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_bmi.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_hmi.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_gmi.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_dmi.png", 5, 5);
+				}  else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 5);
+				}
+			} else {
+				tempsChgtImage = chrono.getDureeMs();
+				chrono.resume();
 			}
-		} else if (sous <= 400) {
-			if (direction == 1) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_bmi.png", 5, 5);
-			} else if (direction == 2) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_hmi.png", 5, 5);
-			} else if (direction == 3) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_gmi.png", 5, 5);
-			} else if (direction == 4){
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_dmi.png", 5, 5);
-			}  else {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune.png", 5, 5);
-			}
-		} else {
-			tempsChgtImage = chrono.getDureeMs();
-			chrono.resume();
 		}
 	}
 	
+	public double getMinuterieEnerveS() {
+		return minuterieEnerveS;
+	}
+
+	public void setMinuterieEnerveS(double minuterieEnerveS) {
+		this.minuterieEnerveS = minuterieEnerveS;
+	}
+
+	
+
+	public void setJoueur(Joueur joueur) {
+		this.joueur = joueur;
+	}
+
+	public void setTempsChgtImage(double tempsChgtImage) {
+		this.tempsChgtImage = tempsChgtImage;
+	}
+
 	public void animationPacman2(Chrono chrono, int direction) {
 		chrono.pause();
+		
+		///gestion du mode enerve
+		if(chrono.getDureeSec() > this.minuterieEnerveS + 8)
+			{
+				this.setEtat("standard");
+			}
+				
+				
 		double sous = chrono.getDureeMs() - tempsChgtImage;
-		if (sous <= 100) {
-			StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert.png", 5, 5);
-		} else if (sous <= 200) {
-			if (direction == 1) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_bmi.png", 5, 5);
-			} else if (direction == 2) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_hmi.png", 5, 5);
-			} else if (direction == 3) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_gmi.png", 5, 5);
-			} else if (direction == 4){
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_dmi.png", 5, 5);
-			} else {
+		
+		if(this.etat == "standard")
+		{
+			if (sous <= 100) {
 				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert.png", 5, 5);
-			}
-		} else if (sous <= 300) {
-			if (direction == 1) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_b.png", 5, 5);
-			} else if (direction == 2) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_h.png", 5, 5);
-			} else if (direction == 3) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_g.png", 5, 5);
-			} else if (direction == 4){
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_d.png", 5, 5);
+			} else if (sous <= 200) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_bmi.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_hmi.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_gmi.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_dmi.png", 5, 5);
+				} else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert.png", 5, 5);
+				}
+			} else if (sous <= 300) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_b.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_h.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_g.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_d.png", 5, 5);
+				} else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert.png", 5, 5);
+				}
+			} else if (sous <= 400) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_bmi.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_hmi.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_gmi.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_dmi.png", 5, 5);
+				} else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert.png", 5, 5);
+				}
 			} else {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert.png", 5, 5);
+				tempsChgtImage = chrono.getDureeMs();
+				chrono.resume();
 			}
-		} else if (sous <= 400) {
-			if (direction == 1) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_bmi.png", 5, 5);
-			} else if (direction == 2) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_hmi.png", 5, 5);
-			} else if (direction == 3) {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_gmi.png", 5, 5);
-			} else if (direction == 4){
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_dmi.png", 5, 5);
+		}
+		if(this.etat == "enerve")
+		{
+			if (sous <= 100) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_b.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_h.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_g.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 5);
+				} else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 5);
+				}
+			} else if (sous <= 200) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_bmi.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_hmi.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_gmi.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_dmi.png", 5, 5);
+				} else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 5);
+				}
+			} else if (sous <= 300) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_b.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_h.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_g.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 5);
+				} else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 5);
+				}
+			} else if (sous <= 400) {
+				if (direction == 1) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_bmi.png", 5, 5);
+				} else if (direction == 2) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_hmi.png", 5, 5);
+				} else if (direction == 3) {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_gmi.png", 5, 5);
+				} else if (direction == 4){
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_dmi.png", 5, 5);
+				} else {
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 5);
+				}
 			} else {
-				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert.png", 5, 5);
+				tempsChgtImage = chrono.getDureeMs();
+				chrono.resume();
 			}
-		} else {
-			tempsChgtImage = chrono.getDureeMs();
-			chrono.resume();
 		}
 	}
 	
-	
-	public Pacman(double position_x,double position_y, double width, double speed, String color, Joueur player)
-	{
-		super(position_x,position_y, width, speed, color);
-		this.joueur = player;
-	}
 	
 	//cette méthode permet au joueur 1 de choisir sa direction en appuyant sur une touche 
 	//elle prend en argument la direction précédente et la renvoie si le joueur n'appuie sur rien
@@ -213,7 +370,7 @@ public class Pacman extends Personnage{
 		}
 	}
 	
-	public void interraction(Graine [][] tab_graines, Pacman AutrePac ,Fantome...fantomes)
+	public void interraction(Graine [][] tab_graines,Pacman AutrePac ,Fantome...fantomes)
 	{
 		for(int i = 0; i < tab_graines.length;i++)
 		{
@@ -230,6 +387,22 @@ public class Pacman extends Personnage{
 						tab_graines[i][j].setType("null");
 						this.getJoueur().setScore(this.getJoueur().getScore()+10);
 					}
+					if(tab_graines[i][j].type == "super")
+					{
+						tab_graines[i][j].setType("null");
+						this.getJoueur().setScore(this.getJoueur().getScore()+50);
+						this.etat = "enerve";
+						for(int m = 0; m < fantomes.length;m++)
+						{
+							if(fantomes[m].getEtat() == "standard")
+							{
+								fantomes[m].setEtat("apeure");
+							}
+						}
+						GestionDuJeu.getChrono().pause();
+						this.minuterieEnerveS = GestionDuJeu.getChrono().getDureeSec();
+						GestionDuJeu.getChrono().resume();
+					}
 				}
 			}
 		}
@@ -241,33 +414,48 @@ public class Pacman extends Personnage{
 					this.gethy1() < fantomes[a].getPosy() &&
 					this.gethy2()> fantomes[a].getPosy())
 			{
-				// on remet le pacamn à sa position initiale :
-				this.position_x = this.position_i_x;
-				this.position_y = this.position_i_y;
-				AutrePac.position_x = AutrePac.position_i_x;
-				AutrePac.position_y = AutrePac.position_i_y;
-				
-				// on remet les fantômes à leur position initiale
-				for(int b = 0; b< fantomes.length;b++)
+				if(this.etat == "standard")
 				{
-					fantomes[b].position_x = fantomes[b].position_i_x;
-					fantomes[b].position_y = fantomes[b].position_i_y;
-					fantomes[b].setEtat("initial");
-					GestionDuJeu.getChrono().pause();
-					fantomes[b].setTimer(GestionDuJeu.getChrono().getDureeSec());
-					GestionDuJeu.getChrono().resume();
-					fantomes[b].check1 = false;
-					fantomes[b].check2 = false;
+					// on remet le pacamn à sa position initiale :
+					this.position_x = this.position_i_x;
+					this.position_y = this.position_i_y;
+					AutrePac.position_x = AutrePac.position_i_x;
+					AutrePac.position_y = AutrePac.position_i_y;
+					
+					// on remet les fantômes à leur position initiale
+					for(int b = 0; b< fantomes.length;b++)
+					{
+						fantomes[b].position_x = fantomes[b].position_i_x;
+						fantomes[b].position_y = fantomes[b].position_i_y;
+						fantomes[b].setEtat("initial");
+						GestionDuJeu.getChrono().pause();
+						fantomes[b].setTimer(GestionDuJeu.getChrono().getDureeSec());
+						GestionDuJeu.getChrono().resume();
+						fantomes[b].check1 = false;
+						fantomes[b].check2 = false;
+					}
+					
+					// on enlève une vie au joueur :
+					this.getJoueur().setVie(this.getJoueur().getVie()-1);
+					
+					this.hitbox_x1 = this.position_x-this.width;
+					this.hitbox_x2 = this.position_x+this.width;
+					this.hitbox_y1= this.position_y-this.width;
+					this.hitbox_y2 = this.position_y+this.width;
 				}
 				
-				// on enlève une vie au joueur :
-				this.getJoueur().setVie(this.getJoueur().getVie()-1);
-				
-				this.hitbox_x1 = this.position_x-this.width;
-				this.hitbox_x2 = this.position_x+this.width;
-				this.hitbox_y1= this.position_y-this.width;
-				this.hitbox_y2 = this.position_y+this.width;
-
+				if(this.etat == "enerve" && fantomes[a].equals("standard"))
+				{
+					fantomes[a].position_x = fantomes[a].position_i_x;
+					fantomes[a].position_y = fantomes[a].position_i_y;
+					fantomes[a].setEtat("initial");
+					this.getJoueur().setScore(this.getJoueur().getScore()+200);
+					GestionDuJeu.getChrono().pause();
+					fantomes[a].setTimer(GestionDuJeu.getChrono().getDureeSec() - 8);
+					GestionDuJeu.getChrono().resume();
+					fantomes[a].check1 = false;
+					fantomes[a].check2 = false;
+				}
 			}
 		}
 		
@@ -278,5 +466,13 @@ public class Pacman extends Personnage{
 		return this.joueur;
 	}
 	
+	public void setEtat(String Etat)
+	{
+		this.etat = Etat;
+	}
+	public String getEtat()
+	{
+		return this.etat;
+	}
 	
 }

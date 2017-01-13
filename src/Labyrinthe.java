@@ -11,7 +11,7 @@ public class Labyrinthe {
 	public int [][] matrice = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 							   {0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0},
 							   {0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0},
-							   {0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0},
+							   {0,9,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,9,0},
 							   {0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0},
 							   {0,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,1,1,1,1,1,1,0},
 							   {0,1,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0},
@@ -31,7 +31,7 @@ public class Labyrinthe {
 							   {0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0},
 							   {0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0},
 							   {0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0},
-							   {0,1,1,1,0,0,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,1,0,0,1,1,1,0},
+							   {0,9,1,1,0,0,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,1,0,0,1,1,9,0},
 							   {0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0},
 							   {0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0},
 							   {0,1,1,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,0,0,1,1,1,1,1,1,0},
@@ -157,56 +157,98 @@ public class Labyrinthe {
 	public void affichageFantome(Fantome fantome, Labyrinthe Lab) {
 		int direction = fantome.getDirection();
 		
-		switch (direction) {
-		case 1:
-			if (fantome.color == "o") {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange_b.png", 5, 5);
-			} else if (fantome.color == "p") {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rose_b.png", 5, 5);
-			} else if (fantome.color == "b") {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_bleu_b.png", 5, 5);
-			} else {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rouge_b.png", 5, 5);
-			} 
-			break;
+		if(fantome.getEtat() == "standard")
+		{
+			switch (direction) {
+			case 1:
+				if (fantome.color == "o") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange_b.png", 5, 5);
+				} else if (fantome.color == "p") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rose_b.png", 5, 5);
+				} else if (fantome.color == "b") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_bleu_b.png", 5, 5);
+				} else {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rouge_b.png", 5, 5);
+				} 
+				break;
+			
+			case 2:
+				if (fantome.color == "o") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange_h.png", 5, 5);
+				} else if (fantome.color == "p") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rose_h.png", 5, 5);
+				} else if (fantome.color == "b") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_bleu_h.png", 5, 5);
+				} else {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rouge_h.png", 5, 5);
+				}
+				break;
+				
+			case 3:
+				if (fantome.color == "o") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange_g.png", 5, 5);
+				} else if (fantome.color == "p") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rose_g.png", 5, 5);
+				} else if (fantome.color == "b") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_bleu_g.png", 5, 5);
+				} else {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rouge_g.png", 5, 5);
+				}
+				break;
+				
+			case 4:
+				if (fantome.color == "o") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange_d.png", 5, 5);
+				} else if (fantome.color == "p") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rose_d.png", 5, 5);
+				} else if (fantome.color == "b") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_bleu_d.png", 5, 5);
+				} else {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rouge_d.png", 5, 5);
+				}
+				break;
+				
+			default:
+				if (fantome.color == "o") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange.png", 5, 5);
+				} else if (fantome.color == "p") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rose.png", 5, 5);
+				} else if (fantome.color == "b") {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_bleu.png", 5, 5);
+				} else {
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rouge.png", 5, 5);
+				}
+				break;
+			}
+		}
 		
-		case 2:
-			if (fantome.color == "o") {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange_h.png", 5, 5);
-			} else if (fantome.color == "p") {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rose_h.png", 5, 5);
-			} else if (fantome.color == "b") {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_bleu_h.png", 5, 5);
-			} else {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rouge_h.png", 5, 5);
-			}
-			break;
+		if(fantome.getEtat() == "apeure")
+		{
+			switch (direction) {
+			case 1:
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu.png", 5, 5);
+				break;
 			
-		case 3:
-			if (fantome.color == "o") {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange_g.png", 5, 5);
-			} else if (fantome.color == "p") {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rose_g.png", 5, 5);
-			} else if (fantome.color == "b") {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_bleu_g.png", 5, 5);
-			} else {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rouge_g.png", 5, 5);
+			case 2:
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu_h.png", 5, 5);
+				break;
+				
+			case 3:
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu_g.png", 5, 5);
+				break;
+				
+			case 4:
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu_d.png", 5, 5);
+				break;
+				
+			default:
+					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu.png", 5, 5);
+				break;
 			}
-			break;
-			
-		case 4:
-			if (fantome.color == "o") {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange_d.png", 5, 5);
-			} else if (fantome.color == "p") {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rose_d.png", 5, 5);
-			} else if (fantome.color == "b") {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_bleu_d.png", 5, 5);
-			} else {
-				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rouge_d.png", 5, 5);
-			}
-			break;
-			
-		default:
+		}
+		
+		if(fantome.getEtat() == "initial")
+		{
 			if (fantome.color == "o") {
 				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_orange.png", 5, 5);
 			} else if (fantome.color == "p") {
@@ -216,7 +258,6 @@ public class Labyrinthe {
 			} else {
 				StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_rouge.png", 5, 5);
 			}
-			break;
 		}
 	}
 	
@@ -300,25 +341,25 @@ public class Labyrinthe {
 		switch(choix){
 		
 		case 1:
-			while(tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 1 || tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 2)
+			while(tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 1 || tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 2 || tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 9)
 			{
 				pos_y--;
 			}
 			break;
 		case 2:
-			while(tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 1 || tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 2)
+			while(tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 1 || tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 2 || tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 9)
 			{
 				pos_y++;
 			}
 			break;
 		case 3:
-			while(tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 1 || tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 2)
+			while(tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 1 || tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 2 || tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 9)
 			{
 				pos_x--;
 			}
 			break;
 		case 4:
-			while(tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 1 || tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 2)
+			while(tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 1 || tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 2 || tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)].getType() == 9)
 			{
 				pos_x++;
 			}
@@ -341,6 +382,10 @@ public class Labyrinthe {
 				{
 					tab_graines[i][j] = new Graine(i*ligne,j*colonne, "standard");
 				}
+				else if(tab_murs[i][j].getType() == 9)
+				{
+					tab_graines[i][j] = new Graine(i*ligne,j*colonne, "super");
+				}
 				else
 				{
 					tab_graines[i][j] = new Graine(i*ligne,j*colonne, "null");
@@ -361,7 +406,11 @@ public class Labyrinthe {
 				{	
 					StdDraw.setPenColor(StdDraw.GRAY);
 					StdDraw.filledCircle(i*f_graines,j*f_graines,Graine.width);
-
+				}
+				if(tab_graines[i][j].type == "super")
+				{	
+					StdDraw.setPenColor(StdDraw.GRAY);
+					StdDraw.filledCircle(i*f_graines,j*f_graines,Graine.width+0.8);
 				}
 			}
 		}

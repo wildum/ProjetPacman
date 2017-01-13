@@ -53,6 +53,7 @@ public class Personnage {
 				{	
 					this.position_y -= speed; //pas d'obstacle -> on avance
 					this.choix_precedent = choix;
+					direction = 1;
 				}
 				else if (choix != this.choix_precedent)
 				{
@@ -66,6 +67,7 @@ public class Personnage {
 				{	
 					this.position_y += speed;
 					this.choix_precedent = choix;
+					direction = 2;
 				}
 				else if (choix != this.choix_precedent)
 				{
@@ -78,6 +80,7 @@ public class Personnage {
 				{
 					this.position_x -= speed;
 					this.choix_precedent = choix;
+					direction = 3;
 				}
 				else if (choix != this.choix_precedent)
 				{
@@ -90,6 +93,7 @@ public class Personnage {
 				{
 					this.position_x += speed;
 					this.choix_precedent = choix;
+					direction = 4;
 				}
 				else if (choix != this.choix_precedent)
 				{

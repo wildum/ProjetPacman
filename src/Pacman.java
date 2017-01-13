@@ -4,7 +4,133 @@ import edu.princeton.cs.introcs.StdDraw;
 public class Pacman extends Personnage{
 	
 	private Joueur joueur;
+	private double tempsChgtImage = 0; 
+	
+	public double getTempsChgtImage () {
+		return this.tempsChgtImage;
+	}
+	
+	public void chgtImage(int direction, Chrono chrono) {
+		if (this.getColor() == "y") {
+			this.animationPacman1(chrono, direction);
+		} else {
+			this.animationPacman2(chrono, direction);
+		}
+		
+		if (this.getColor() == "y") {
+			this.animationPacman1(chrono, direction);
+		} else {
+			this.animationPacman2(chrono, direction);
+		}
+		
+		if (this.getColor() == "y") {
+			this.animationPacman1(chrono, direction);
+		} else {
+			this.animationPacman2(chrono, direction);
+		}
+		
+		if (this.getColor() == "y") {
+			this.animationPacman1(chrono, direction);
+		} else {
+			this.animationPacman2(chrono, direction);
+		}
+	}
 
+	public void animationPacman1(Chrono chrono, int direction) {
+		chrono.pause();
+		double sous = chrono.getDureeMs() - tempsChgtImage;
+		if (sous <= 100) {
+			StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune.png", 5, 5);
+		} else if (sous <= 200) {
+			if (direction == 1) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_bmi.png", 5, 5);
+			} else if (direction == 2) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_hmi.png", 5, 5);
+			} else if (direction == 3) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_gmi.png", 5, 5);
+			} else if (direction == 4){
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_dmi.png", 5, 5);
+			}  else {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune.png", 5, 5);
+			}
+		} else if (sous <= 300) {
+			if (direction == 1) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_b.png", 5, 5);
+			} else if (direction == 2) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_h.png", 5, 5);
+			} else if (direction == 3) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_g.png", 5, 5);
+			} else if (direction == 4){
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_d.png", 5, 5);
+			}  else {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune.png", 5, 5);
+			}
+		} else if (sous <= 400) {
+			if (direction == 1) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_bmi.png", 5, 5);
+			} else if (direction == 2) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_hmi.png", 5, 5);
+			} else if (direction == 3) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_gmi.png", 5, 5);
+			} else if (direction == 4){
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune_dmi.png", 5, 5);
+			}  else {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jaune.png", 5, 5);
+			}
+		} else {
+			tempsChgtImage = chrono.getDureeMs();
+			chrono.resume();
+		}
+	}
+	
+	public void animationPacman2(Chrono chrono, int direction) {
+		chrono.pause();
+		double sous = chrono.getDureeMs() - tempsChgtImage;
+		if (sous <= 100) {
+			StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert.png", 5, 5);
+		} else if (sous <= 200) {
+			if (direction == 1) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_bmi.png", 5, 5);
+			} else if (direction == 2) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_hmi.png", 5, 5);
+			} else if (direction == 3) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_gmi.png", 5, 5);
+			} else if (direction == 4){
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_dmi.png", 5, 5);
+			} else {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert.png", 5, 5);
+			}
+		} else if (sous <= 300) {
+			if (direction == 1) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_b.png", 5, 5);
+			} else if (direction == 2) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_h.png", 5, 5);
+			} else if (direction == 3) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_g.png", 5, 5);
+			} else if (direction == 4){
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_d.png", 5, 5);
+			} else {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert.png", 5, 5);
+			}
+		} else if (sous <= 400) {
+			if (direction == 1) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_bmi.png", 5, 5);
+			} else if (direction == 2) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_hmi.png", 5, 5);
+			} else if (direction == 3) {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_gmi.png", 5, 5);
+			} else if (direction == 4){
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert_dmi.png", 5, 5);
+			} else {
+				StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_vert.png", 5, 5);
+			}
+		} else {
+			tempsChgtImage = chrono.getDureeMs();
+			chrono.resume();
+		}
+	}
+	
+	
 	public Pacman(double position_x,double position_y, double width, double speed, String color, Joueur player)
 	{
 		super(position_x,position_y, width, speed, color);
@@ -19,22 +145,18 @@ public class Pacman extends Personnage{
 		{
 			if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN)) {
 				this.speed = speed_init; //la vitesse est remise à la vitesse initiale au cas où le pacman serait à l'arrêt
-	            direction = 1;
-				return choix = 1;
+	            return choix = 1;
 	        }
 	        if (StdDraw.isKeyPressed(KeyEvent.VK_UP))  {
 	        	this.speed = speed_init;
-	        	direction = 2;
 	            return choix = 2;
 	        }
 	        if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) {
 	        	this.speed = speed_init;
-	        	direction = 3;
 	            return choix = 3;
 	        }
 	        if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) {
 	        	this.speed = speed_init;
-	        	direction = 4;
 	            return choix = 4;
 	        }
 	        else

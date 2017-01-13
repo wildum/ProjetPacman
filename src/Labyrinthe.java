@@ -8,6 +8,7 @@ public class Labyrinthe {
 	private int f_graines = 4;
 	private int ligne = 4, colonne = 4;
 	private Mur [][] tab_murs= new Mur[28][31];
+	boolean gettingStarted = true;
 	public int [][] matrice = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 							   {0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0},
 							   {0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0},
@@ -75,7 +76,7 @@ public class Labyrinthe {
 			StdDraw.text(80, -8, "LIVES P2 :"); // vies P2
 			
 			chrono.pause();
-			StdDraw.textLeft(-1.8, 135, "TIME : " + chrono.getDureeMs()/1000 + " s"); // Chrono
+			StdDraw.textLeft(-1.8, 135, "TIME : " + Math.round(chrono.getDureeSec()) + " s"); // Chrono
 			chrono.resume();
 			
 			StdDraw.setPenColor(StdDraw.YELLOW);
@@ -104,7 +105,7 @@ public class Labyrinthe {
 			StdDraw.text(6, -8, "LIVES :"); // Vies joueur
 			
 			chrono.pause();
-			StdDraw.textLeft(-1.8, 135, "TIME : " + chrono.getDureeMs()/1000 + " s"); // Chrono
+			StdDraw.textLeft(-1.8, 135, "TIME : " + Math.round(chrono.getDureeSec()) + " s"); // Chrono
 			chrono.resume();
 			
 			String score = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
@@ -149,6 +150,13 @@ public class Labyrinthe {
 				affichageFantome((Fantome)persos[i], Lab);
 			}
 			
+		}
+		
+		if (gettingStarted) {
+			StdDraw.text(54, 51, "GET READY !");
+			StdDraw.show(); 
+			StdDraw.pause(5000);
+			gettingStarted = false;
 		}
 		
 		StdDraw.show(20);

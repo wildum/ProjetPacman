@@ -35,7 +35,7 @@ public class Jeu {
 			}
 			keepPlaying = true;
 			affichageFin = true;
-			GestionDuJeu.getChrono().start(); // on lance le chrono du jeu
+			 
 			// Init labyrinthe :
 			Labyrinthe Lab = new Labyrinthe(); //Labyrinthe de taille 500x760
 			
@@ -55,7 +55,8 @@ public class Jeu {
 			
 			// Init graines : 
 			graines = Lab.i_graines();
-			
+				
+			boolean boucle1 = true;
 			
 			if(choixApresMenu1 == 3)
 			{
@@ -67,8 +68,10 @@ public class Jeu {
 				GestionDuJeu.affichageMenuControl();
 			}
 			
+			
 			if(choixApresMenu1 == 1 || choixApresMenu1 == 2)
 			{
+				GestionDuJeu.getChrono().start(); // on lance le chrono du jeu
 			do
 			{
 				// affichage du menu pause si la touche Espace est pressée :
@@ -91,14 +94,28 @@ public class Jeu {
 				{
 					Pac1.interraction(graines, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 					Pac2.interraction(graines, Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
-					Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+					if (boucle1) {
+						GestionDuJeu.getChrono().pause();
+						Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+						GestionDuJeu.getChrono().resume();
+						boucle1 = false;
+					} else {
+						Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+					}
 					fin = GestionDuJeu.checkWinLoose(graines, J1, J2);
 					
 				}
 				else
 				{
 					Pac1.interraction(graines,Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
-					Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+					if (boucle1) {
+						GestionDuJeu.getChrono().pause();
+						Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+						GestionDuJeu.getChrono().resume();
+						boucle1 = false;
+					} else {
+						Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+					}
 					fin = GestionDuJeu.checkWinLoose(graines, J1);
 				}
 				

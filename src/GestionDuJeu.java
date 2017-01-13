@@ -38,7 +38,7 @@ public class GestionDuJeu {
 				position = true;			
 				
 				// ONE PLAYER :
-				if(StdDraw.mouseX() > 39.5 && StdDraw.mouseX() < 69 && StdDraw.mouseY() > 36 && StdDraw.mouseY() < 40.5) // choix du mode 1 joueur
+				if(StdDraw.mouseX() > 39.5 && StdDraw.mouseX() < 69 && StdDraw.mouseY() > 33 && StdDraw.mouseY() < 42) // choix du mode 1 joueur
 				{
 					choixDuJoueur = 1;
 					position = false;
@@ -59,7 +59,7 @@ public class GestionDuJeu {
 				}
 				
 				// TWO PLAYER :
-				if(StdDraw.mouseX() > 37.2 && StdDraw.mouseX() < 71.1 && StdDraw.mouseY() > 26.3 && StdDraw.mouseY() < 30) // choix du mode 2 joueurs
+				if(StdDraw.mouseX() > 37.2 && StdDraw.mouseX() < 71.1 && StdDraw.mouseY() > 23.5 && StdDraw.mouseY() < 33) // choix du mode 2 joueurs
 				{
 					choixDuJoueur = 2;
 					position = false;
@@ -76,11 +76,10 @@ public class GestionDuJeu {
 					StdDraw.setFont(normale);
 					StdDraw.setPenColor(200,200,200);
 					StdDraw.text(54, 22, "Two Players");
-					
 				}
 				
 				// HIGHSCORE :
-				if(StdDraw.mouseX() > 39.5 && StdDraw.mouseX() < 69.5 && StdDraw.mouseY() > 17.1 && StdDraw.mouseY() < 21) // choix de regarder les meilleurs scores
+				if(StdDraw.mouseX() > 39.5 && StdDraw.mouseX() < 69.5 && StdDraw.mouseY() > 15 && StdDraw.mouseY() < 23.5) // choix de regarder les meilleurs scores
 				{
 					choixDuJoueur = 3;
 					position = false;
@@ -101,7 +100,7 @@ public class GestionDuJeu {
 				}
 				
 				// CONTROLS :
-				if(StdDraw.mouseX() > 41 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > 8 && StdDraw.mouseY() < 12)
+				if(StdDraw.mouseX() > 41 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > 6 && StdDraw.mouseY() < 15)
 				{
 					choixDuJoueur = 5;
 					position = false;
@@ -122,7 +121,7 @@ public class GestionDuJeu {
 				
 				
 				// QUIT :
-				if(StdDraw.mouseX() > 47 && StdDraw.mouseX() < 61 && StdDraw.mouseY() > -2 && StdDraw.mouseY() < 4) // choix de quitter
+				if(StdDraw.mouseX() > 47 && StdDraw.mouseX() < 61 && StdDraw.mouseY() > -4 && StdDraw.mouseY() < 6) // choix de quitter
 				{
 					choixDuJoueur = 4;
 					position = false;
@@ -217,7 +216,7 @@ public class GestionDuJeu {
 		do {
 			position = true;
 			
-			if (StdDraw.mouseX() > 43 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > -1 && StdDraw.mouseY() < 4) {
+			if (StdDraw.mouseX() > 43 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > -3 && StdDraw.mouseY() < 6) {
 				choixDuJoueur = true;
 				position = false;
 				StdDraw.setPenColor(StdDraw.BLACK);
@@ -502,9 +501,14 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 	       {
 	    	   tailleMax = 10;
 	       }
+	       
 	       for(int l = 0; l < tailleMax; l++)
 	       {
-	    	   StdDraw.textLeft(35, y, Integer.toString(l+1) + "." + tab_pseudo[l] + "     " + Integer.toString(tab_scores[l]));
+	    	   StdDraw.setPenColor(StdDraw.YELLOW);
+	    	   StdDraw.textLeft(2, y, Integer.toString(l+1) + ".");
+	    	   StdDraw.textRight(105, y, Integer.toString(tab_scores[l]));
+	    	   StdDraw.setPenColor(StdDraw.WHITE);
+	    	   StdDraw.textLeft(10, y, tab_pseudo[l]);	    	   
 	    	   y -= 10;
 	       }
 	
@@ -525,9 +529,9 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 		}
 	}
 
-public static double getHighscore()
+public static int getHighscore()
 {
-	double score = 0;
+	int score = 0;
 	int a = 0;
 	File f = new File("sauvegardes.txt");
 	FileReader fr;

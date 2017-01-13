@@ -15,7 +15,7 @@ public class Fantome extends Personnage{
 		if(this.color.equals("r"))
 		{
 			this.timer_init = 0;
-			this.etat = "normal";
+			this.etat = "standard";
 		}
 		if(this.color.equals("p"))
 		{
@@ -47,9 +47,17 @@ public class Fantome extends Personnage{
 	//choix de la direction du fantome
 	//elle prend en argument le labyrinthe pour le obstacles et le choix
 	//le choix est gardé s'il n'y a pas d'obstacle, sinon on le change
-	public int choixDirection(Labyrinthe Lab, int choix)
+	public int choixDirection(Labyrinthe Lab, int choix, Pacman...pacmans)
 	{
-	
+		boolean std = true;
+		for(int r = 0; r < pacmans.length; r++)
+		{
+			if(pacmans[r].getEtat() == "enerve")
+				std = false;
+		}
+		
+		if(std)
+			this.etat = "standard";
 			
 		if(choix == 1 || choix == 3)
 		{
@@ -59,13 +67,20 @@ public class Fantome extends Personnage{
 		{
 			directionInverse = choix-1;
 		}
+		if(this.etat == "standard")
+		{
 			do
 			{	
 				this.speed = speed_init;
 				choix = rd.nextInt(4)+1;
 			} while(directionInverse == choix || Lab.checkMur(choix, this.position_x, this.position_y) == false);
+		}
 		
-		
+		if(this.etat == "apeure")
+		{
+			return this.fuite(Lab,this.calculDuPlusProche(pacmans), directionInverse);
+			
+		}
 	
 		return choix;
 		
@@ -102,9 +117,102 @@ public class Fantome extends Personnage{
 			}
 			if(this.check2)
 			{
-				this.etat = "normal";
+				this.etat = "standard";
 			}
 		
+	}
+	
+	public Pacman calculDuPlusProche(Pacman...pacmans)
+	{
+		double x,y;
+		double min = 0;
+		int lePlusProche = 0;
+		double [] distance = new double[pacmans.length];
+		for(int i = 0; i<pacmans.length;i++)
+		{	
+			if(pacmans[i].getEtat() == "super")
+			{
+				x = this.position_x - pacmans[i].position_x; 
+				y = this.position_y - pacmans[i].position_y;
+				distance[i] = Math.sqrt(x*x + y*y);
+			}
+			else
+			{
+				distance[i] = 0;
+			}
+		}
+		for(int j = 0; j<distance.length;j++)
+		{
+			if(distance[j] > min)
+			{
+				min = distance[j];
+				lePlusProche = j;
+			}
+		}
+		return pacmans[lePlusProche];
+	}
+	
+	public int fuite(Labyrinthe Lab, Pacman p, int directionPrecedente)
+	{
+		int choix = 0;
+		int [] ordreChoix = new int[4];
+		double x = this.position_x - p.getPosx();
+		double y = this.position_y - p.getPosy();
+		
+		if(Math.abs(x) > Math.abs(y))
+		{
+			if(x > 0)
+			{
+				ordreChoix[0] = 4;
+				ordreChoix[3] = 3;
+			}
+			else
+			{
+				ordreChoix[0] = 3;
+				ordreChoix[3] = 4;
+			}
+			if(y > 0)
+			{
+				ordreChoix[1] = 2;
+				ordreChoix[2] = 1;
+			}
+			else
+			{
+				ordreChoix[1] = 1;
+				ordreChoix[2] = 2;
+			}
+		}
+		else
+		{
+			if(x > 0)
+			{
+				ordreChoix[1] = 4;
+				ordreChoix[2] = 3;
+			}
+			else
+			{
+				ordreChoix[1] = 3;
+				ordreChoix[2] = 4;
+			}
+			if(y > 0)
+			{
+				ordreChoix[0] = 2;
+				ordreChoix[3] = 1;
+			}
+			else
+			{
+				ordreChoix[0] = 1;
+				ordreChoix[3] = 2;
+			}
+		}
+		
+		int a = 0;
+		while(ordreChoix[a] == directionPrecedente || Lab.checkMur(ordreChoix[a], this.position_x, this.position_y) == false)
+		{
+			a++;
+		}
+		
+		return ordreChoix[a];
 	}
 	
 	public String getEtat()

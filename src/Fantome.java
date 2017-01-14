@@ -127,6 +127,7 @@ public class Fantome extends Personnage{
 		
 	}
 	
+	//on calcul quel pacman est le plus proche de la position du fantome
 	public Pacman calculDuPlusProche(Pacman...pacmans)
 	{
 		double x,y;
@@ -157,6 +158,9 @@ public class Fantome extends Personnage{
 		return pacmans[lePlusProche];
 	}
 	
+	/*prends en argument le pacman le plus proche
+	 si le fantome est apeuré, le fuit
+	 si le fantome est traqueur, le poursuit */
 	public int deplacementIntelligent(Labyrinthe Lab, Pacman p, int directionPrecedente)
 	{
 		int choix = 0;

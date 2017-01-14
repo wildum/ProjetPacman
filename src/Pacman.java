@@ -415,7 +415,7 @@ public class Pacman extends Personnage{
 					this.gethy1() < fantomes[a].getPosy() &&
 					this.gethy2()> fantomes[a].getPosy())
 			{
-				if(this.etat == "standard")
+				if(this.etat == "standard" || fantomes[a].getEtat() == "standard")
 				{
 					// on remet le pacamn à sa position initiale :
 					this.position_x = this.position_i_x;

@@ -48,10 +48,10 @@ public class Jeu {
 			Pacman Pac2 = new Pacman(54,100, 2.5, 0.5, "g",J2);
 							
 			// Init Fantômes :
-			Fantome FantomeRouge = new Fantome(54, 76, 2.5, 0.5, "r", GestionDuJeu.getChrono()); // déjà dehors
-			Fantome FantomeRose = new Fantome(54, 64, 2.5, 0.5, "p", GestionDuJeu.getChrono()); // 2e à sortir (au lancement du jeu)
-			Fantome FantomeBleu = new Fantome(46, 64, 2.5, 0.5, "b", GestionDuJeu.getChrono()); // 3e à sortir (après 4 secondes de jeu)
-			Fantome FantomeOrange = new Fantome(62, 64, 2.5, 0.5, "o", GestionDuJeu.getChrono()); // 4e à sortir (après 8 secondes de jeu)
+			Fantome FantomeRouge = new Fantome(54, 76, 2.5, 0.5, "r", GestionDuJeu.getChrono(), "traqueur"); // déjà dehors
+			Fantome FantomeRose = new Fantome(54, 64, 2.5, 0.5, "p", GestionDuJeu.getChrono(), "traqueur"); // 2e à sortir (au lancement du jeu)
+			Fantome FantomeBleu = new Fantome(46, 64, 2.5, 0.5, "b", GestionDuJeu.getChrono(), "traqueur"); // 3e à sortir (après 4 secondes de jeu)
+			Fantome FantomeOrange = new Fantome(62, 64, 2.5, 0.5, "o", GestionDuJeu.getChrono(), "traqueur"); // 4e à sortir (après 8 secondes de jeu)
 			
 			// Init graines : 
 			graines = Lab.i_graines();

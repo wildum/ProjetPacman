@@ -7,11 +7,12 @@ public class Fantome extends Personnage{
 	protected double timer;
 	protected String etat;
 	protected boolean check1, check2;
-	public Fantome(double position_x,double position_y, double width, double speed, String color, Chrono t)
+	protected String comportement;
+	public Fantome(double position_x,double position_y, double width, double speed, String color, Chrono t, String comportement)
 	{
 		super(position_x,position_y, width, speed, color);
 		this.timer = t.getDureeSec();
-		
+		this.comportement = comportement;
 		if(this.color.equals("r"))
 		{
 			this.timer_init = 0;
@@ -67,7 +68,7 @@ public class Fantome extends Personnage{
 		{
 			directionInverse = choix-1;
 		}
-		if(this.etat == "standard")
+		if(this.etat == "standard" && this.comportement == "random")
 		{
 			do
 			{	
@@ -75,10 +76,14 @@ public class Fantome extends Personnage{
 				choix = rd.nextInt(4)+1;
 			} while(directionInverse == choix || Lab.checkMur(choix, this.position_x, this.position_y) == false);
 		}
+		else if(this.etat == "standard" && this.comportement == "traqueur")
+		{
+			return this.deplacementIntelligent(Lab,this.calculDuPlusProche(pacmans), directionInverse);
+		}
 		
 		if(this.etat == "apeure")
 		{
-			return this.fuite(Lab,this.calculDuPlusProche(pacmans), directionInverse);
+			return this.deplacementIntelligent(Lab,this.calculDuPlusProche(pacmans), directionInverse);
 			
 		}
 	
@@ -125,12 +130,12 @@ public class Fantome extends Personnage{
 	public Pacman calculDuPlusProche(Pacman...pacmans)
 	{
 		double x,y;
-		double min = 0;
+		double min = 1000;
 		int lePlusProche = 0;
 		double [] distance = new double[pacmans.length];
 		for(int i = 0; i<pacmans.length;i++)
 		{	
-			if(pacmans[i].getEtat() == "super")
+			if(pacmans[i].getEtat() == "super" || this.etat == "standard")
 			{
 				x = this.position_x - pacmans[i].position_x; 
 				y = this.position_y - pacmans[i].position_y;
@@ -143,7 +148,7 @@ public class Fantome extends Personnage{
 		}
 		for(int j = 0; j<distance.length;j++)
 		{
-			if(distance[j] > min)
+			if(distance[j] < min)
 			{
 				min = distance[j];
 				lePlusProche = j;
@@ -152,60 +157,110 @@ public class Fantome extends Personnage{
 		return pacmans[lePlusProche];
 	}
 	
-	public int fuite(Labyrinthe Lab, Pacman p, int directionPrecedente)
+	public int deplacementIntelligent(Labyrinthe Lab, Pacman p, int directionPrecedente)
 	{
 		int choix = 0;
 		int [] ordreChoix = new int[4];
 		double x = this.position_x - p.getPosx();
 		double y = this.position_y - p.getPosy();
-		
-		if(Math.abs(x) > Math.abs(y))
+		if(this.etat.equals("apeure"))
 		{
-			if(x > 0)
+			if(Math.abs(x) > Math.abs(y))
 			{
-				ordreChoix[0] = 4;
-				ordreChoix[3] = 3;
+				if(x > 0)
+				{
+					ordreChoix[0] = 4;
+					ordreChoix[3] = 3;
+				}
+				else
+				{
+					ordreChoix[0] = 3;
+					ordreChoix[3] = 4;
+				}
+				if(y > 0)
+				{
+					ordreChoix[1] = 2;
+					ordreChoix[2] = 1;
+				}
+				else
+				{
+					ordreChoix[1] = 1;
+					ordreChoix[2] = 2;
+				}
 			}
 			else
 			{
-				ordreChoix[0] = 3;
-				ordreChoix[3] = 4;
-			}
-			if(y > 0)
-			{
-				ordreChoix[1] = 2;
-				ordreChoix[2] = 1;
-			}
-			else
-			{
-				ordreChoix[1] = 1;
-				ordreChoix[2] = 2;
+				if(x > 0)
+				{
+					ordreChoix[1] = 4;
+					ordreChoix[2] = 3;
+				}
+				else
+				{
+					ordreChoix[1] = 3;
+					ordreChoix[2] = 4;
+				}
+				if(y > 0)
+				{
+					ordreChoix[0] = 2;
+					ordreChoix[3] = 1;
+				}
+				else
+				{
+					ordreChoix[0] = 1;
+					ordreChoix[3] = 2;
+				}
 			}
 		}
-		else
+		else if(this.comportement.equals("traqueur"))
 		{
-			if(x > 0)
+			if(Math.abs(x) > Math.abs(y))
 			{
-				ordreChoix[1] = 4;
-				ordreChoix[2] = 3;
+				if(x > 0)
+				{
+					ordreChoix[3] = 4;
+					ordreChoix[0] = 3;
+				}
+				else
+				{
+					ordreChoix[3] = 3;
+					ordreChoix[0] = 4;
+				}
+				if(y > 0)
+				{
+					ordreChoix[2] = 2;
+					ordreChoix[1] = 1;
+				}
+				else
+				{
+					ordreChoix[2] = 1;
+					ordreChoix[1] = 2;
+				}
 			}
 			else
 			{
-				ordreChoix[1] = 3;
-				ordreChoix[2] = 4;
-			}
-			if(y > 0)
-			{
-				ordreChoix[0] = 2;
-				ordreChoix[3] = 1;
-			}
-			else
-			{
-				ordreChoix[0] = 1;
-				ordreChoix[3] = 2;
+				if(x > 0)
+				{
+					ordreChoix[2] = 4;
+					ordreChoix[1] = 3;
+				}
+				else
+				{
+					ordreChoix[2] = 3;
+					ordreChoix[1] = 4;
+				}
+				if(y > 0)
+				{
+					ordreChoix[3] = 2;
+					ordreChoix[0] = 1;
+				}
+				else
+				{
+					ordreChoix[3] = 1;
+					ordreChoix[0] = 2;
+				}
 			}
 		}
-		
 		int a = 0;
 		while(ordreChoix[a] == directionPrecedente || Lab.checkMur(ordreChoix[a], this.position_x, this.position_y) == false)
 		{
@@ -214,6 +269,7 @@ public class Fantome extends Personnage{
 		
 		return ordreChoix[a];
 	}
+	
 	
 	public String getEtat()
 	{

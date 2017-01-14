@@ -444,7 +444,7 @@ public class Pacman extends Personnage{
 					this.hitbox_y2 = this.position_y+this.width;
 				}
 				
-				if(this.etat == "enerve" && fantomes[a].equals("standard"))
+				if(this.etat == "enerve" && fantomes[a].getEtat().equals("apeure"))
 				{
 					fantomes[a].position_x = fantomes[a].position_i_x;
 					fantomes[a].position_y = fantomes[a].position_i_y;

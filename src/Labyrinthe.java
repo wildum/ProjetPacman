@@ -7,6 +7,8 @@ public class Labyrinthe {
 	private final int max_y = 100; // A ne pas changer
 	private int f_graines = 4;
 	private int ligne = 4, colonne = 4;
+	private boolean setMinuteur = true;
+	private double minuteur =0;
 	private Mur [][] tab_murs= new Mur[28][31];
 	boolean gettingStarted = true;
 	public int [][] matrice = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -167,6 +169,7 @@ public class Labyrinthe {
 		
 		if(fantome.getEtat() == "standard")
 		{
+			setMinuteur = true;
 			switch (direction) {
 			case 1:
 				if (fantome.color == "o") {
@@ -232,27 +235,139 @@ public class Labyrinthe {
 		
 		if(fantome.getEtat() == "apeure")
 		{
+			GestionDuJeu.chrono.pause();
+			if(setMinuteur)
+			{
+				minuteur = GestionDuJeu.getChrono().getDureeSec();
+				setMinuteur = false;
+			}
+			double diff = GestionDuJeu.getChrono().getDureeSec() - minuteur;
 			switch (direction) {
 			case 1:
+				if(diff > 6)
+				{
+					if(diff < 6.4)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ablanc.png", 5, 5);
+					}
+					else if(diff < 6.8)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu.png", 5, 5);
+					}
+					else if(diff < 7.2)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ablanc.png", 5, 5);
+					}
+					else if(diff < 7.6)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu.png", 5, 5);
+					}
+					else
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ablanc.png", 5, 5);
+					}
+				}
+				else
+				{
 					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu.png", 5, 5);
+				}
 				break;
 			
 			case 2:
+				if(diff > 6)
+				{
+					if(diff < 6.4)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ablanc_h.png", 5, 5);
+					}
+					else if(diff < 6.8)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu_h.png", 5, 5);
+					}
+					else if(diff < 7.2)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ablanc_h.png", 5, 5);
+					}
+					else if(diff < 7.6)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu_h.png", 5, 5);
+					}
+					else
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ablanc_h.png", 5, 5);
+					}
+				}
+				else
+				{
 					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu_h.png", 5, 5);
+				}
 				break;
 				
 			case 3:
+				if(diff > 6)
+				{
+					if(diff < 6.4)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ablanc_g.png", 5, 5);
+					}
+					else if(diff < 6.8)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu_g.png", 5, 5);
+					}
+					else if(diff < 7.2)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ablanc_g.png", 5, 5);
+					}
+					else if(diff < 7.6)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu_g.png", 5, 5);
+					}
+					else
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ablanc_g.png", 5, 5);
+					}
+				}
+				else
+				{
 					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu_g.png", 5, 5);
+				}
 				break;
 				
 			case 4:
+				if(diff > 6)
+				{
+					if(diff < 6.4)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ablanc_d.png", 5, 5);
+					}
+					else if(diff < 6.8)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu_d.png", 5, 5);
+					}
+					else if(diff < 7.2)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ablanc_d.png", 5, 5);
+					}
+					else if(diff < 7.6)
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu_d.png", 5, 5);
+					}
+					else
+					{
+						StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ablanc_d.png", 5, 5);
+					}
+				}
+				else
+				{
 					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu_d.png", 5, 5);
+				}
 				break;
 				
 			default:
 					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu.png", 5, 5);
 				break;
 			}
+			GestionDuJeu.chrono.resume();
 		}
 		
 		if(fantome.getEtat() == "initial")

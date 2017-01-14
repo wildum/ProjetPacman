@@ -92,8 +92,8 @@ public class Jeu {
 				// affiche le lab et les personnages :
 				if(choixApresMenu1 == 2)
 				{
-					Pac1.interraction(graines, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
-					Pac2.interraction(graines, Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+					Pac1.interraction(graines,Lab ,FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+					Pac2.interraction(graines,Lab ,FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 					if (boucle1) {
 						GestionDuJeu.getChrono().pause();
 						Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
@@ -107,7 +107,7 @@ public class Jeu {
 				}
 				else
 				{
-					Pac1.interraction(graines,Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+					Pac1.interraction(graines,Lab ,FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 					if (boucle1) {
 						GestionDuJeu.getChrono().pause();
 						Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);

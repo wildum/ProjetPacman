@@ -229,5 +229,6 @@ public class Fantome extends Personnage{
 	{
 		this.timer = t;
 	}
+	
 
 }

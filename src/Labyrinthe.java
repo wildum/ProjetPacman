@@ -3,6 +3,7 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class Labyrinthe {
 	
+	private double diff = 0;
 	private final int max_x = 100; // A ne pas changer
 	private final int max_y = 100; // A ne pas changer
 	private int f_graines = 4;
@@ -169,7 +170,6 @@ public class Labyrinthe {
 		
 		if(fantome.getEtat() == "standard")
 		{
-			setMinuteur = true;
 			switch (direction) {
 			case 1:
 				if (fantome.color == "o") {
@@ -241,7 +241,7 @@ public class Labyrinthe {
 				minuteur = GestionDuJeu.getChrono().getDureeSec();
 				setMinuteur = false;
 			}
-			double diff = GestionDuJeu.getChrono().getDureeSec() - minuteur;
+			diff = GestionDuJeu.getChrono().getDureeSec() - minuteur;
 			switch (direction) {
 			case 1:
 				if(diff > 6)
@@ -565,5 +565,8 @@ public class Labyrinthe {
 		return max_y;
 	}
 
-	
+	public void setSetMinuteur (boolean m)
+	{
+		this.setMinuteur = m;
+	}
 }

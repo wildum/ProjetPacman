@@ -370,7 +370,7 @@ public class Pacman extends Personnage{
 		}
 	}
 	
-	public void interraction(Graine [][] tab_graines,Pacman AutrePac ,Fantome...fantomes)
+	public void interraction(Graine [][] tab_graines,Labyrinthe Labyrinthe,Fantome...fantomes)
 	{
 		for(int i = 0; i < tab_graines.length;i++)
 		{
@@ -392,6 +392,7 @@ public class Pacman extends Personnage{
 						tab_graines[i][j].setType("null");
 						this.getJoueur().setScore(this.getJoueur().getScore()+50);
 						this.etat = "enerve";
+						Labyrinthe.setSetMinuteur(true);
 						for(int m = 0; m < fantomes.length;m++)
 						{
 							if(fantomes[m].getEtat() == "standard")
@@ -419,8 +420,6 @@ public class Pacman extends Personnage{
 					// on remet le pacamn à sa position initiale :
 					this.position_x = this.position_i_x;
 					this.position_y = this.position_i_y;
-					AutrePac.position_x = AutrePac.position_i_x;
-					AutrePac.position_y = AutrePac.position_i_y;
 					
 					// on remet les fantômes à leur position initiale
 					for(int b = 0; b< fantomes.length;b++)

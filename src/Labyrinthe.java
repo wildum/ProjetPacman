@@ -92,14 +92,13 @@ public class Labyrinthe {
 			StdDraw.setPenColor(StdDraw.WHITE);
 			StdDraw.textRight(109.5, 135, "HIGHSCORE : " + GestionDuJeu.getHighscore());// meilleur score
 			
-			StdDraw.setPenColor(StdDraw.YELLOW);
 			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) { 
-				StdDraw.filledCircle(a,-7,2.5);
+				StdDraw.picture(a,-7,"Images/p_jaune_d.png", 5, 5);
 				a=a+6.5;
 			}
-			StdDraw.setPenColor(StdDraw.GREEN);
+			
 			for(int i = 0; i < ((Pacman)persos[1]).getJoueur().getVie(); i++) {
-				StdDraw.filledCircle(b,-7,2.5);
+				StdDraw.picture(b,-7,"Images/p_vert_d.png", 5, 5);
 				b=b+6.5;
 			}
 		} else { //S'il n'y en a qu'un seul
@@ -116,9 +115,8 @@ public class Labyrinthe {
 			
 			StdDraw.textRight(109.5, 135, "HIGHSCORE : " + GestionDuJeu.getHighscore());// meilleur score
 			
-			StdDraw.setPenColor(StdDraw.YELLOW);
 			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) {
-				StdDraw.filledCircle(a,-7,2.5);
+				StdDraw.picture(a,-7,"Images/p_jaune_d.png", 5, 5);
 				a=a+6.5;
 			}
 		}

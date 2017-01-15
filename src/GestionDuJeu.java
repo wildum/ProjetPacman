@@ -212,7 +212,6 @@ public class GestionDuJeu {
 		StdDraw.text(55, 20, "SPACE: PAUSE/RESUME");
 		StdDraw.text(55, 14, "ECHAP: EXIT");
 		
-				
 		do {
 			position = true;
 			
@@ -313,6 +312,7 @@ public class GestionDuJeu {
 
 public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 {
+	boolean clic = true, position = true, choixDuJoueur = false;	
 	boolean stay = true;
 	int y = 90;
 	int a = 0;
@@ -502,6 +502,7 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 	    	   tailleMax = 10;
 	       }
 	       
+	       StdDraw.picture(54,118,"Images/Pacman_menu.png",73.3,46);
 	       for(int l = 0; l < tailleMax; l++)
 	       {
 	    	   StdDraw.setPenColor(StdDraw.YELLOW);
@@ -509,24 +510,45 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 	    	   StdDraw.textRight(105, y, Integer.toString(tab_scores[l]));
 	    	   StdDraw.setPenColor(StdDraw.WHITE);
 	    	   StdDraw.textLeft(10, y, tab_pseudo[l]);	    	   
-	    	   y -= 10;
+	    	   y -= 8.7;
 	       }
-	
+			
+			do {
+				position = true;
+				
+				if (StdDraw.mouseX() > 43 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > -3 && StdDraw.mouseY() < 6) {
+					choixDuJoueur = true;
+					position = false;
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.filledRectangle(55, -4, 30, 5);
+					StdDraw.setFont(selection);
+					StdDraw.setPenColor(StdDraw.WHITE);
+					StdDraw.text(54, -4.3, "GO BACK");
+				} else {
+					StdDraw.setPenColor(StdDraw.BLACK);
+					StdDraw.filledRectangle(55, -4, 30, 5);
+					StdDraw.setFont(normale);
+					StdDraw.setPenColor(200, 200, 200);
+					StdDraw.text(54, -4, "GO BACK");				
+				}
+				
+				StdDraw.pause(50);
+				if (StdDraw.mousePressed()) {
+					StdDraw.pause(300);
+					clic = false;
+					stay = false;
+				} else {
+					clic = true;
+				}
+				StdDraw.show(20);
+			} while(clic || position);
 	      } catch (FileNotFoundException e) {
 	        e.printStackTrace();
 	      } catch (IOException e) {
 	        e.printStackTrace();
 	      }
 	    StdDraw.show(20);
-	    while(stay)
-		{
-	    	StdDraw.pause(150);
-	    	if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE))
-	    	{
-	    		StdDraw.pause(50);
-	    		stay = false;
-	    	}
-		}
+	    
 	}
 
 public static int getHighscore()

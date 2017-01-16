@@ -8,6 +8,8 @@ public class Fantome extends Personnage{
 	protected String etat;
 	protected boolean check1, check2;
 	protected String comportement;
+	boolean std;
+	
 	public Fantome(double position_x,double position_y, double width, double speed, String color, Chrono t, String comportement)
 	{
 		super(position_x,position_y, width, speed, color);
@@ -50,7 +52,7 @@ public class Fantome extends Personnage{
 	//le choix est gardé s'il n'y a pas d'obstacle, sinon on le change
 	public int choixDirection(Labyrinthe Lab, int choix, Pacman...pacmans)
 	{
-		boolean std = true;
+		std = true;
 		for(int r = 0; r < pacmans.length; r++)
 		{
 			if(pacmans[r].getEtat() == "enerve")

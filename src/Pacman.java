@@ -469,6 +469,7 @@ public class Pacman extends Personnage{
 	{
 		this.etat = Etat;
 	}
+	
 	public String getEtat()
 	{
 		return this.etat;

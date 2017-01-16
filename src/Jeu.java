@@ -45,7 +45,7 @@ public class Jeu {
 			
 			// Init Pacman(s)
 			Pacman Pac1 = new Pacman(54, 28, 2.5, 0.5, "y",J1); //(pos_x, pos_y, largeur, vitesse, couleur)
-			Pacman Pac2 = new Pacman(54,100, 2.5, 0.5, "g",J2);
+			Pacman Pac2 = new Pacman(54, 100, 2.5, 0.5, "g",J2);
 							
 			// Init Fantômes :
 			Fantome FantomeRouge = new Fantome(54, 76, 2.5, 0.5, "r", GestionDuJeu.getChrono(), "traqueur"); // déjà dehors

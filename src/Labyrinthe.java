@@ -12,11 +12,13 @@ public class Labyrinthe {
 	private double minuteur =0;
 	private Mur [][] tab_murs= new Mur[28][31];
 	boolean gettingStarted = true;
+
 	Graine [][] tab_graines = new Graine[28][31];
 	boolean dispo;
 	Font normale = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
 	int direction;
-	
+	protected static int fantMin, fantMax;
+	protected static double minD, maxD;
 	public int [][] matrice = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 							   {0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0},
 							   {0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0},
@@ -162,7 +164,7 @@ public class Labyrinthe {
 			StdDraw.show(); 
 			StdDraw.pause(5000);
 			gettingStarted = false;
-		}
+		} 
 		
 		StdDraw.show(20);
 	}
@@ -555,6 +557,30 @@ public class Labyrinthe {
 		}
 	}
 	
+	public void switchComportementFantome(Pacman p, Fantome...fantomes)
+	{
+		minD = Math.sqrt(fantomes[0].getPosx()*fantomes[0].getPosx() + fantomes[0].getPosy()*fantomes[0].getPosy());
+		maxD = Math.sqrt(fantomes[0].getPosx()*fantomes[0].getPosx() + fantomes[0].getPosy()*fantomes[0].getPosy());
+		fantMin = 0;
+		fantMax = 0;
+		for(int i = 1; i < fantomes.length; i++)
+		{
+			if(Math.sqrt(fantomes[i].getPosx()*fantomes[i].getPosx() + fantomes[i].getPosy()*fantomes[i].getPosy()) < minD)
+			{
+				minD = Math.sqrt(fantomes[i].getPosx()*fantomes[i].getPosx() + fantomes[i].getPosy()*fantomes[i].getPosy());
+				fantMin = i;
+			}
+			if(Math.sqrt(fantomes[i].getPosx()*fantomes[i].getPosx() + fantomes[i].getPosy()*fantomes[i].getPosy()) > maxD)
+			{
+				maxD = Math.sqrt(fantomes[i].getPosx()*fantomes[i].getPosx() + fantomes[i].getPosy()*fantomes[i].getPosy());
+				fantMax = i;
+			}
+		}
+		
+		fantomes[fantMin].setComportement("traqueur");
+		fantomes[fantMax].setComportement("embuscadeur");
+	}
+	
 
 	public int getMax_x()
 	{
@@ -570,4 +596,6 @@ public class Labyrinthe {
 	{
 		this.setMinuteur = m;
 	}
+	
+	
 }

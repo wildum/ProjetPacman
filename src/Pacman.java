@@ -108,51 +108,51 @@ public class Pacman extends Personnage{
 		{
 			if (sous <= 100) {
 				if (direction == 1) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 6, 5);
 				} else if (direction == 2) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_h.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_h.png", 6, 5);
 				} else if (direction == 3) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_g.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_g.png", 5, 6);
 				} else if (direction == 4){
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_d.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_d.png", 5, 6);
 				}  else {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 6);
 				}
 			} else if (sous <= 200) {
 				if (direction == 1) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_bmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_bmi.png", 6, 5);
 				} else if (direction == 2) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_hmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_hmi.png", 6, 5);
 				} else if (direction == 3) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_gmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_gmi.png", 5, 6);
 				} else if (direction == 4){
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_dmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_dmi.png", 5, 6);
 				}  else {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 6);
 				}
 			} else if (sous <= 300) {
 				if (direction == 1) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 6, 5);
 				} else if (direction == 2) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_h.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_h.png", 6, 5);
 				} else if (direction == 3) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_g.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_g.png", 5, 6);
 				} else if (direction == 4){
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_d.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_d.png", 5, 6);
 				}  else {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 6);
 				}
 			} else if (sous <= 400) {
 				if (direction == 1) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_bmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_bmi.png", 6, 5);
 				} else if (direction == 2) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_hmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_hmi.png", 6, 5);
 				} else if (direction == 3) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_gmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_gmi.png", 5, 6);
 				} else if (direction == 4){
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_dmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_dmi.png", 5, 6);
 				}  else {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_jenerve_b.png", 5, 6);
 				}
 			} else {
 				tempsChgtImage = chrono.getDureeMs();
@@ -240,51 +240,51 @@ public class Pacman extends Personnage{
 		{
 			if (sous <= 100) {
 				if (direction == 1) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_b.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_b.png", 6, 5);
 				} else if (direction == 2) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_h.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_h.png", 6, 5);
 				} else if (direction == 3) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_g.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_g.png", 5, 6);
 				} else if (direction == 4){
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 6);
 				} else {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 6);
 				}
 			} else if (sous <= 200) {
 				if (direction == 1) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_bmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_bmi.png", 6, 5);
 				} else if (direction == 2) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_hmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_hmi.png", 6, 5);
 				} else if (direction == 3) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_gmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_gmi.png", 5, 6);
 				} else if (direction == 4){
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_dmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_dmi.png", 5, 6);
 				} else {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 6);
 				}
 			} else if (sous <= 300) {
 				if (direction == 1) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_b.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_b.png", 6, 5);
 				} else if (direction == 2) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_h.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_h.png", 6, 5);
 				} else if (direction == 3) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_g.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_g.png", 5, 6);
 				} else if (direction == 4){
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 6);
 				} else {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 6);
 				}
 			} else if (sous <= 400) {
 				if (direction == 1) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_bmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_bmi.png", 6, 5);
 				} else if (direction == 2) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_hmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_hmi.png", 6, 5);
 				} else if (direction == 3) {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_gmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_gmi.png", 5, 6);
 				} else if (direction == 4){
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_dmi.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_dmi.png", 5, 6);
 				} else {
-					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 5);
+					StdDraw.picture(this.getPosx(),this.getPosy(),"Images/p_venerve_d.png", 5, 6);
 				}
 			} else {
 				tempsChgtImage = chrono.getDureeMs();
@@ -469,6 +469,7 @@ public class Pacman extends Personnage{
 	{
 		this.etat = Etat;
 	}
+	
 	public String getEtat()
 	{
 		return this.etat;

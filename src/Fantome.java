@@ -16,7 +16,7 @@ public class Fantome extends Personnage{
 	protected double [] distance;
 	protected int [] ordreChoix;
 	protected int a;
-	
+	static Random rd = new Random(System.currentTimeMillis());
 	
 	
 	public Fantome(double position_x,double position_y, double width, double speed, String color, String comportement)
@@ -51,10 +51,6 @@ public class Fantome extends Personnage{
 			this.check2 = false;
 		}
 	}
-	
-	
-	
-	static Random rd = new Random(System.currentTimeMillis());
 	
 	//choix de la direction du fantome
 	//elle prend en argument le labyrinthe pour le obstacles et le choix

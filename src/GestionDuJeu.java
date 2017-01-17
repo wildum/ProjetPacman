@@ -8,13 +8,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileOutputStream;
 
-
-
 public class GestionDuJeu {
 	
 	// Chronomètre du jeu :
 	static Chrono chrono = new Chrono();
 	static Font trespetite = new Font("SHOWCARD GOTHIC", Font.BOLD, 15), petite = new Font("SHOWCARD GOTHIC", Font.BOLD, 18), normale = new Font("SHOWCARD GOTHIC", Font.BOLD, 20), selection = new Font("SHOWCARD GOTHIC", Font.BOLD, 22), grande = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
+	
+	// Variables méthode affichageMenuPage1() :
+	static boolean clic1, position1;
+	static int choixDuJoueur1;
+	
+	// Variables méthode affichageMenuPause() :
+	static boolean choixDuJoueur2, loop2;
+	
+	
+	// Variables méthode affichageMenuControle() :
+	static boolean clic3, position3, choixDuJoueur3;
+	
+	// Variables méthode affichageMenuFin() :
+	static boolean choixDuJoueur4;
+	
+	// Variables méthode highscores() :
+	static boolean clic5, position5, choixDuJoueur5, stay5, enter, enter2;
 	
 	
 	public static Chrono getChrono() {
@@ -24,9 +39,9 @@ public class GestionDuJeu {
 	// affichageMenuPage1() gère l'affiche du menu principal	
 	public static int affichageMenuPage1()
 		{
-			boolean clic = true;
-			boolean position = true;
-			int choixDuJoueur = 0;
+		clic1 = true;
+		position1 = true;
+		choixDuJoueur1 = 0;
 			StdDraw.setCanvasSize(500,760); 
 			StdDraw.setXscale(-2,110);
 			StdDraw.setYscale(-27,149);
@@ -35,13 +50,13 @@ public class GestionDuJeu {
 			StdDraw.picture(54,105,"Images/Pacman_menu.png",110,69);
 			do
 			{
-				position = true;			
+				position1 = true;			
 				
 				// ONE PLAYER :
 				if(StdDraw.mouseX() > 39.5 && StdDraw.mouseX() < 69 && StdDraw.mouseY() > 33 && StdDraw.mouseY() < 42) // choix du mode 1 joueur
 				{
-					choixDuJoueur = 1;
-					position = false;
+					choixDuJoueur1 = 1;
+					position1 = false;
 					StdDraw.setPenColor(StdDraw.BLACK);
 					StdDraw.filledRectangle(54.5, 34, 30, 5);
 					StdDraw.setFont(selection);
@@ -61,8 +76,8 @@ public class GestionDuJeu {
 				// TWO PLAYER :
 				if(StdDraw.mouseX() > 37.2 && StdDraw.mouseX() < 71.1 && StdDraw.mouseY() > 23.5 && StdDraw.mouseY() < 33) // choix du mode 2 joueurs
 				{
-					choixDuJoueur = 2;
-					position = false;
+					choixDuJoueur1 = 2;
+					position1 = false;
 					StdDraw.setPenColor(StdDraw.BLACK);
 					StdDraw.filledRectangle(54.5, 25, 30, 3.5);
 					StdDraw.setFont(selection);
@@ -81,8 +96,8 @@ public class GestionDuJeu {
 				// HIGHSCORE :
 				if(StdDraw.mouseX() > 39.5 && StdDraw.mouseX() < 69.5 && StdDraw.mouseY() > 15 && StdDraw.mouseY() < 23.5) // choix de regarder les meilleurs scores
 				{
-					choixDuJoueur = 3;
-					position = false;
+					choixDuJoueur1 = 3;
+					position1 = false;
 					StdDraw.setPenColor(StdDraw.BLACK);
 					StdDraw.filledRectangle(54.5, 16, 30, 5);
 					StdDraw.setFont(selection);
@@ -102,8 +117,8 @@ public class GestionDuJeu {
 				// CONTROLS :
 				if(StdDraw.mouseX() > 41 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > 6 && StdDraw.mouseY() < 15)
 				{
-					choixDuJoueur = 5;
-					position = false;
+					choixDuJoueur1 = 5;
+					position1 = false;
 					StdDraw.setPenColor(StdDraw.BLACK);
 					StdDraw.filledRectangle(54.5, 6, 30, 5);
 					StdDraw.setFont(selection);
@@ -123,8 +138,8 @@ public class GestionDuJeu {
 				// QUIT :
 				if(StdDraw.mouseX() > 47 && StdDraw.mouseX() < 61 && StdDraw.mouseY() > -4 && StdDraw.mouseY() < 6) // choix de quitter
 				{
-					choixDuJoueur = 4;
-					position = false;
+					choixDuJoueur1 = 4;
+					position1 = false;
 					StdDraw.setPenColor(StdDraw.BLACK);
 					StdDraw.filledRectangle(54.5, -4, 30, 5);
 					StdDraw.setFont(selection);
@@ -143,51 +158,53 @@ public class GestionDuJeu {
 				if(StdDraw.mousePressed())
 				{
 					StdDraw.pause(50);
-					clic = false;
+					clic1 = false;
 				}
 				else
 				{
-					clic = true;
+					clic1 = true;
 				}
 				
 				
 				StdDraw.show(20);
 				StdDraw.pause(50);
-				} while(clic || position);
+				} while(clic1 || position1);
 			StdDraw.pause(150);
-			return choixDuJoueur;
+			return choixDuJoueur1;
 		}
 
 	public static boolean affichageMenuPause()
 	{
-		boolean choixDuJoueur = true;
-		boolean loop = true;;
+		choixDuJoueur2 = true;
+		loop2 = true;
 		StdDraw.setFont(selection);
 		StdDraw.setPenColor(StdDraw.YELLOW);
 		StdDraw.text(54.5, 74.5, "PAUSED");
 		StdDraw.setPenColor(StdDraw.WHITE);
 		StdDraw.setFont(normale);
 		StdDraw.text(54, 51, "QUIT? Y/N");
-		while(loop)
+		while(loop2)
 		{
 			StdDraw.show(20);
 			if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE) || StdDraw.isKeyPressed(KeyEvent.VK_N))
 			{
-				loop = false;
-				choixDuJoueur = true;
+				loop2 = false;
+				choixDuJoueur2 = true;
 			}
 			if(StdDraw.isKeyPressed(KeyEvent.VK_ESCAPE) || StdDraw.isKeyPressed(KeyEvent.VK_Y))
 			{
-				loop = false;
-				choixDuJoueur = false;
+				loop2 = false;
+				choixDuJoueur2 = false;
 			}
 		}
-		return choixDuJoueur;
+		return choixDuJoueur2;
 	}
 	
 	
 	public static boolean affichageMenuControl() {
-		boolean clic = true, position = true, choixDuJoueur = false;
+		clic3 = true;
+		position3 = true;
+		choixDuJoueur3 = false;
 		StdDraw.setCanvasSize(500,760); 
 		StdDraw.setXscale(-2,110);
 		StdDraw.setYscale(-27,149); 
@@ -213,11 +230,11 @@ public class GestionDuJeu {
 		StdDraw.text(55, 14, "ECHAP: EXIT");
 		
 		do {
-			position = true;
+			position3 = true;
 			
 			if (StdDraw.mouseX() > 43 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > -3 && StdDraw.mouseY() < 6) {
-				choixDuJoueur = true;
-				position = false;
+				choixDuJoueur3 = true;
+				position3 = false;
 				StdDraw.setPenColor(StdDraw.BLACK);
 				StdDraw.filledRectangle(55, -4, 30, 5);
 				StdDraw.setFont(selection);
@@ -234,14 +251,14 @@ public class GestionDuJeu {
 			StdDraw.pause(50);
 			if (StdDraw.mousePressed()) {
 				StdDraw.pause(300);
-				clic = false;
+				clic3 = false;
 			} else {
-				clic = true;
+				clic3 = true;
 			}
 			StdDraw.show(20);
-		} while(clic || position);
+		} while(clic3 || position3);
 		
-		return choixDuJoueur;
+		return choixDuJoueur3;
 	}
 	
 	public static int checkWinLoose(Graine [][] tab_graines, Joueur...joueurs)
@@ -282,9 +299,9 @@ public class GestionDuJeu {
 	
 	public static boolean affichageFin(int fin)
 	{
+		choixDuJoueur4 = true;
 		StdDraw.setFont(grande);
-		boolean loop = true;
-		boolean choixDuJoueur = true;
+		
 			if(fin == 1)
 			{
 				StdDraw.setPenColor(StdDraw.GREEN);
@@ -303,17 +320,18 @@ public class GestionDuJeu {
 			{
 				StdDraw.show(20);
 				StdDraw.text(54, 51, "(PRESS SPACE TO CONTINUE)");
-			}
-			
-		
-		return choixDuJoueur;
+			}		
+		return choixDuJoueur4;
 	}
 	
-
-public static void highscores(boolean save, boolean P2, Joueur...joueurs)
+public static void highscores(boolean save, boolean P2, int fin, Joueur...joueurs)
 {
-	boolean clic = true, position = true, choixDuJoueur = false;	
-	boolean stay = true;
+	clic5 = true;
+	position5 = true;
+	choixDuJoueur5 = false;	
+	stay5 = true;
+	enter = false;
+	enter2 = false;
 	int y = 90;
 	int a = 0;
 	File f = new File("sauvegardes.txt");
@@ -332,10 +350,15 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 	int tailleTab = 0;
 	int compteur = 0;
 	int change, tailleMax;
-	boolean enter = false;
-	boolean enter2 = false;
 	String changement = "";
 	StdDraw.setFont(normale);
+	int bonusChrono = 0;
+	if(GestionDuJeu.getChrono().getDureeSec() < 60 && fin == 1)
+		bonusChrono = 400;
+	else if(GestionDuJeu.getChrono().getDureeSec() < 90 && fin == 1)
+		bonusChrono = 400;
+	else
+		bonusChrono = 0;
 	while(StdDraw.hasNextKeyTyped())
 	{
 		StdDraw.nextKeyTyped();
@@ -374,7 +397,8 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 	    			StdDraw.text(10, 80, "J1");
 	    			StdDraw.textLeft(23, 80, dataIn);
 	    			StdDraw.setPenColor(StdDraw.WHITE);
-	    			StdDraw.textRight(83, 80, Integer.toString(joueurs[0].getScore()));
+	    			int sj1 = joueurs[0].getScore() + joueurs[0].getVie()*200 + bonusChrono;
+	    			StdDraw.textRight(83, 80, Integer.toString(sj1));
 	    			StdDraw.show(20);
 	    		}
 	    		fw.write("\r\n");
@@ -424,8 +448,10 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 		    			StdDraw.textLeft(23, 70, dataIn);
 		    			StdDraw.text(10, 70, "J2");
 		    			StdDraw.setPenColor(StdDraw.WHITE);
-		    			StdDraw.textRight(80, 80, Integer.toString(joueurs[0].getScore()));
-		    			StdDraw.textRight(80, 70, Integer.toString(joueurs[1].getScore()));
+		    			int sj1 = joueurs[0].getScore() + joueurs[0].getVie()*200 + bonusChrono;
+		    			int sj2 = joueurs[1].getScore() + joueurs[1].getVie()*200 + bonusChrono;
+		    			StdDraw.textRight(80, 80, Integer.toString(sj1));
+		    			StdDraw.textRight(80, 70, Integer.toString(sj2));
 		    			StdDraw.show(20);
 		    		}
 	    			fw.write("\r\n");
@@ -514,11 +540,11 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 	       }
 			
 			do {
-				position = true;
+				position5 = true;
 				
 				if (StdDraw.mouseX() > 43 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > -3 && StdDraw.mouseY() < 6) {
-					choixDuJoueur = true;
-					position = false;
+					choixDuJoueur5 = true;
+					position5 = false;
 					StdDraw.setPenColor(StdDraw.BLACK);
 					StdDraw.filledRectangle(55, -4, 30, 5);
 					StdDraw.setFont(selection);
@@ -535,13 +561,13 @@ public static void highscores(boolean save, boolean P2, Joueur...joueurs)
 				StdDraw.pause(50);
 				if (StdDraw.mousePressed()) {
 					StdDraw.pause(300);
-					clic = false;
-					stay = false;
+					clic5 = false;
+					stay5 = false;
 				} else {
-					clic = true;
+					clic5 = true;
 				}
 				StdDraw.show(20);
-			} while(clic || position);
+			} while(clic5 || position5);
 	      } catch (FileNotFoundException e) {
 	        e.printStackTrace();
 	      } catch (IOException e) {

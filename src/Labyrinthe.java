@@ -12,6 +12,11 @@ public class Labyrinthe {
 	private double minuteur =0;
 	private Mur [][] tab_murs= new Mur[28][31];
 	boolean gettingStarted = true;
+
+	Graine [][] tab_graines = new Graine[28][31];
+	boolean dispo;
+	Font normale = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
+	int direction;
 	protected static int fantMin, fantMax;
 	protected static double minD, maxD;
 	public int [][] matrice = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -62,8 +67,7 @@ public class Labyrinthe {
 	//cette méthode gère l'affichage du lab et des personnages :
 	public void affichage(Labyrinthe Lab,Graine [][] tab_graines,Chrono chrono,Personnage... persos) //on peut ajouter autant de perso que l'on veut
 	{
-		Font font = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
-		StdDraw.setFont(font);
+		StdDraw.setFont(normale);
 		
 		//affichage du terrain :
 		StdDraw.setXscale(-2,110);
@@ -166,7 +170,7 @@ public class Labyrinthe {
 	}
 
 	public void affichageFantome(Fantome fantome, Labyrinthe Lab) {
-		int direction = fantome.getDirection();
+		direction = fantome.getDirection();
 		
 		if(fantome.getEtat() == "standard")
 		{
@@ -443,7 +447,7 @@ public class Labyrinthe {
 	}
 	
 	public void affiche_mur()
-{
+	{
 	StdDraw.setPenColor(StdDraw.BLUE);
 	for(int i = 0; i < tab_murs.length;i++)
 	{
@@ -495,8 +499,7 @@ public class Labyrinthe {
 	//cette méthode prends en argument les personnages et utilise leur position
 	public Graine [][] i_graines() 
 	{
-		Graine [][] tab_graines = new Graine[28][31];
-		boolean dispo;
+		
 		for(int i = 0; i < tab_graines.length;i++)
 		{
 			for(int j = 0; j < tab_graines[i].length; j++)

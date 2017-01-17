@@ -45,7 +45,7 @@ public class Jeu {
 			
 			// Init Pacman(s)
 			Pacman Pac1 = new Pacman(54, 28, 2.5, 0.5, "y",J1); //(pos_x, pos_y, largeur, vitesse, couleur)
-			Pacman Pac2 = new Pacman(54,100, 2.5, 0.5, "g",J2);
+			Pacman Pac2 = new Pacman(54, 100, 2.5, 0.5, "g",J2);
 							
 			// Init Fantômes :
 			Fantome FantomeRouge = new Fantome(54, 76, 2.5, 0.5, "r", "traqueur"); // déjà dehors
@@ -61,7 +61,7 @@ public class Jeu {
 			
 			if(choixApresMenu1 == 3)
 			{
-				GestionDuJeu.highscores(false, false);
+				GestionDuJeu.highscores(false, false, 0);
 			}
 			
 			if (choixApresMenu1 == 5)
@@ -217,11 +217,11 @@ public class Jeu {
 				nePasRejouer = GestionDuJeu.affichageFin(fin);
 				if(choixApresMenu1 == 2)
 				{
-					GestionDuJeu.highscores(true, true, J1, J2);
+					GestionDuJeu.highscores(true, true, fin, J1, J2);
 				}
 				else
 				{
-					GestionDuJeu.highscores(true, false, J1);
+					GestionDuJeu.highscores(true, false, fin, J1);
 				}
 			}
 			else

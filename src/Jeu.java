@@ -52,7 +52,7 @@ public class Jeu {
 			Fantome FantomeRose = new Fantome(54, 64, 2.5, 0.5, "p", "traqueur"); // 2e à sortir (au lancement du jeu)
 			Fantome FantomeBleu = new Fantome(46, 64, 2.5, 0.5, "b", "embuscadeur"); // 3e à sortir (après 4 secondes de jeu)
 			Fantome FantomeOrange = new Fantome(62, 64, 2.5, 0.5, "o", "embuscadeur"); // 4e à sortir (après 8 secondes de jeu)
-			
+		
 			// Init graines : 
 			graines = Lab.i_graines();
 				
@@ -126,7 +126,7 @@ public class Jeu {
 				
 				choixP1 = Pac1.choixDeLaDirectionP1(choixP1); //choix direction avec les touches zqsd
 				Pac1.deplacer(Lab, choixP1); //deplace le personnage, renvoie false si E a été pressé
-				
+
 				if(choixApresMenu1 == 2)
 				{
 					choixP2 = Pac2.choixDeLaDirectionP2(choixP2);

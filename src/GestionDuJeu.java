@@ -407,7 +407,8 @@ public static void highscores(boolean save, boolean P2, int fin, Joueur...joueur
 		    		fw.write(dataIn.charAt(u));
 	    		}
 	    		fw.write('$');
-	    		String scoreJ1 = Integer.toString(joueurs[0].getScore());
+	    		int sj1 = joueurs[0].getScore() + joueurs[0].getVie()*200 + bonusChrono;
+	    		String scoreJ1 = Integer.toString(sj1);
 	    		fw.write(scoreJ1);
 	    		fw.write('@');
 	    		if(P2)
@@ -448,7 +449,6 @@ public static void highscores(boolean save, boolean P2, int fin, Joueur...joueur
 		    			StdDraw.textLeft(23, 70, dataIn);
 		    			StdDraw.text(10, 70, "J2");
 		    			StdDraw.setPenColor(StdDraw.WHITE);
-		    			int sj1 = joueurs[0].getScore() + joueurs[0].getVie()*200 + bonusChrono;
 		    			int sj2 = joueurs[1].getScore() + joueurs[1].getVie()*200 + bonusChrono;
 		    			StdDraw.textRight(80, 80, Integer.toString(sj1));
 		    			StdDraw.textRight(80, 70, Integer.toString(sj2));
@@ -460,7 +460,8 @@ public static void highscores(boolean save, boolean P2, int fin, Joueur...joueur
 			    		fw.write(dataIn.charAt(w));
 		    		}		    		
 	    			fw.write('$');
-		    		String scoreJ2 = Integer.toString(joueurs[1].getScore());
+	    			int sj2 = joueurs[1].getScore() + joueurs[1].getVie()*200 + bonusChrono;
+		    		String scoreJ2 = Integer.toString(sj2);
 		    		fw.write(scoreJ2);
 		    		fw.write('@');
 	    		}
@@ -647,4 +648,42 @@ public static int getHighscore()
   }
 	return score;
 }
+
+
+public static void setDifficulty(int level, Fantome...fantomes)
+{
+	switch(level)
+	{
+		case 1:
+			fantomes[0].setComportement("traqueur");
+			break;
+		case 2:
+			fantomes[0].setComportement("traqueur");
+			fantomes[1].setComportement("traqueur");
+			break;
+		case 3:
+			fantomes[0].setComportement("traqueur");
+			fantomes[1].setComportement("embuscadeur");
+			break;
+		case 4:
+			fantomes[0].setComportement("traqueur");
+			fantomes[1].setComportement("traqueur");
+			fantomes[2].setComportement("embuscadeur");
+			break;
+		case 5:
+			fantomes[0].setComportement("traqueur");
+			fantomes[1].setComportement("traqueur");
+			fantomes[2].setComportement("embuscadeur");
+			fantomes[3].setComportement("embuscadeur");
+			break;
+		default:
+			fantomes[0].setComportement("traqueur");
+			fantomes[1].setComportement("traqueur");
+			fantomes[2].setComportement("traqueur");
+			fantomes[3].setComportement("traqueur");
+			break;
+	}
+}
+
+
 }

@@ -19,6 +19,7 @@ public class Pacman extends Personnage{
 		return this.tempsChgtImage;
 	}
 	
+	
 	public void chgtImage(int direction, Chrono chrono) {
 		if (this.getColor() == "y") {
 			this.animationPacman1(chrono, direction);

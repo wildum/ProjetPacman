@@ -357,6 +357,17 @@ public class Fantome extends Personnage{
 		return ordreChoix[a];
 	}
 	
+	public void reset()
+	{
+		this.position_x = this.position_i_x;
+		this.position_y = this.position_i_y;
+		this.setEtat("initial");
+		GestionDuJeu.getChrono().pause();
+		this.setTimer(GestionDuJeu.getChrono().getDureeSec());
+		GestionDuJeu.getChrono().resume();
+		this.check1 = false;
+		this.check2 = false;
+	}
 
 	
 	public String getEtat()

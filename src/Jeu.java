@@ -67,14 +67,12 @@ public class Jeu {
 					FantomeRose.reset();
 					FantomeBleu.reset();
 					FantomeOrange.reset();
-					Pac1.setEtat("standard");
-					Pac1.setPosx(Pac1.position_i_x);
-					Pac1.setPosy(Pac1.position_i_y);
-					Pac2.setEtat("standard");
-					Pac2.setPosx(Pac2.position_i_x);
-					Pac2.setPosy(Pac2.position_i_y);
-					Pac1.setTempsChgtImage(0);
-					Pac2.setTempsChgtImage(0);
+					Pac1.reset();
+					Pac2.reset();
+					if(J1.getVie() < 3)
+					J1.setVie(J1.getVie()+1);
+					if(J2.getVie() < 3)
+					J2.setVie(J2.getVie()+1);
 				}
 				
 				// Init graines : 
@@ -86,11 +84,14 @@ public class Jeu {
 				if(choixApresMenu1 == 3)
 				{
 					GestionDuJeu.highscores(false, false, 0);
+					nextLevel = false;
 				}
 				
 				if (choixApresMenu1 == 5)
 				{
 					GestionDuJeu.affichageMenuControl();
+					nextLevel = false;
+
 				}
 				
 				
@@ -109,6 +110,7 @@ public class Jeu {
 						{
 							affichageFin = false;
 							nextLevel = false;
+							nePasRejouer = true;
 						}
 						StdDraw.pause(300);
 						GestionDuJeu.getChrono().resume(); // on fait repartir le chrono

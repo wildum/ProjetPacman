@@ -23,7 +23,6 @@ public class Personnage {
 		this.position_y = position_y;
 		this.position_i_x = position_x;
 		this.position_i_y = position_y;
-		
 		this.hitbox_x1 = position_x-width;
 		this.hitbox_x2 = position_x+width;
 		this.hitbox_y1= position_y-width;

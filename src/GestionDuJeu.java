@@ -11,7 +11,7 @@ import java.io.FileOutputStream;
 public class GestionDuJeu {
 	
 	// Chronomètre du jeu :
-	private static Chrono chrono = new Chrono();
+	private static Chrono chrono = new Chrono(), chronoMenu1 = new Chrono();
 	private static Font trespetite = new Font("SHOWCARD GOTHIC", Font.BOLD, 15), petite = new Font("SHOWCARD GOTHIC", Font.BOLD, 18), normale = new Font("SHOWCARD GOTHIC", Font.BOLD, 20), selection = new Font("SHOWCARD GOTHIC", Font.BOLD, 22), grande = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
 	
 	// Variables méthode affichageMenuPage1() :
@@ -37,14 +37,19 @@ public class GestionDuJeu {
 	
 	private static Pacman pacman = new Pacman(10, 54, 2.5, 0.5, "y");
 	
+	private static double tempsChgtImage = 0; 
+	
 	public static Chrono getChrono() {
 		return chrono;
+	}
+	
+	public double getTempsChgtImage () {
+		return this.tempsChgtImage;
 	}
 	
 	// affichageMenuPage1() gère l'affiche du menu principal	
 	public static int affichageMenuPage1()
 		{
-
 		clic1 = true;
 		position1 = true;
 		choixDuJoueur1 = 0;
@@ -170,7 +175,8 @@ public class GestionDuJeu {
 				{
 					clic1 = true;
 				}
-				animationMenu1();
+				
+				
 				
 				StdDraw.show(20);
 				StdDraw.pause(50);
@@ -451,7 +457,7 @@ public class GestionDuJeu {
 				    		StdDraw.setPenColor(StdDraw.YELLOW);
 			    			StdDraw.textLeft(23, 80, dataJ1);
 			    			StdDraw.text(10, 80, "J1");
-			    			StdDraw.setPenColor(StdDraw.GREEN);
+			    			StdDraw.setPenColor(50, 255, 70);
 			    			StdDraw.textLeft(23, 70, dataIn);
 			    			StdDraw.text(10, 70, "J2");
 			    			StdDraw.setPenColor(StdDraw.WHITE);
@@ -715,10 +721,7 @@ public class GestionDuJeu {
 	}
 	*/
 	
-	public static void animationMenu1() {
-		StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_dmi.png", 5, 5);
-		StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_d.png", 5, 5);
-	}
+	
 
 
 }

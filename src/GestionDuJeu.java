@@ -11,7 +11,7 @@ import java.io.FileOutputStream;
 public class GestionDuJeu {
 	
 	// Chronomètre du jeu :
-	private static Chrono chrono = new Chrono();
+	private static Chrono chrono = new Chrono(), chronoMenu1 = new Chrono();
 	private static Font trespetite = new Font("SHOWCARD GOTHIC", Font.BOLD, 15), petite = new Font("SHOWCARD GOTHIC", Font.BOLD, 18), normale = new Font("SHOWCARD GOTHIC", Font.BOLD, 20), selection = new Font("SHOWCARD GOTHIC", Font.BOLD, 22), grande = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
 	
 	// Variables méthode affichageMenuPage1() :
@@ -33,14 +33,19 @@ public class GestionDuJeu {
 	
 	private static Pacman pacman = new Pacman(10, 54, 2.5, 0.5, "y");
 	
+	private static double tempsChgtImage = 0; 
+	
 	public static Chrono getChrono() {
 		return chrono;
+	}
+	
+	public double getTempsChgtImage () {
+		return this.tempsChgtImage;
 	}
 	
 	// affichageMenuPage1() gère l'affiche du menu principal	
 	public static int affichageMenuPage1()
 		{
-
 		clic1 = true;
 		position1 = true;
 		choixDuJoueur1 = 0;
@@ -166,7 +171,8 @@ public class GestionDuJeu {
 				{
 					clic1 = true;
 				}
-				animationMenu1();
+				
+				
 				
 				StdDraw.show(20);
 				StdDraw.pause(50);
@@ -686,10 +692,41 @@ public class GestionDuJeu {
 		}
 	}
 	
-	public static void animationMenu1() {
-		StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_dmi.png", 5, 5);
-		StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_d.png", 5, 5);
-	}
+	/*public static void animationMenu1(Chrono chrono, int direction) {
+		double sous = chrono.getDureeMs() - tempsChgtImage;
+		
+		if (sous <= 100) {
+			StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune.png", 5, 5);
+		} else if (sous <= 200) {
+			if (direction == 1)
+				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_gmi.png", 5, 5);
+			else if (direction == 2)
+				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_dmi.png", 5, 5);
+			else 
+				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune.png", 5, 5);
+			
+		} else if (sous <= 300) {
+			if (direction == 1)
+				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_g.png", 5, 5);
+			else if (direction == 2)
+				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_d.png", 5, 5);
+			else 
+				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune.png", 5, 5);
+			
+		} else if (sous <= 400) {
+			if (direction == 1) 
+				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_gmi.png", 5, 5);
+			else if (direction == 2)
+				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_dmi.png", 5, 5);
+			else 
+				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune.png", 5, 5);
+			
+		} else {
+			tempsChgtImage = chrono.getDureeMs();
+			chrono.resume();
+		}
+		
+	}*/
 
 
 }

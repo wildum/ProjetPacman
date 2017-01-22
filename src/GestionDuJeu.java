@@ -453,7 +453,7 @@ public class GestionDuJeu {
 				    		StdDraw.setPenColor(StdDraw.YELLOW);
 			    			StdDraw.textLeft(23, 80, dataJ1);
 			    			StdDraw.text(10, 80, "J1");
-			    			StdDraw.setPenColor(StdDraw.GREEN);
+			    			StdDraw.setPenColor(50, 255, 70);
 			    			StdDraw.textLeft(23, 70, dataIn);
 			    			StdDraw.text(10, 70, "J2");
 			    			StdDraw.setPenColor(StdDraw.WHITE);
@@ -692,41 +692,7 @@ public class GestionDuJeu {
 		}
 	}
 	
-	/*public static void animationMenu1(Chrono chrono, int direction) {
-		double sous = chrono.getDureeMs() - tempsChgtImage;
-		
-		if (sous <= 100) {
-			StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune.png", 5, 5);
-		} else if (sous <= 200) {
-			if (direction == 1)
-				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_gmi.png", 5, 5);
-			else if (direction == 2)
-				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_dmi.png", 5, 5);
-			else 
-				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune.png", 5, 5);
-			
-		} else if (sous <= 300) {
-			if (direction == 1)
-				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_g.png", 5, 5);
-			else if (direction == 2)
-				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_d.png", 5, 5);
-			else 
-				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune.png", 5, 5);
-			
-		} else if (sous <= 400) {
-			if (direction == 1) 
-				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_gmi.png", 5, 5);
-			else if (direction == 2)
-				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_dmi.png", 5, 5);
-			else 
-				StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune.png", 5, 5);
-			
-		} else {
-			tempsChgtImage = chrono.getDureeMs();
-			chrono.resume();
-		}
-		
-	}*/
+	
 
 
 }

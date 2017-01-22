@@ -98,7 +98,7 @@ public class Labyrinthe {
 			StdDraw.setPenColor(StdDraw.YELLOW);
 			String score1 = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
 			StdDraw.textLeft(-1.5, 125.5, "SCORE P1 : " + score1); // score P1
-			StdDraw.setPenColor(StdDraw.GREEN);
+			StdDraw.setPenColor(50, 255, 70);
 			String score2 = Integer.toString(((Pacman)persos[1]).getJoueur().getScore());
 			StdDraw.textRight(109.5, 125.5, "SCORE P2 : " + score2); // score P2
 			

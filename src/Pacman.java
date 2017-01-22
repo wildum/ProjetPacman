@@ -465,7 +465,17 @@ public class Pacman extends Personnage{
 			}
 		}
 		
+		
+		
 				
+	}
+	
+	public void reset()
+	{
+		this.setEtat("standard");
+		this.setPosx(this.position_i_x);
+		this.setPosy(this.position_i_y);
+		this.setTempsChgtImage(0);
 	}
 	
 	public Joueur getJoueur() {

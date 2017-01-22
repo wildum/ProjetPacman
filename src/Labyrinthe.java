@@ -246,7 +246,7 @@ public class Labyrinthe {
 		
 		if(fantome.getEtat() == "apeure")
 		{
-			GestionDuJeu.chrono.pause();
+			GestionDuJeu.getChrono().pause();
 			if(setMinuteur)
 			{
 				minuteur = GestionDuJeu.getChrono().getDureeSec();
@@ -378,7 +378,7 @@ public class Labyrinthe {
 					StdDraw.picture(fantome.getPosx(),fantome.getPosy(),"Images/f_ableu.png", 5, 5);
 				break;
 			}
-			GestionDuJeu.chrono.resume();
+			GestionDuJeu.getChrono().resume();
 		}
 		
 		if(fantome.getEtat() == "initial")

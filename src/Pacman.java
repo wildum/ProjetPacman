@@ -15,6 +15,12 @@ public class Pacman extends Personnage{
 		this.etat = "standard";
 	}
 	
+	public Pacman(double position_x,double position_y, double width, double speed, String color)
+	{
+		super(position_x,position_y, width, speed, color);
+		this.etat = "standard";
+	}
+	
 	public double getTempsChgtImage () {
 		return this.tempsChgtImage;
 	}

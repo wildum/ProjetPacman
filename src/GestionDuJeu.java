@@ -11,26 +11,27 @@ import java.io.FileOutputStream;
 public class GestionDuJeu {
 	
 	// Chronomètre du jeu :
-	static Chrono chrono = new Chrono();
-	static Font trespetite = new Font("SHOWCARD GOTHIC", Font.BOLD, 15), petite = new Font("SHOWCARD GOTHIC", Font.BOLD, 18), normale = new Font("SHOWCARD GOTHIC", Font.BOLD, 20), selection = new Font("SHOWCARD GOTHIC", Font.BOLD, 22), grande = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
+	private static Chrono chrono = new Chrono();
+	private static Font trespetite = new Font("SHOWCARD GOTHIC", Font.BOLD, 15), petite = new Font("SHOWCARD GOTHIC", Font.BOLD, 18), normale = new Font("SHOWCARD GOTHIC", Font.BOLD, 20), selection = new Font("SHOWCARD GOTHIC", Font.BOLD, 22), grande = new Font("SHOWCARD GOTHIC", Font.BOLD, 40);
 	
 	// Variables méthode affichageMenuPage1() :
-	static boolean clic1, position1;
+	private static boolean clic1, position1;
 	static int choixDuJoueur1;
 	
 	// Variables méthode affichageMenuPause() :
-	static boolean choixDuJoueur2, loop2;
+	private static boolean choixDuJoueur2, loop2;
 	
 	
 	// Variables méthode affichageMenuControle() :
-	static boolean clic3, position3, choixDuJoueur3;
+	private static boolean clic3, position3, choixDuJoueur3;
 	
 	// Variables méthode affichageMenuFin() :
-	static boolean choixDuJoueur4;
+	private static boolean choixDuJoueur4;
 	
 	// Variables méthode highscores() :
-	static boolean clic5, position5, choixDuJoueur5, stay5, enter, enter2;
+	private static boolean clic5, position5, choixDuJoueur5, stay5, enter, enter2;
 	
+	private static Pacman pacman = new Pacman(10, 54, 2.5, 0.5, "y");
 	
 	public static Chrono getChrono() {
 		return chrono;
@@ -39,6 +40,7 @@ public class GestionDuJeu {
 	// affichageMenuPage1() gère l'affiche du menu principal	
 	public static int affichageMenuPage1()
 		{
+
 		clic1 = true;
 		position1 = true;
 		choixDuJoueur1 = 0;
@@ -164,7 +166,7 @@ public class GestionDuJeu {
 				{
 					clic1 = true;
 				}
-				
+				animationMenu1();
 				
 				StdDraw.show(20);
 				StdDraw.pause(50);
@@ -324,99 +326,50 @@ public class GestionDuJeu {
 		return choixDuJoueur4;
 	}
 	
-public static void highscores(boolean save, boolean P2, int fin, Joueur...joueurs)
-{
-	clic5 = true;
-	position5 = true;
-	choixDuJoueur5 = false;	
-	stay5 = true;
-	enter = false;
-	enter2 = false;
-	int y = 90;
-	int a = 0;
-	File f = new File("sauvegardes.txt");
-	FileWriter fw;
-	FileReader fr;
-	StdDraw.setXscale(-2,110);
-	StdDraw.setYscale(-27,149);
-	StdDraw.clear(StdDraw.BLACK);
-	StdDraw.setPenColor(StdDraw.WHITE);
-	String dataOut = "";
-	String dataIn = "";
-	String sample = "";
-	String [] tab_pseudo;
-	int [] tab_scores;
-	int numberScore;
-	int tailleTab = 0;
-	int compteur = 0;
-	int change, tailleMax;
-	String changement = "";
-	StdDraw.setFont(normale);
-	int bonusChrono = 0;
-	if(GestionDuJeu.getChrono().getDureeSec() < 60 && fin == 1)
-		bonusChrono = 400;
-	else if(GestionDuJeu.getChrono().getDureeSec() < 90 && fin == 1)
-		bonusChrono = 400;
-	else
-		bonusChrono = 0;
-	while(StdDraw.hasNextKeyTyped())
+	public static void highscores(boolean save, boolean P2, int fin, Joueur...joueurs)
 	{
-		StdDraw.nextKeyTyped();
-	}
-	    try {
-	    	if(save)
-	    	{
-	    		fw = new FileWriter(f,true);
-	    		while(enter || dataIn == "")
-	    		{
-	    			StdDraw.pause(50);
-	    			if(StdDraw.hasNextKeyTyped() && dataIn.length() < 15)
-	    			{
-	    				dataIn += StdDraw.nextKeyTyped();
-	    			}
-	    			if(StdDraw.isKeyPressed(KeyEvent.VK_ENTER))
-	    			{
-	    				enter = false;
-	    			}
-	    			else
-	    			{
-	    				enter = true;
-	    			}
-	    			if(StdDraw.isKeyPressed(KeyEvent.VK_BACK_SPACE) && dataIn.length() > 1)
-	    			{
-	    				dataIn = dataIn.substring(0, dataIn.length()-2);
-	    				StdDraw.clear(StdDraw.BLACK);
-	    				StdDraw.pause(50);
-	    			}
-	    			StdDraw.setFont(grande);
-		    		StdDraw.text(50, 100, "SAVE YOUR SCORE");
-		    		StdDraw.setFont(petite);
-		    		StdDraw.line(20,79,60,79);
-		    		StdDraw.picture(18, 81, "Images/fleche_droite.png");
-	    			StdDraw.setPenColor(StdDraw.YELLOW);
-	    			StdDraw.text(10, 80, "J1");
-	    			StdDraw.textLeft(23, 80, dataIn);
-	    			StdDraw.setPenColor(StdDraw.WHITE);
-	    			int sj1 = joueurs[0].getScore() + joueurs[0].getVie()*200 + bonusChrono;
-	    			StdDraw.textRight(83, 80, Integer.toString(sj1));
-	    			StdDraw.show(20);
-	    		}
-	    		fw.write("\r\n");
-	    		for(int u = 0; u<dataIn.length();u++)
-	    		{
-		    		fw.write(dataIn.charAt(u));
-	    		}
-	    		fw.write('$');
-	    		int sj1 = joueurs[0].getScore() + joueurs[0].getVie()*200 + bonusChrono;
-	    		String scoreJ1 = Integer.toString(sj1);
-	    		fw.write(scoreJ1);
-	    		fw.write('@');
-	    		if(P2)
-	    		{
-	    			StdDraw.clear(StdDraw.BLACK);
-	    			String dataJ1 = dataIn;
-	    			dataIn = "";
-	    			while(enter2 || dataIn == "")
+		clic5 = true;
+		position5 = true;
+		choixDuJoueur5 = false;	
+		stay5 = true;
+		enter = false;
+		enter2 = false;
+		int y = 90;
+		int a = 0;
+		File f = new File("sauvegardes.txt");
+		FileWriter fw;
+		FileReader fr;
+		StdDraw.setXscale(-2,110);
+		StdDraw.setYscale(-27,149);
+		StdDraw.clear(StdDraw.BLACK);
+		StdDraw.setPenColor(StdDraw.WHITE);
+		String dataOut = "";
+		String dataIn = "";
+		String sample = "";
+		String [] tab_pseudo;
+		int [] tab_scores;
+		int numberScore;
+		int tailleTab = 0;
+		int compteur = 0;
+		int change, tailleMax;
+		String changement = "";
+		StdDraw.setFont(normale);
+		int bonusChrono = 0;
+		if(GestionDuJeu.getChrono().getDureeSec() < 60 && fin == 1)
+			bonusChrono = 400;
+		else if(GestionDuJeu.getChrono().getDureeSec() < 90 && fin == 1)
+			bonusChrono = 400;
+		else
+			bonusChrono = 0;
+		while(StdDraw.hasNextKeyTyped())
+		{
+			StdDraw.nextKeyTyped();
+		}
+		    try {
+		    	if(save)
+		    	{
+		    		fw = new FileWriter(f,true);
+		    		while(enter || dataIn == "")
 		    		{
 		    			StdDraw.pause(50);
 		    			if(StdDraw.hasNextKeyTyped() && dataIn.length() < 15)
@@ -425,11 +378,11 @@ public static void highscores(boolean save, boolean P2, int fin, Joueur...joueur
 		    			}
 		    			if(StdDraw.isKeyPressed(KeyEvent.VK_ENTER))
 		    			{
-		    				enter2 = false;
+		    				enter = false;
 		    			}
 		    			else
 		    			{
-		    				enter2 = true;
+		    				enter = true;
 		    			}
 		    			if(StdDraw.isKeyPressed(KeyEvent.VK_BACK_SPACE) && dataIn.length() > 1)
 		    			{
@@ -440,250 +393,303 @@ public static void highscores(boolean save, boolean P2, int fin, Joueur...joueur
 		    			StdDraw.setFont(grande);
 			    		StdDraw.text(50, 100, "SAVE YOUR SCORE");
 			    		StdDraw.setFont(petite);
-			    		StdDraw.line(20,69,60,69);
-			    		StdDraw.picture(18, 71, "Images/fleche_droite.png");
-			    		StdDraw.setPenColor(StdDraw.YELLOW);
-		    			StdDraw.textLeft(23, 80, dataJ1);
+			    		StdDraw.line(20,79,60,79);
+			    		StdDraw.picture(18, 81, "Images/fleche_droite.png");
+		    			StdDraw.setPenColor(StdDraw.YELLOW);
 		    			StdDraw.text(10, 80, "J1");
-		    			StdDraw.setPenColor(StdDraw.GREEN);
-		    			StdDraw.textLeft(23, 70, dataIn);
-		    			StdDraw.text(10, 70, "J2");
+		    			StdDraw.textLeft(23, 80, dataIn);
 		    			StdDraw.setPenColor(StdDraw.WHITE);
-		    			int sj2 = joueurs[1].getScore() + joueurs[1].getVie()*200 + bonusChrono;
-		    			StdDraw.textRight(80, 80, Integer.toString(sj1));
-		    			StdDraw.textRight(80, 70, Integer.toString(sj2));
+		    			int sj1 = joueurs[0].getScore() + joueurs[0].getVie()*200 + bonusChrono;
+		    			StdDraw.textRight(83, 80, Integer.toString(sj1));
 		    			StdDraw.show(20);
 		    		}
-	    			fw.write("\r\n");
-	    			for(int w = 0; w<dataIn.length();w++)
+		    		fw.write("\r\n");
+		    		for(int u = 0; u<dataIn.length();u++)
 		    		{
-			    		fw.write(dataIn.charAt(w));
-		    		}		    		
-	    			fw.write('$');
-	    			int sj2 = joueurs[1].getScore() + joueurs[1].getVie()*200 + bonusChrono;
-		    		String scoreJ2 = Integer.toString(sj2);
-		    		fw.write(scoreJ2);
+			    		fw.write(dataIn.charAt(u));
+		    		}
+		    		fw.write('$');
+		    		int sj1 = joueurs[0].getScore() + joueurs[0].getVie()*200 + bonusChrono;
+		    		String scoreJ1 = Integer.toString(sj1);
+		    		fw.write(scoreJ1);
 		    		fw.write('@');
-	    		}
-	    		fw.close();
-	    		StdDraw.clear(StdDraw.BLACK);
-	    	}
-	        fr = new FileReader(f);
-	        int i = 0;
-	        while((i = fr.read()) != -1)
-	        {
-	          dataOut += (char)i;
-	        }
-	        for(int b = 0; b< dataOut.length(); b++)
-	        {
-	        	if(dataOut.charAt(b) == '$')
-	        	{
-	        		tailleTab++;
-	        	}
-	        }
-	        tab_pseudo = new String[tailleTab];
-        	tab_scores = new int[tailleTab];
-	       while(a < dataOut.length())
-	        {
-	        	while(dataOut.charAt(a) != '$')
-	        	{
-	        		sample += dataOut.charAt(a);
-	        		a++;
-	        	}
-	        	a++;
-	        	tab_pseudo[compteur] = sample;
-	        	sample = "";
-	        	while(dataOut.charAt(a) != '@')
-	        	{
-	        		sample += dataOut.charAt(a);
-	        		a++;
-	        	} 
-	        	a++;
-	        	numberScore = Integer.parseInt(sample);
-	        	sample = "";
-	        	tab_scores[compteur] = numberScore;
-	        	compteur++;
-	        }
-	       
-	       for(int s = 0; s < tab_scores.length; s++)
-	       {
-	    	   for(int t = 0; t < s; t++)
-	    	   {
-	    		   if(tab_scores[t] < tab_scores[s])
-	    		   {
-	    			   change = tab_scores[t];
-	    			   tab_scores[t] = tab_scores[s];
-	    			   tab_scores[s] = change;
-	    			   changement = tab_pseudo[t];
-	    			   tab_pseudo[t] = tab_pseudo[s];
-	    			   tab_pseudo[s] = changement;
-	    		   }
-	    	   }
-	       }
-	       if(tab_scores.length < 10)
-	       {
-	    	   tailleMax = tab_scores.length;
-	       }
-	       else
-	       {
-	    	   tailleMax = 10;
-	       }
-	       
-	       StdDraw.picture(54,118,"Images/Pacman_menu.png",73.3,46);
-	       for(int l = 0; l < tailleMax; l++)
-	       {
-	    	   StdDraw.setPenColor(StdDraw.YELLOW);
-	    	   StdDraw.textLeft(2, y, Integer.toString(l+1) + ".");
-	    	   StdDraw.textRight(105, y, Integer.toString(tab_scores[l]));
-	    	   StdDraw.setPenColor(StdDraw.WHITE);
-	    	   StdDraw.textLeft(10, y, tab_pseudo[l]);	    	   
-	    	   y -= 8.7;
-	       }
-			
-			do {
-				position5 = true;
+		    		if(P2)
+		    		{
+		    			StdDraw.clear(StdDraw.BLACK);
+		    			String dataJ1 = dataIn;
+		    			dataIn = "";
+		    			while(enter2 || dataIn == "")
+			    		{
+			    			StdDraw.pause(50);
+			    			if(StdDraw.hasNextKeyTyped() && dataIn.length() < 15)
+			    			{
+			    				dataIn += StdDraw.nextKeyTyped();
+			    			}
+			    			if(StdDraw.isKeyPressed(KeyEvent.VK_ENTER))
+			    			{
+			    				enter2 = false;
+			    			}
+			    			else
+			    			{
+			    				enter2 = true;
+			    			}
+			    			if(StdDraw.isKeyPressed(KeyEvent.VK_BACK_SPACE) && dataIn.length() > 1)
+			    			{
+			    				dataIn = dataIn.substring(0, dataIn.length()-2);
+			    				StdDraw.clear(StdDraw.BLACK);
+			    				StdDraw.pause(50);
+			    			}
+			    			StdDraw.setFont(grande);
+				    		StdDraw.text(50, 100, "SAVE YOUR SCORE");
+				    		StdDraw.setFont(petite);
+				    		StdDraw.line(20,69,60,69);
+				    		StdDraw.picture(18, 71, "Images/fleche_droite.png");
+				    		StdDraw.setPenColor(StdDraw.YELLOW);
+			    			StdDraw.textLeft(23, 80, dataJ1);
+			    			StdDraw.text(10, 80, "J1");
+			    			StdDraw.setPenColor(StdDraw.GREEN);
+			    			StdDraw.textLeft(23, 70, dataIn);
+			    			StdDraw.text(10, 70, "J2");
+			    			StdDraw.setPenColor(StdDraw.WHITE);
+			    			int sj2 = joueurs[1].getScore() + joueurs[1].getVie()*200 + bonusChrono;
+			    			StdDraw.textRight(80, 80, Integer.toString(sj1));
+			    			StdDraw.textRight(80, 70, Integer.toString(sj2));
+			    			StdDraw.show(20);
+			    		}
+		    			fw.write("\r\n");
+		    			for(int w = 0; w<dataIn.length();w++)
+			    		{
+				    		fw.write(dataIn.charAt(w));
+			    		}		    		
+		    			fw.write('$');
+		    			int sj2 = joueurs[1].getScore() + joueurs[1].getVie()*200 + bonusChrono;
+			    		String scoreJ2 = Integer.toString(sj2);
+			    		fw.write(scoreJ2);
+			    		fw.write('@');
+		    		}
+		    		fw.close();
+		    		StdDraw.clear(StdDraw.BLACK);
+		    	}
+		        fr = new FileReader(f);
+		        int i = 0;
+		        while((i = fr.read()) != -1)
+		        {
+		          dataOut += (char)i;
+		        }
+		        for(int b = 0; b< dataOut.length(); b++)
+		        {
+		        	if(dataOut.charAt(b) == '$')
+		        	{
+		        		tailleTab++;
+		        	}
+		        }
+		        tab_pseudo = new String[tailleTab];
+	        	tab_scores = new int[tailleTab];
+		       while(a < dataOut.length())
+		        {
+		        	while(dataOut.charAt(a) != '$')
+		        	{
+		        		sample += dataOut.charAt(a);
+		        		a++;
+		        	}
+		        	a++;
+		        	tab_pseudo[compteur] = sample;
+		        	sample = "";
+		        	while(dataOut.charAt(a) != '@')
+		        	{
+		        		sample += dataOut.charAt(a);
+		        		a++;
+		        	} 
+		        	a++;
+		        	numberScore = Integer.parseInt(sample);
+		        	sample = "";
+		        	tab_scores[compteur] = numberScore;
+		        	compteur++;
+		        }
+		       
+		       for(int s = 0; s < tab_scores.length; s++)
+		       {
+		    	   for(int t = 0; t < s; t++)
+		    	   {
+		    		   if(tab_scores[t] < tab_scores[s])
+		    		   {
+		    			   change = tab_scores[t];
+		    			   tab_scores[t] = tab_scores[s];
+		    			   tab_scores[s] = change;
+		    			   changement = tab_pseudo[t];
+		    			   tab_pseudo[t] = tab_pseudo[s];
+		    			   tab_pseudo[s] = changement;
+		    		   }
+		    	   }
+		       }
+		       if(tab_scores.length < 10)
+		       {
+		    	   tailleMax = tab_scores.length;
+		       }
+		       else
+		       {
+		    	   tailleMax = 10;
+		       }
+		       
+		       StdDraw.picture(54,118,"Images/Pacman_menu.png",73.3,46);
+		       for(int l = 0; l < tailleMax; l++)
+		       {
+		    	   StdDraw.setPenColor(StdDraw.YELLOW);
+		    	   StdDraw.textLeft(2, y, Integer.toString(l+1) + ".");
+		    	   StdDraw.textRight(105, y, Integer.toString(tab_scores[l]));
+		    	   StdDraw.setPenColor(StdDraw.WHITE);
+		    	   StdDraw.textLeft(10, y, tab_pseudo[l]);	    	   
+		    	   y -= 8.7;
+		       }
 				
-				if (StdDraw.mouseX() > 43 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > -3 && StdDraw.mouseY() < 6) {
-					choixDuJoueur5 = true;
-					position5 = false;
-					StdDraw.setPenColor(StdDraw.BLACK);
-					StdDraw.filledRectangle(55, -4, 30, 5);
-					StdDraw.setFont(selection);
-					StdDraw.setPenColor(StdDraw.WHITE);
-					StdDraw.text(54, -4.3, "GO BACK");
-				} else {
-					StdDraw.setPenColor(StdDraw.BLACK);
-					StdDraw.filledRectangle(55, -4, 30, 5);
-					StdDraw.setFont(normale);
-					StdDraw.setPenColor(200, 200, 200);
-					StdDraw.text(54, -4, "GO BACK");				
-				}
-				
-				StdDraw.pause(50);
-				if (StdDraw.mousePressed()) {
-					StdDraw.pause(300);
-					clic5 = false;
-					stay5 = false;
-				} else {
-					clic5 = true;
-				}
-				StdDraw.show(20);
-			} while(clic5 || position5);
-	      } catch (FileNotFoundException e) {
-	        e.printStackTrace();
-	      } catch (IOException e) {
-	        e.printStackTrace();
-	      }
-	    StdDraw.show(20);
-	    
+				do {
+					position5 = true;
+					
+					if (StdDraw.mouseX() > 43 && StdDraw.mouseX() < 66 && StdDraw.mouseY() > -3 && StdDraw.mouseY() < 6) {
+						choixDuJoueur5 = true;
+						position5 = false;
+						StdDraw.setPenColor(StdDraw.BLACK);
+						StdDraw.filledRectangle(55, -4, 30, 5);
+						StdDraw.setFont(selection);
+						StdDraw.setPenColor(StdDraw.WHITE);
+						StdDraw.text(54, -4.3, "GO BACK");
+					} else {
+						StdDraw.setPenColor(StdDraw.BLACK);
+						StdDraw.filledRectangle(55, -4, 30, 5);
+						StdDraw.setFont(normale);
+						StdDraw.setPenColor(200, 200, 200);
+						StdDraw.text(54, -4, "GO BACK");				
+					}
+					
+					StdDraw.pause(50);
+					if (StdDraw.mousePressed()) {
+						StdDraw.pause(300);
+						clic5 = false;
+						stay5 = false;
+					} else {
+						clic5 = true;
+					}
+					StdDraw.show(20);
+				} while(clic5 || position5);
+		      } catch (FileNotFoundException e) {
+		        e.printStackTrace();
+		      } catch (IOException e) {
+		        e.printStackTrace();
+		      }
+		    StdDraw.show(20);
+		    
 	}
 
-public static int getHighscore()
-{
-	int score = 0;
-	int a = 0;
-	File f = new File("sauvegardes.txt");
-	FileReader fr;
-	String dataOut = "";
-	String sample = "";
-	int [] tab_scores;
-	int numberScore;
-	int tailleTab = 0;
-	int compteur = 0;
-	int change;
-    int i = 0;
-    try
-    {
-    	fr = new FileReader(f);
-    while((i = fr.read()) != -1)
-    {
-      dataOut += (char)i;
-    }
-    for(int b = 0; b< dataOut.length(); b++)
-    {
-    	if(dataOut.charAt(b) == '$')
-    	{
-    		tailleTab++;
-    	}
-    }
-	tab_scores = new int[tailleTab];
-   while(a < dataOut.length())
-    {
-	   while(dataOut.charAt(a) != '$')
-   	{
-   		a++;
-   	} 
-	   a++;
-    	while(dataOut.charAt(a) != '@')
-    	{
-    		sample += dataOut.charAt(a);
-    		a++;
-    	} 
-    	a++;
-    	numberScore = Integer.parseInt(sample);
-    	sample = "";
-    	tab_scores[compteur] = numberScore;
-    	compteur++;
-    }
-   
-   for(int s = 0; s < tab_scores.length; s++)
-   {
-	   for(int t = 0; t < s; t++)
+	public static int getHighscore()
+	{
+		int score = 0;
+		int a = 0;
+		File f = new File("sauvegardes.txt");
+		FileReader fr;
+		String dataOut = "";
+		String sample = "";
+		int [] tab_scores;
+		int numberScore;
+		int tailleTab = 0;
+		int compteur = 0;
+		int change;
+	    int i = 0;
+	    try
+	    {
+	    	fr = new FileReader(f);
+	    while((i = fr.read()) != -1)
+	    {
+	      dataOut += (char)i;
+	    }
+	    for(int b = 0; b< dataOut.length(); b++)
+	    {
+	    	if(dataOut.charAt(b) == '$')
+	    	{
+	    		tailleTab++;
+	    	}
+	    }
+		tab_scores = new int[tailleTab];
+	   while(a < dataOut.length())
+	    {
+		   while(dataOut.charAt(a) != '$')
+	   	{
+	   		a++;
+	   	} 
+		   a++;
+	    	while(dataOut.charAt(a) != '@')
+	    	{
+	    		sample += dataOut.charAt(a);
+	    		a++;
+	    	} 
+	    	a++;
+	    	numberScore = Integer.parseInt(sample);
+	    	sample = "";
+	    	tab_scores[compteur] = numberScore;
+	    	compteur++;
+	    }
+	   
+	   for(int s = 0; s < tab_scores.length; s++)
 	   {
-		   if(tab_scores[t] < tab_scores[s])
+		   for(int t = 0; t < s; t++)
 		   {
-			   change = tab_scores[t];
-			   tab_scores[t] = tab_scores[s];
-			   tab_scores[s] = change;
+			   if(tab_scores[t] < tab_scores[s])
+			   {
+				   change = tab_scores[t];
+				   tab_scores[t] = tab_scores[s];
+				   tab_scores[s] = change;
+			   }
 		   }
 	   }
-   }
-   
-   score = tab_scores[0];
-
-  } catch (FileNotFoundException e) {
-    e.printStackTrace();
-  } catch (IOException e) {
-    e.printStackTrace();
-  }
-	return score;
-}
-
-
-public static void setDifficulty(int level, Fantome...fantomes)
-{
-	switch(level)
-	{
-		case 1:
-			fantomes[0].setComportement("traqueur");
-			break;
-		case 2:
-			fantomes[0].setComportement("traqueur");
-			fantomes[1].setComportement("traqueur");
-			break;
-		case 3:
-			fantomes[0].setComportement("traqueur");
-			fantomes[1].setComportement("embuscadeur");
-			break;
-		case 4:
-			fantomes[0].setComportement("traqueur");
-			fantomes[1].setComportement("traqueur");
-			fantomes[2].setComportement("embuscadeur");
-			break;
-		case 5:
-			fantomes[0].setComportement("traqueur");
-			fantomes[1].setComportement("traqueur");
-			fantomes[2].setComportement("embuscadeur");
-			fantomes[3].setComportement("embuscadeur");
-			break;
-		default:
-			fantomes[0].setComportement("traqueur");
-			fantomes[1].setComportement("traqueur");
-			fantomes[2].setComportement("traqueur");
-			fantomes[3].setComportement("traqueur");
-			break;
+	   
+	   score = tab_scores[0];
+	
+	  } catch (FileNotFoundException e) {
+	    e.printStackTrace();
+	  } catch (IOException e) {
+	    e.printStackTrace();
+	  }
+		return score;
 	}
-}
+	
+	public static void setDifficulty(int level, Fantome...fantomes)
+	{
+		switch(level)
+		{
+			case 1:
+				fantomes[0].setComportement("traqueur");
+				break;
+			case 2:
+				fantomes[0].setComportement("traqueur");
+				fantomes[1].setComportement("traqueur");
+				break;
+			case 3:
+				fantomes[0].setComportement("traqueur");
+				fantomes[1].setComportement("embuscadeur");
+				break;
+			case 4:
+				fantomes[0].setComportement("traqueur");
+				fantomes[1].setComportement("traqueur");
+				fantomes[2].setComportement("embuscadeur");
+				break;
+			case 5:
+				fantomes[0].setComportement("traqueur");
+				fantomes[1].setComportement("traqueur");
+				fantomes[2].setComportement("embuscadeur");
+				fantomes[3].setComportement("embuscadeur");
+				break;
+			default:
+				fantomes[0].setComportement("traqueur");
+				fantomes[1].setComportement("traqueur");
+				fantomes[2].setComportement("traqueur");
+				fantomes[3].setComportement("traqueur");
+				break;
+		}
+	}
+	
+	public static void animationMenu1() {
+		StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_dmi.png", 5, 5);
+		StdDraw.picture(pacman.getPosx(),pacman.getPosy(),"Images/p_jaune_d.png", 5, 5);
+	}
 
 
 }

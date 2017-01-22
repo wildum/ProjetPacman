@@ -74,6 +74,9 @@ public class Jeu {
 					J1.setVie(J1.getVie()+1);
 					if(J2.getVie() < 3)
 					J2.setVie(J2.getVie()+1);
+					
+					J1.setVivant(true);
+					J2.setVivant(true);
 				}
 				
 				// Init graines : 
@@ -124,11 +127,11 @@ public class Jeu {
 						Pac2.interraction(graines,Lab ,FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 						if (boucle1) {
 							GestionDuJeu.getChrono().pause();
-							Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+							Lab.affichage(Lab, graines, GestionDuJeu.getChrono(),level, Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 							GestionDuJeu.getChrono().resume();
 							boucle1 = false;
 						} else {
-							Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+							Lab.affichage(Lab, graines, GestionDuJeu.getChrono(),level, Pac1, Pac2, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 						}
 						fin = GestionDuJeu.checkWinLoose(graines, J1, J2);
 						
@@ -142,11 +145,11 @@ public class Jeu {
 						
 						if (boucle1) {
 							GestionDuJeu.getChrono().pause();
-							Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+							Lab.affichage(Lab, graines, GestionDuJeu.getChrono(),level, Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 							GestionDuJeu.getChrono().resume();
 							boucle1 = false;
 						} else {
-							Lab.affichage(Lab, graines, GestionDuJeu.getChrono(), Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
+							Lab.affichage(Lab, graines, GestionDuJeu.getChrono(),level, Pac1, FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 						}
 						fin = GestionDuJeu.checkWinLoose(graines, J1);
 					}
@@ -258,6 +261,22 @@ public class Jeu {
 					{
 						nePasRejouer = false;
 						level++;
+						int bonusChrono = 0;
+						if(GestionDuJeu.getChrono().getDureeSec() < 60 && fin == 1)
+							bonusChrono = 400;
+						else if(GestionDuJeu.getChrono().getDureeSec() < 90 && fin == 1)
+							bonusChrono = 400;
+						else
+							bonusChrono = 0;
+						if(choixApresMenu1 == 2)
+						{
+							J1.setScore(J1.getScore() + J1.getVie()*200 + bonusChrono);
+							J2.setScore(J2.getScore() + J2.getVie()*200 + bonusChrono);
+						}
+						else
+						{
+							J1.setScore(J1.getScore() + J1.getVie()*200 + bonusChrono);
+						}
 						StdDraw.setXscale(-2,110);
 						StdDraw.setYscale(-27,149);
 						StdDraw.clear(StdDraw.BLACK);

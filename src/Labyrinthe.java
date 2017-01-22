@@ -14,7 +14,7 @@ public class Labyrinthe {
 	private double minuteur =0;
 	private Mur [][] tab_murs= new Mur[28][31];
 	boolean gettingStarted = true;
-
+	private int lvl;
 	Graine [][] tab_graines = new Graine[28][31];
 	boolean dispo;
 	Font normale = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
@@ -71,7 +71,7 @@ public class Labyrinthe {
 	}
 	
 	//cette méthode gère l'affichage du lab et des personnages :
-	public void affichage(Labyrinthe Lab,Graine [][] tab_graines,Chrono chrono,Personnage... persos) //on peut ajouter autant de perso que l'on veut
+	public void affichage(Labyrinthe Lab,Graine [][] tab_graines,Chrono chrono, int level,Personnage... persos) //on peut ajouter autant de perso que l'on veut
 	{
 		StdDraw.setFont(normale);
 		
@@ -81,8 +81,9 @@ public class Labyrinthe {
 		StdDraw.clear(StdDraw.BLACK);
 		StdDraw.picture(54.5,60,"Images/Terrain.jpg",115,127); // pour placer l'image (Paint)
 		Lab.affiche_graines(tab_graines);
-		
-		
+		StdDraw.setPenColor(StdDraw.WHITE);
+		lvl = level+1;
+		StdDraw.text(55, 139, "LEVEL: " + lvl);
 		// affichage des vies, du chrono et du score :
 		if (persos[0].getColor() == "y" && persos[1].getColor() == "g") { // s'il y a 2 joueurs
 			double a = 24, b = 94;			
@@ -121,7 +122,6 @@ public class Labyrinthe {
 			chrono.pause();
 			StdDraw.textLeft(-1.8, 134, "TIME : " + Math.round(chrono.getDureeSec()) + " s"); // Chrono
 			chrono.resume();
-			
 			String score = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
 			StdDraw.textLeft(-1.5, 125.5, "SCORE : " + score); // score joueur
 			

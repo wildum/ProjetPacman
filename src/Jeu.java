@@ -1,4 +1,6 @@
 import java.awt.event.KeyEvent;
+
+import edu.princeton.cs.introcs.StdAudio;
 import edu.princeton.cs.introcs.StdDraw;
 
 //cette classe ne doit contenir que la fonction main
@@ -22,7 +24,6 @@ public class Jeu {
 		StdDraw.setCanvasSize(500,760);
 		StdDraw.setXscale(-2,110);
 		StdDraw.setYscale(-27,149); 
-		
 		
 		
 		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -86,11 +87,13 @@ public class Jeu {
 				if(choixApresMenu1 == 3)
 				{
 					GestionDuJeu.highscores(false, false, 0);
+					
 				}
 				
 				if (choixApresMenu1 == 5)
 				{
 					GestionDuJeu.affichageMenuControl();
+					 
 				}
 				
 				

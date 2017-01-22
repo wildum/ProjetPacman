@@ -1,4 +1,6 @@
 import java.awt.Font;
+
+import edu.princeton.cs.introcs.StdAudio;
 import edu.princeton.cs.introcs.StdDraw;
 
 public class Labyrinthe {
@@ -19,6 +21,10 @@ public class Labyrinthe {
 	int direction;
 	protected static int fantMin, fantMax;
 	protected static double minD, maxD;
+	
+	String file = "Audio/Intro.wav";
+	double [] sample = StdAudio.read(file);
+	
 	public int [][] matrice = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 							   {0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0},
 							   {0,1,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,1,0},
@@ -85,7 +91,7 @@ public class Labyrinthe {
 			StdDraw.text(80, -8, "LIVES P2 :"); // vies P2
 			
 			chrono.pause();
-			StdDraw.textLeft(-1.8, 135, "TIME : " + Math.round(chrono.getDureeSec()) + " s"); // Chrono
+			StdDraw.textLeft(-1.8, 134, "TIME : " + Math.round(chrono.getDureeSec()) + " s"); // Chrono
 			chrono.resume();
 			
 			StdDraw.setPenColor(StdDraw.YELLOW);
@@ -96,7 +102,7 @@ public class Labyrinthe {
 			StdDraw.textRight(109.5, 125.5, "SCORE P2 : " + score2); // score P2
 			
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.textRight(109.5, 135, "HIGHSCORE : " + GestionDuJeu.getHighscore());// meilleur score
+			StdDraw.textRight(109.5, 134, "HIGHSCORE : " + GestionDuJeu.getHighscore());// meilleur score
 			
 			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) { 
 				StdDraw.picture(a,-7,"Images/p_jaune_d.png", 5, 5);
@@ -113,13 +119,13 @@ public class Labyrinthe {
 			StdDraw.text(6, -8, "LIVES :"); // Vies joueur
 			
 			chrono.pause();
-			StdDraw.textLeft(-1.8, 135, "TIME : " + Math.round(chrono.getDureeSec()) + " s"); // Chrono
+			StdDraw.textLeft(-1.8, 134, "TIME : " + Math.round(chrono.getDureeSec()) + " s"); // Chrono
 			chrono.resume();
 			
 			String score = Integer.toString(((Pacman)persos[0]).getJoueur().getScore());
 			StdDraw.textLeft(-1.5, 125.5, "SCORE : " + score); // score joueur
 			
-			StdDraw.textRight(109.5, 135, "HIGHSCORE : " + GestionDuJeu.getHighscore());// meilleur score
+			StdDraw.textRight(109.5, 134, "HIGHSCORE : " + GestionDuJeu.getHighscore());// meilleur score
 			
 			for(int i = 0; i < ((Pacman)persos[0]).getJoueur().getVie(); i++) {
 				StdDraw.picture(a,-7,"Images/p_jaune_d.png", 5, 5);
@@ -160,9 +166,10 @@ public class Labyrinthe {
 		}
 		
 		if (gettingStarted) {
+			StdDraw.setPenColor(StdDraw.YELLOW);
 			StdDraw.text(54, 51, "GET READY !");
 			StdDraw.show(); 
-			StdDraw.pause(5000);
+			StdAudio.play(sample);
 			gettingStarted = false;
 		} 
 		

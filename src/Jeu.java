@@ -104,7 +104,7 @@ public class Jeu {
 				do
 				{
 					// affichage du menu pause si la touche Espace est pressée :
-					if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE))
+					if(StdDraw.isKeyPressed(KeyEvent.VK_P))
 					{
 						GestionDuJeu.getChrono().pause(); // on met le chrono en pause pour qu'il ne continue pas le temps de la pause
 						StdDraw.pause(300);
@@ -259,8 +259,10 @@ public class Jeu {
 					}
 					else
 					{
+						keepPlaying = true;
 						nePasRejouer = false;
 						level++;
+						Lab.setGettingStarted(true);
 						int bonusChrono = 0;
 						if(GestionDuJeu.getChrono().getDureeSec() < 60 && fin == 1)
 							bonusChrono = 400;

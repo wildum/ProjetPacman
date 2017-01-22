@@ -16,6 +16,7 @@ public class Fantome extends Personnage{
 	protected double [] distance;
 	protected int [] ordreChoix;
 	protected int a;
+	protected int comptInitial = 0;
 	static Random rd = new Random(System.currentTimeMillis());
 	
 	
@@ -389,5 +390,6 @@ public class Fantome extends Personnage{
 	{
 		this.comportement = comportement;
 	}
+	
 
 }

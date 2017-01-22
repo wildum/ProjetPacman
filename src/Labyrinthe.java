@@ -19,8 +19,7 @@ public class Labyrinthe {
 	boolean dispo;
 	Font normale = new Font("SHOWCARD GOTHIC", Font.BOLD, 20);
 	int direction;
-	protected static int fantMin, fantMax;
-	protected static double minD, maxD;
+	
 	
 	String file = "Audio/Intro.wav";
 	double [] sample = StdAudio.read(file);
@@ -564,30 +563,6 @@ public class Labyrinthe {
 		}
 	}
 	
-	public void switchComportementFantome(Pacman p, Fantome...fantomes)
-	{
-		minD = Math.sqrt(fantomes[0].getPosx()*fantomes[0].getPosx() + fantomes[0].getPosy()*fantomes[0].getPosy());
-		maxD = Math.sqrt(fantomes[0].getPosx()*fantomes[0].getPosx() + fantomes[0].getPosy()*fantomes[0].getPosy());
-		fantMin = 0;
-		fantMax = 0;
-		for(int i = 1; i < fantomes.length; i++)
-		{
-			if(Math.sqrt(fantomes[i].getPosx()*fantomes[i].getPosx() + fantomes[i].getPosy()*fantomes[i].getPosy()) < minD)
-			{
-				minD = Math.sqrt(fantomes[i].getPosx()*fantomes[i].getPosx() + fantomes[i].getPosy()*fantomes[i].getPosy());
-				fantMin = i;
-			}
-			if(Math.sqrt(fantomes[i].getPosx()*fantomes[i].getPosx() + fantomes[i].getPosy()*fantomes[i].getPosy()) > maxD)
-			{
-				maxD = Math.sqrt(fantomes[i].getPosx()*fantomes[i].getPosx() + fantomes[i].getPosy()*fantomes[i].getPosy());
-				fantMax = i;
-			}
-		}
-		
-		fantomes[fantMin].setComportement("traqueur");
-		fantomes[fantMax].setComportement("embuscadeur");
-	}
-	
 
 	public int getMax_x()
 	{
@@ -604,6 +579,9 @@ public class Labyrinthe {
 		this.setMinuteur = m;
 	}
 	
-	
+	public void setGettingStarted(boolean t)
+	{
+		this.gettingStarted = t;
+	}
 	
 }

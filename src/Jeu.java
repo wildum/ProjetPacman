@@ -16,6 +16,7 @@ public class Jeu {
 		boolean nePasRejouer = true;
 		boolean affichageFin = true; 
 		boolean nextLevel = true;
+		boolean enableSwitch = false;
 		int fin = 0, choixApresMenu1 = 0;
 		int choixP1 = 0, choixP2 = 0, choixF1 = 1, choixF2 = 2, choixF3 = 3, choixF4 = 3;
 		int level = 0;
@@ -62,7 +63,7 @@ public class Jeu {
 			{
 				if(level > 0)
 				{
-					GestionDuJeu.setDifficulty(level, FantomeRouge, FantomeRose, FantomeBleu, FantomeOrange);
+					enableSwitch = GestionDuJeu.setDifficulty(level, FantomeRouge, FantomeRose, FantomeBleu, FantomeOrange);
 					GestionDuJeu.getChrono().start();
 					FantomeRouge.reset();
 					FantomeRose.reset();
@@ -141,7 +142,8 @@ public class Jeu {
 						Pac1.interraction(graines,Lab ,FantomeRose, FantomeBleu, FantomeRouge, FantomeOrange);
 						
 						//switch l'etat des fantomes
-						//Lab.switchComportementFantome(Pac1, FantomeRose, FantomeOrange, FantomeBleu, FantomeRouge);
+						if(enableSwitch)
+						GestionDuJeu.switchComportementFantome(Pac1, FantomeRose, FantomeOrange, FantomeBleu, FantomeRouge);
 						
 						if (boucle1) {
 							GestionDuJeu.getChrono().pause();

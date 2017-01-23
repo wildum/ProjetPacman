@@ -5,7 +5,7 @@ public class Pacman extends Personnage{
 	
 	private Joueur joueur;
 	private double tempsChgtImage = 0; 
-	private String etat = "";
+	private String etat = ""; // erneve ou standard
 	private double minuterieEnerveS = -8;
 	
 	public Pacman(double position_x,double position_y, double width, double speed, String color, Joueur player)
@@ -25,6 +25,12 @@ public class Pacman extends Personnage{
 		return this.tempsChgtImage;
 	}
 	
+	
+	/* Cette méthode permet d'alterner l'image du Pacman pour donner une sensation de mouvement.
+	 * Suivant la couleur du pacman la méthode utilise une méthode différente.
+	 * Elle prend en argument la direction du pacman et le chrono.
+	 * */
+	 
 	
 	public void chgtImage(int direction, Chrono chrono) {
 		if (this.getColor() == "y") {
@@ -52,6 +58,10 @@ public class Pacman extends Personnage{
 		}
 	}
 
+	/*
+	 * Cette méthode choisie l'image du pacman suivant le chrono et la direction qu'elle prends en argument.
+	 * Les images dépendent de l'état du Pacman
+	 */
 	public void animationPacman1(Chrono chrono, int direction) {
 		chrono.pause();
 		
@@ -185,6 +195,10 @@ public class Pacman extends Personnage{
 	public void setTempsChgtImage(double tempsChgtImage) {
 		this.tempsChgtImage = tempsChgtImage;
 	}
+	
+	/*
+	 * Même méthode qu'animationPacman1 sauf qu'elle gère le pacman vert
+	 */
 
 	public void animationPacman2(Chrono chrono, int direction) {
 		chrono.pause();
@@ -301,8 +315,9 @@ public class Pacman extends Personnage{
 	}
 	
 	
-	//cette méthode permet au joueur 1 de choisir sa direction en appuyant sur une touche 
-	//elle prend en argument la direction précédente et la renvoie si le joueur n'appuie sur rien
+	/*Cette méthode permet au joueur 1 de choisir sa direction en appuyant sur une touche 
+	*Elle prend en argument la direction précédente et la renvoie si le joueur n'appuie sur rien
+	*/
 	public int choixDeLaDirectionP1(int choix)
 	{
 		if(this.joueur.isVivant())
@@ -338,7 +353,9 @@ public class Pacman extends Personnage{
         
 	}
 	
-	//cette méthode permet au joueur 2 de choisir sa direction en appuyant sur une touche
+	/*Cette méthode permet au joueur 2 de choisir sa direction en appuyant sur une touche
+	 * */
+	 
 	public int choixDeLaDirectionP2(int choix)
 	{
 		if(this.joueur.isVivant())
@@ -377,23 +394,30 @@ public class Pacman extends Personnage{
 		}
 	}
 	
+	/*Cette méthode s'occupe des interractions entre le pacman avec les graines et les fantômes
+	 * Elle prends en argument le tableau de graines, le labyrinthe et les fantomes
+	 * 
+	 */
 	public void interraction(Graine [][] tab_graines,Labyrinthe Labyrinthe,Fantome...fantomes)
 	{
 		for(int i = 0; i < tab_graines.length;i++)
 		{
 			for(int j = 0; j < tab_graines[i].length; j++)
 			{
+				//si contact avec une graine
 				if(		
 						this.position_x < tab_graines[i][j].gethx2() &&
 						this.position_x > tab_graines[i][j].gethx1() &&
 						this.position_y < tab_graines[i][j].gethy2() &&
 						this.position_y > tab_graines[i][j].gethy1()   )
 				{
+					//si graine standard
 					if(tab_graines[i][j].type == "standard")
 					{
 						tab_graines[i][j].setType("null");
 						this.getJoueur().setScore(this.getJoueur().getScore()+10);
 					}
+					//si super graine
 					if(tab_graines[i][j].type == "super")
 					{
 						tab_graines[i][j].setType("null");
@@ -417,11 +441,13 @@ public class Pacman extends Personnage{
 		
 		for(int a = 0; a < fantomes.length;a++)
 		{
+			//contact entre le pac et un fantome
 			if(this.gethx1() < fantomes[a].getPosx() &&
 					this.gethx2() > fantomes[a].getPosx() &&
 					this.gethy1() < fantomes[a].getPosy() &&
 					this.gethy2()> fantomes[a].getPosy())
 			{
+				//contact avec pacman standard et fantome standard
 				if(this.etat == "standard" || fantomes[a].getEtat() == "standard")
 				{
 					// on remet le pacamn à sa position initiale :
@@ -449,7 +475,7 @@ public class Pacman extends Personnage{
 					this.hitbox_y1= this.position_y-this.width;
 					this.hitbox_y2 = this.position_y+this.width;
 				}
-				
+				//contact avec fantomes lorsque pacman énervé et fantome apeuré
 				if(this.etat == "enerve" && fantomes[a].getEtat().equals("apeure"))
 				{
 					fantomes[a].position_x = fantomes[a].position_i_x;
@@ -470,6 +496,10 @@ public class Pacman extends Personnage{
 				
 	}
 	
+	/*
+	 * Cette méthode permet de renvoyer le pacman à sa position initiale.
+	 * Elle est appelée lorsque l'on passe d'un niveau à un autre
+	 */
 	public void reset()
 	{
 		this.setEtat("standard");

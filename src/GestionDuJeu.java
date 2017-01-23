@@ -31,9 +31,10 @@ public class GestionDuJeu {
 	// Variables méthode highscores() :
 	private static boolean clic5, position5, choixDuJoueur5, stay5, enter, enter2;
 	
-	/*Variables méthode switchComportementFantomes() :
+	//Variables méthode switchComportementFantomes() :
 	protected static int fantMin, fantMax;
-	protected static double minD, maxD;*/
+	protected static double minD, maxD;
+	protected static double x,y;
 	
 	private static Pacman pacman = new Pacman(10, 54, 2.5, 0.5, "y");
 	
@@ -661,8 +662,9 @@ public class GestionDuJeu {
 		return score;
 	}
 	
-	public static void setDifficulty(int level, Fantome...fantomes)
+	public static boolean setDifficulty(int level, Fantome...fantomes)
 	{
+		boolean enableSwitch = false;
 		switch(level)
 		{
 			case 1:
@@ -686,32 +688,39 @@ public class GestionDuJeu {
 				fantomes[1].setComportement("traqueur");
 				fantomes[2].setComportement("embuscadeur");
 				fantomes[3].setComportement("embuscadeur");
+				enableSwitch = true;
 				break;
 			default:
 				fantomes[0].setComportement("traqueur");
 				fantomes[1].setComportement("traqueur");
 				fantomes[2].setComportement("traqueur");
 				fantomes[3].setComportement("traqueur");
+				enableSwitch = true;
 				break;
 		}
+		return enableSwitch;
 	}
-	/*
-	public void switchComportementFantome(Pacman p, Fantome...fantomes)
+	
+	public static void switchComportementFantome(Pacman p, Fantome...fantomes)
 	{
-		minD = Math.sqrt(fantomes[0].getPosx()*fantomes[0].getPosx() + fantomes[0].getPosy()*fantomes[0].getPosy());
-		maxD = Math.sqrt(fantomes[0].getPosx()*fantomes[0].getPosx() + fantomes[0].getPosy()*fantomes[0].getPosy());
+		x = p.getPosx() - fantomes[0].getPosx();
+		y = p.getPosy() - fantomes[0].getPosy();
+		minD = Math.sqrt(x*x + y*y);
+		maxD = Math.sqrt(x*x + y*y);
 		fantMin = 0;
 		fantMax = 0;
 		for(int i = 1; i < fantomes.length; i++)
 		{
-			if(Math.sqrt(fantomes[i].getPosx()*fantomes[i].getPosx() + fantomes[i].getPosy()*fantomes[i].getPosy()) < minD)
+			x = p.getPosx() - fantomes[i].getPosx();
+			y = p.getPosy() - fantomes[i].getPosy();
+			if(Math.sqrt(x*x + y*y) < minD)
 			{
-				minD = Math.sqrt(fantomes[i].getPosx()*fantomes[i].getPosx() + fantomes[i].getPosy()*fantomes[i].getPosy());
+				minD = Math.sqrt(x*x + y*y);
 				fantMin = i;
 			}
-			if(Math.sqrt(fantomes[i].getPosx()*fantomes[i].getPosx() + fantomes[i].getPosy()*fantomes[i].getPosy()) > maxD)
+			if(Math.sqrt(x*x + y*y) > maxD)
 			{
-				maxD = Math.sqrt(fantomes[i].getPosx()*fantomes[i].getPosx() + fantomes[i].getPosy()*fantomes[i].getPosy());
+				maxD = Math.sqrt(x*x + y*y);
 				fantMax = i;
 			}
 		}
@@ -719,7 +728,7 @@ public class GestionDuJeu {
 		fantomes[fantMin].setComportement("traqueur");
 		fantomes[fantMax].setComportement("embuscadeur");
 	}
-	*/
+	
 	
 	
 

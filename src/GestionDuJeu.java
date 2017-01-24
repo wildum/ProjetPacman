@@ -227,7 +227,7 @@ public class GestionDuJeu {
 		StdDraw.setFont(normale);
 		StdDraw.setPenColor(StdDraw.YELLOW);
 		StdDraw.text(24, 60, "PLAYER 1:");
-		StdDraw.setPenColor(StdDraw.GREEN);
+		StdDraw.setPenColor(50, 235, 70);
 		StdDraw.text(81, 60, "PLAYER 2:");
 		StdDraw.setPenColor(StdDraw.WHITE);
 		StdDraw.text(56, 27, "GAME:");
@@ -239,8 +239,8 @@ public class GestionDuJeu {
 		StdDraw.text(79, 47, "Q: LEFT");
 		StdDraw.text(79, 41, "S: DOWN");
 		StdDraw.text(79, 35, "D: RIGHT");
-		StdDraw.text(55, 20, "SPACE: PAUSE/RESUME");
-		StdDraw.text(55, 14, "ECHAP: EXIT");
+		StdDraw.text(55, 20, "P: PAUSE/RESUME");
+		StdDraw.text(55, 14, "ESCAPE: EXIT");
 		
 		do {
 			position3 = true;

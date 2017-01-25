@@ -37,11 +37,11 @@ public class Chrono {
         pauseFin = 0;
         }        
 
-    public double getDureeSec() {
+    public double getDureeSec() { // permet d'obtenir la durée du chrono en secondes
         return duree/1000;
     }
         
-    public double getDureeMs() {
+    public double getDureeMs() { // permet d'obtenir la durée du chrono en millisecondes
         return duree;
     }      
 

@@ -16,7 +16,7 @@ public class GestionDuJeu {
 	
 	// Variables méthode affichageMenuPage1() :
 	private static boolean clic1, position1;
-	static int choixDuJoueur1;
+	private static int choixDuJoueur1;
 	
 	// Variables méthode affichageMenuPause() :
 	private static boolean choixDuJoueur2, loop2;
@@ -35,18 +35,11 @@ public class GestionDuJeu {
 	protected static int fantMin, fantMax;
 	protected static double minD, maxD;
 	protected static double x,y;
-	
-	private static Pacman pacman = new Pacman(10, 54, 2.5, 0.5, "y");
-	
-	private static double tempsChgtImage = 0; 
-	
+		
 	public static Chrono getChrono() {
 		return chrono;
 	}
-	
-	public double getTempsChgtImage () {
-		return this.tempsChgtImage;
-	}
+		
 	
 	// affichageMenuPage1() gère l'affiche du menu principal	
 	public static int affichageMenuPage1()
@@ -227,7 +220,7 @@ public class GestionDuJeu {
 		StdDraw.setFont(normale);
 		StdDraw.setPenColor(StdDraw.YELLOW);
 		StdDraw.text(24, 60, "PLAYER 1:");
-		StdDraw.setPenColor(StdDraw.GREEN);
+		StdDraw.setPenColor(50, 235, 70);
 		StdDraw.text(81, 60, "PLAYER 2:");
 		StdDraw.setPenColor(StdDraw.WHITE);
 		StdDraw.text(56, 27, "GAME:");
@@ -239,8 +232,8 @@ public class GestionDuJeu {
 		StdDraw.text(79, 47, "Q: LEFT");
 		StdDraw.text(79, 41, "S: DOWN");
 		StdDraw.text(79, 35, "D: RIGHT");
-		StdDraw.text(55, 20, "SPACE: PAUSE/RESUME");
-		StdDraw.text(55, 14, "ECHAP: EXIT");
+		StdDraw.text(55, 20, "P: PAUSE/RESUME");
+		StdDraw.text(55, 14, "ESCAPE: EXIT");
 		
 		do {
 			position3 = true;

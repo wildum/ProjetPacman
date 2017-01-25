@@ -2,22 +2,22 @@ import java.util.Random;
 
 public class Fantome extends Personnage{
 	
-	protected int directionInverse = 1;
-	protected double timer_init;
-	protected double timer;
-	protected String etat;
+	private int directionInverse = 1;
+	private double timer_init;
+	private double timer;
+	private String etat;
 	protected boolean check1, check2;
-	protected String comportement;
-	protected boolean std;
-	protected double x,y;
-	protected double x1,y1;
-	protected double min;
-	protected int lePlusProche;
-	protected double [] distance;
-	protected int [] ordreChoix;
-	protected int a;
-	protected int comptInitial = 0;
-	static Random rd = new Random(System.currentTimeMillis());
+	private String comportement;
+	private boolean std;
+	private double x,y;
+	private double x1,y1;
+	private double min;
+	private int lePlusProche;
+	private double [] distance;
+	private int [] ordreChoix;
+	private int a;
+	private int comptInitial = 0;
+	private static Random rd = new Random(System.currentTimeMillis());
 	
 	
 	public Fantome(double position_x,double position_y, double width, double speed, String color, String comportement)

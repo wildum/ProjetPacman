@@ -26,7 +26,7 @@ public class Pacman extends Personnage{
 	}
 	
 	
-	/* Cette méthode permet d'alterner l'image du Pacman pour donner une sensation de mouvement.
+	/* Cette méthode permet d'alterner l'image du Pacman pour donner une illusion de mouvement.
 	 * Suivant la couleur du pacman la méthode utilise une méthode différente.
 	 * Elle prend en argument la direction du pacman et le chrono.
 	 * */

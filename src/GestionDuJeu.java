@@ -16,7 +16,7 @@ public class GestionDuJeu {
 	
 	// Variables méthode affichageMenuPage1() :
 	private static boolean clic1, position1;
-	static int choixDuJoueur1;
+	private static int choixDuJoueur1;
 	
 	// Variables méthode affichageMenuPause() :
 	private static boolean choixDuJoueur2, loop2;
@@ -35,18 +35,11 @@ public class GestionDuJeu {
 	protected static int fantMin, fantMax;
 	protected static double minD, maxD;
 	protected static double x,y;
-	
-	private static Pacman pacman = new Pacman(10, 54, 2.5, 0.5, "y");
-	
-	private static double tempsChgtImage = 0; 
-	
+		
 	public static Chrono getChrono() {
 		return chrono;
 	}
-	
-	public double getTempsChgtImage () {
-		return this.tempsChgtImage;
-	}
+		
 	
 	// affichageMenuPage1() gère l'affiche du menu principal	
 	public static int affichageMenuPage1()

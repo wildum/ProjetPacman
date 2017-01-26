@@ -6,6 +6,11 @@ public class Graine {
 	protected static double width = 0.5;
 	protected double hitbox_x1, hitbox_x2, hitbox_y1, hitbox_y2;
 	
+	/*
+	 * Constructeur de la classe
+Prend en argument la position en x et y que doit avoir la graine ainsi que son état (“standard”, “super” ou “null”)
+
+	 */
 	public Graine(int pos_x, int pos_y, String type)
 	{
 		this.pos_x = pos_x;

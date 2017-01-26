@@ -56,6 +56,12 @@ public class Labyrinthe {
 							   {0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
 							   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
 	
+	
+	/*
+	 * Constructeur de la classe
+Fixe la taille de la fenêtre à 500*760 pixels
+
+	 */
 	public Labyrinthe()
 	{
 		StdDraw.setCanvasSize(500,760); // pour gérer la taille de la fenêtre
@@ -69,7 +75,10 @@ public class Labyrinthe {
 		
 	}
 	
-	//cette méthode gère l'affichage du lab et des personnages :
+	/*Gère tout l’affichage dans la fenêtre principale du jeu : elle affiche le terrain, les différents personnages, les graines, le niveau, les vies, le temps, les scores et le meilleur score
+	Appelle les fonctions affichageFantome, affiche_graines (cf méthodes ci-dessous) et chgtImage (cf classe Pacman) pour changer les images des personnages en fonction de leur direction et du temps (pour le pacman)
+	Joue la musique du pacman (du dossier Audio du projet) au lancement du jeu et au début de chaque niveau (grâce à la classe StdAudio de la librairie stdlib)
+	*/
 	public void affichage(Labyrinthe Lab,Graine [][] tab_graines,Chrono chrono, int level,Personnage... persos) //on peut ajouter autant de perso que l'on veut
 	{
 		StdDraw.setFont(normale);
@@ -175,6 +184,12 @@ public class Labyrinthe {
 		StdDraw.show(20);
 	}
 
+	/*
+	 * Gère le changement d’image des fantômes en fonction de leur direction de déplacement et de leur état (standard ou apeuré)
+Utilise les images présentes dans le dossier Images du projet
+
+	 */
+	
 	public void affichageFantome(Fantome fantome, Labyrinthe Lab) {
 		direction = fantome.getDirection();
 		
@@ -394,9 +409,12 @@ public class Labyrinthe {
 		}
 	}
 	
-	//on vérifie que la direction choisie est correcte (qu'il n'y a pas d'obstacle)
-	//elle prend en argument la direction choisie et la position du personnage 
-	//méthode a améliorer -> mettre les murs
+	/*
+	 * Gère le déplacement des personnages dans le labyrinthe en vérifiant la présence de murs ou non
+Permet également que tous les personnages soient sur les mêmes trajectoires et ne sortent pas du labyrinthe
+Prend en argument la direction choisi par l’utilisateur/la direction du fantôme ainsi que les positions en x et en y du personnage
+
+	 */
 	public boolean checkMur(int choix, double pos_x, double pos_y)
 	{	
 		
@@ -452,6 +470,11 @@ public class Labyrinthe {
 		return false;
 	}
 	
+	/*
+	 * Méthode utilisée lors du débugage
+Affiche des carrés bleus aux emplacement des murs de la matrice du jeu
+
+	 */
 	public void affiche_mur()
 	{
 	StdDraw.setPenColor(StdDraw.BLUE);
@@ -466,7 +489,12 @@ public class Labyrinthe {
 		}
 	}
 }
-	
+	/*
+	 * Donne la localisation du mur le plus proche dans la direction que suit le personnage
+Prend en argument les positions en x et y du personnage ainsi que son choix de direction
+Renvoie un objet Mur indiquant la position du mur en question
+
+	 */
 	
 	public Mur nextMur(double pos_x, double pos_y, int choix)
 	{
@@ -501,8 +529,12 @@ public class Labyrinthe {
 		return tab_murs[(int) Math.round(pos_x/ligne)][(int) Math.round(pos_y/colonne)];
 	}
 	
-	//on initialise la position des graines
-	//cette méthode prends en argument les personnages et utilise leur position
+	/*
+	 * Initialise la position des graines (= fromages) à leur état initial en prenant en compte la matrice du jeu 
+La fonction parcours la matrice du jeu et initialise l’état des graines : si l’entier vaut 1, l’état de la graine est “standard” ; s’il vaut 9, l’état est “super” et s’il vaut 2, l’état est “null”
+Renvoie un tableau 2D d’objets Graines initialisés
+
+	 */
 	public Graine [][] i_graines() 
 	{
 		
@@ -527,6 +559,11 @@ public class Labyrinthe {
 		
 		return tab_graines;
 	}
+	/*
+	 * Gère l’affichage des graines en fonction de leur initialisation dans la méthode i_graines
+	 * Elle n’affiche que les graines qui ont pour type “standard” ou “super”. Lorsque le Pacman mange une graine et que le type de la graine devient “null”, 
+	 * elle n’est plus affiché par cette méthode
+	 */
 	
 	public void affiche_graines(Graine [][] tab_graines)
 	{
@@ -547,7 +584,12 @@ public class Labyrinthe {
 			}
 		}
 	}
-	
+	/*
+	 * Donne la case suivante selon la direction que suit le personnage
+Prend en argument les positions en x et y du personnage ainsi que son choix de direction
+Retourne un objet Mur indiquant le type de la case adjacente
+
+	 */
 	public Mur nextCase(double pos_x, double pos_y, int choix)
 	{
 		switch(choix){

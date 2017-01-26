@@ -3,7 +3,27 @@ import java.awt.event.KeyEvent;
 import edu.princeton.cs.introcs.StdAudio;
 import edu.princeton.cs.introcs.StdDraw;
 
+
+//Ce programme a été réalisé par William DUMONT et Eliott DE SEGUIER en Janvier 2017
+
 //cette classe ne doit contenir que la fonction main
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * =========================== DESCRIPTION DU FONCTIONNEMENT DE LA MAIN ======================== *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+/*
+La méthode  par initialiser les différentes variables et par créer la fenêtre. Juste après, nous entrons dans une boucle while regroupant le reste du programme. Sortir de cette boucle while, c’est quitter le jeu. 
+Ensuite est affiché le menu principal via la méthode affichageMenuPage1 de la méthode GestionDuJeu qui va renvoyer un entier. Suivant la valeur de cet entier, nous allons soit commencer une partie (choix 1 pour un joueur, choix 2 pour deux joueurs), soit afficher le menu des scores (choix 3), soit afficher le menu des contrôles (choix 5) soit quitter le jeu (choix 4). 
+Les choix 3, 4 et 5 faisant référence directement à l’utilisation des méthodes décrites dans la classe GestionDuJeu, nous allons nous concentrer sur les choix 1 et 2. Juste avant d’entrer dans la boucle while de la partie ; le labyrinthe, les fantômes, les Pacmans et les joueurs sont créés. 
+Les graines sont initialisées dans le labyrinthe. Les actions suivantes tournent très rapidement en boucle : affichage de tous les éléments graphiques, choix des directions, déplacements des personnages (pacmans et fantômes, les méthodes appelées pour les fantômes dépendent de leurs états) et check des interactions entre Pacman, les graines et les fantômes. 
+Dans cette boucle while, on vérifie si le joueur appuie sur « pause » et si le joueur gagne ou s’il perd. Si le joueur gagne, nous restons dans la boucle mais les positions des personnages sont réinitialisées et le labyrinthe est de nouveau rempli de graines. 
+De plus, la difficulté augmente d’un cran avec l’appel de la méthode setDifficulty de la classe GestionDuJeu. 
+Lorsque le joueur perd, il sort de la boucle et est invité à sauvegarder son score via la méthode getHighscore. Lorsque le joueur a fini de sauvegarder son score et de consulter le tableau des scores, il est renvoyé au menu principal.
+ */
+
+
 public class Jeu {
 	
 	public static void main(String[] args) {

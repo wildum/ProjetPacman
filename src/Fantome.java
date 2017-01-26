@@ -19,6 +19,10 @@ public class Fantome extends Personnage{
 	private int comptInitial = 0;
 	private static Random rd = new Random(System.currentTimeMillis());
 	
+	/*
+	 *  C’est le constructeur de la classe Fantome
+o   Le timer de sortie des fantômes est initialisé suivant la couleur du fantôme
+	 */
 	
 	public Fantome(double position_x,double position_y, double width, double speed, String color, String comportement)
 	{
@@ -53,9 +57,16 @@ public class Fantome extends Personnage{
 		}
 	}
 	
-	//choix de la direction du fantome
-	//elle prend en argument le labyrinthe pour le obstacles et le choix
-	//le choix est gardé s'il n'y a pas d'obstacle, sinon on le change
+	/*
+	 *  Gère la direction du fantôme
+o   Si le fantome a un etat « standard » et un comportement « random », la direction choisie est aléatoire. 
+La direction choisie ne peut pas être égale à l’inverse de la direction précédente et ne peut pas être dans le sens d’un mur. 
+Si tel est le cas, le fantôme choisie une nouvelle direction aléatoire. Si un des pacman est énervé, l’état du fantôme est mis à apeuré.
+ Si l’état du fantôme est apeuré, il fait un choix de direction intelligent pour fuir le pacman énervé le plus proche de lui. 
+Si l’état du fantôme est standard et que son comportement est « traqueur » ou « embuscadeur », il fait un choix de direction intelligent.
+o   Cette méthode utilise la méthode calculDePlusProche (cf Fantome) et deplacementIntelligent (cf Fantome)
+
+	 */
 	public int choixDirection(Labyrinthe Lab, int choix, Pacman...pacmans)
 	{
 		std = true;
@@ -99,6 +110,12 @@ public class Fantome extends Personnage{
 		
 	}
 	
+	/*
+	 * Gère la sortie de la boîte des fantômes et leur permet de passer de l’etat initial à l’état standard
+       Cette méthode récupère le Chrono. Si le timer du fantome est écoulé, c’est qu’il peut sortir de la boîte. Dans ce cas là, il est déplacé petit à petit jusqu’à qu’il soit hors de la boîte. 
+       Dès qu’il est hors de la boîte, son état est mis à « standard ».
+	 */
+	
 	public void transitionBox()
 	{		
 			if(GestionDuJeu.getChrono().getDureeSec() - this.timer > this.timer_init && this.check2 == false)
@@ -135,7 +152,11 @@ public class Fantome extends Personnage{
 		
 	}
 	
-	//on calcul quel pacman est le plus proche de la position du fantome
+	/*
+	 *   Détermine quel est le Pacman le plus proche du fantôme.
+         Cette méthode calcul la distance fantome-Pacmans pour les différents Pacmans présents dans le jeu. Elle renvoie ensuite le Pacman le plus proche.
+         Cette méthode n’est utilisée que pour la méthode déplacement intelligent
+	 */
 	public Pacman calculDuPlusProche(Pacman...pacmans)
 	{
 		min = 1000;
@@ -165,9 +186,16 @@ public class Fantome extends Personnage{
 		return pacmans[lePlusProche];
 	}
 	
-	/*prends en argument le pacman le plus proche
-	 si le fantome est apeuré, le fuit
-	 si le fantome est traqueur, le poursuit */
+	/*
+	 *  Cette méthode permet aux fantômes de se déplacer intelligemment en fonction de la position du Pacman le plus proche.
+        La méthode compare les coordonnées du fantôme avec celles du Pacman. Suivant le résultat, elle établit un ordre de choix de direction. 
+        Cet ordre est déterminé suivant l’angle que fait le vecteur fantôme-Pacman avec les axes x,y. 
+        Si l’état du fantôme est apeuré, les directions sont ordonnées du plus grand angle au plus petit.
+        Si l’état du fantôme est standard et que son comportement est traqueur, les directions sont ordonnées du plus petit angle au plus grand. Si l’état du fantôme est standard et que son comportement est embuscadeur, l’ordre des déplacements est un peu plus compliqué : on découpe le labyrinthe en 4 quarts. 
+        Suivant la position du Pacman et sa direction, la méthode anticipe dans quel quart le Pacman va se retrouver. Elle établit alors un ordre de directions pour que le Fantome se rende dans ce quart et ainsi tendre un piège au Pacman. Pour fonctionner de façon optimale, il est nécessaire de coupler cette méthode avec la méthode switchComportementFantome de la classe GestionDuJeu. 
+        En effet, lorsque le fantôme fait une embuscade, il va se retrouver proche du Pacman dans quelques secondes. La méthode switchComportementFantome va alors changer son comportement pour le mettre en traqueur et ainsi foncer sur le Pacman.
+        Bien que les déplacements des fantômes apeurés et traqueurs fonctionnent très bien, les déplacements des fantômes embuscadeurs sont souvent assez douteux. Ce comportement n’est pas encore très au point et sera sûrement à retravailler.
+	 */
 	public int deplacementIntelligent(Labyrinthe Lab, Pacman p, int directionPrecedente)
 	{
 		ordreChoix = new int[4];
@@ -357,6 +385,10 @@ public class Fantome extends Personnage{
 		
 		return ordreChoix[a];
 	}
+	
+	/*
+	 *  Cette méthode renvoie le fantôme à sa position initiale et met son état à « initial »
+	 */
 	
 	public void reset()
 	{

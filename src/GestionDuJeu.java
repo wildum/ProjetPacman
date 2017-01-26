@@ -41,7 +41,13 @@ public class GestionDuJeu {
 	}
 		
 	
-	// affichageMenuPage1() gère l'affiche du menu principal	
+	/*
+	 * Gère l’affichage du menu principal
+		Présence de zones de détection autour des différents textes (ONE PLAYER, TWO PLAYER, etc.) de sorte que dès que les coordonnées de la souris sont dans une zone, le texte est alors mis en surbrillance
+		Si l’utilisateur clique dans une des zones, la méthode renvoie un entier en fonction de la zone (1 pour ONE PLAYER, 2 pour TWO PLAYER, 3 pour HIGHSCOREs, 5 pour CONTROLS et 4 pour QUIT)
+		Tant que l’utilisateur ne clique pas, il reste sur le menu
+	
+	 */
 	public static int affichageMenuPage1()
 		{
 		clic1 = true;
@@ -178,6 +184,13 @@ public class GestionDuJeu {
 			StdDraw.pause(150);
 			return choixDuJoueur1;
 		}
+	
+	/*
+	 * Gère l’affichage du menu pause
+	   Renvoie un booléen en fonction du choix du joueur : si le joueur presse la touche “y”, la méthode renvoie false et s’il presse “n” elle renvoie true
+	   Tant que l’utilisateur ne presse pas une des deux touches, le jeu reste en pause
+
+	 */
 
 	public static boolean affichageMenuPause()
 	{
@@ -206,6 +219,12 @@ public class GestionDuJeu {
 		return choixDuJoueur2;
 	}
 	
+	/*
+	 * Gère l’affichage du menu décrivant les commandes du jeu
+       Renvoie true si le joueur clique sur le bouton GO BACK (qui se met également en surbrillance comme dans la méthode affichageMenuPage1)
+       Tant que l’utilisateur ne clique pas, il reste sur le menu
+
+	 */
 	
 	public static boolean affichageMenuControl() {
 		clic3 = true;
@@ -267,6 +286,12 @@ public class GestionDuJeu {
 		return choixDuJoueur3;
 	}
 	
+	/*
+	 * Vérifie si le joueur a gagné ou perdu
+       Renvoie un entier : le pacman a mangé tous les fromages, la méthode renvoie 1, si le joueur n’a plus de vies, la méthode l’entier
+
+	 */
+	
 	public static int checkWinLoose(Graine [][] tab_graines, Joueur...joueurs)
 	{
 		int fin = 0, compteur = 0, compteur2 = 0;
@@ -303,6 +328,14 @@ public class GestionDuJeu {
 		return fin;
 	}
 	
+	/*
+	 * Gère l’affichage de fin
+      Prend en argument l’entier de la méthode checkWinLoose : s’il est égal à 1 (le joueur a gagné), la méthode affiche WIN, s’il est égal à 2 (le joueur a perdu), elle affiche GAME OVER
+      Renvoie true si l’utilisateur appuie sur la touche SPACE 
+      Tant que l’utilisateur ne presse pas la touche, il reste sur le menu
+
+	 */
+	
 	public static boolean affichageFin(int fin)
 	{
 		choixDuJoueur4 = true;
@@ -329,6 +362,15 @@ public class GestionDuJeu {
 			}		
 		return choixDuJoueur4;
 	}
+	
+	/*
+	 * Gère l’affichage du menu de saisi du pseudo (SAVE YOUR SCORE) du joueur et du menu highscores
+Est compatible avec les deux modes de jeu (ONE PLAYER et TWO PLAYER)
+Prend en arguments principaux les joueurs (instanciations de la classe Joueur) et le booléen de la méthode affichageFin
+Charge un fichier .txt dans lequel sont stockés les pseudos et scores de toutes les parties effectuées précédemment
+Le joueur ne peut pas quitter le menu saisi du pseudo  tant qu’il n’appuie pas sur la touche SPACE. De même, il ne quitte pas le menu highscores tant qu’il ne clique pas sur GO BACK
+
+	 */
 	
 	public static void highscores(boolean save, boolean P2, int fin, Joueur...joueurs)
 	{
@@ -584,6 +626,12 @@ public class GestionDuJeu {
 		    
 	}
 
+	/*
+	 * Permet de récupérer le meilleur score dans le fichier .txt
+Dès lors, il peut être affiché dans la fenêtre principale du jeu
+Renvoie le meilleur score du fichier
+
+	 */
 	public static int getHighscore()
 	{
 		int score = 0;
@@ -655,6 +703,12 @@ public class GestionDuJeu {
 		return score;
 	}
 	
+	/*
+	 * Changer le comportement des fantômes en fonction du niveau
+Prend en argument le niveau et les fantômes (instanciations de la classe Fantome)
+Renvoie true par défaut si on peut changer le comportement des fantômes pendant le jeu (voir méthode switchComportementFantome) ou false sinon
+	 */
+	
 	public static boolean setDifficulty(int level, Fantome...fantomes)
 	{
 		boolean enableSwitch = false;
@@ -693,6 +747,13 @@ public class GestionDuJeu {
 		}
 		return enableSwitch;
 	}
+	
+	/*
+	 * Change le comportement des fantôme en mode ONE PLAYER à partir du niveau 6
+Prend en argument le pacman (instanciation de la classe Pacman) et les fantômes (classe Fantome)
+Le fantôme le plus près du pacman devient traqueur et le plus lointain embuscadeur
+
+	 */
 	
 	public static void switchComportementFantome(Pacman p, Fantome...fantomes)
 	{

@@ -29,9 +29,12 @@ public class Personnage {
 		this.hitbox_y2 = position_y+width;
 	}
 	
-	//cette méthode déplace les personnages dans le labyrinthe
-	//elle prend en argument le Labyrinthe et le la direction choisie
-	//elle renvoie false si le joueur a décidé d'arrêter de jouer, true sinon
+	/*
+	 * Gère le déplacement des personnages
+       Suivant le choix de direction qu’elle prend en argument, elle modifie la position du personnage en fonction de sa vitesse s’il n’y a pas de mur.
+       Utilise checkMur (cf Labyrinthe)
+
+	 */
 	public void deplacer(Labyrinthe Lab, int choix)
 	{
 		
